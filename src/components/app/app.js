@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import AppHeader from '../app-header';
 import SearchPanel from '../search-panel';
 import TabList from '../tab-list';
-import TabContent from '../tab-content';
+import TabContentItem from '../tab-content-item';
 
 import './app.scss';
 
@@ -80,7 +80,7 @@ export default class App extends Component {
                 <AppHeader />
                 <SearchPanel />
                 <TabList questionData={ questionData } onTabClick={this.onTabClick} />
-                <TabContent questionData={ questionData } />
+                <TabContentItem questionData={ questionData } />
             </div>
         );
     }

@@ -22,7 +22,12 @@ export default class TabContentItem extends Component {
     };
 
     render() {
-        const { entries } = this.props.itemData;
+
+        const [activeData] = this.props.questionData.filter((item) => {
+            return item.active;
+        });
+
+        const { entries } = activeData;
 
         const elements = entries.slice(0, (this.state.count + this.postsPerPage)).map((item) => {
             return (
