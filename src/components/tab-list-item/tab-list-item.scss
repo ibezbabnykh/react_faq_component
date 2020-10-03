@@ -1,0 +1,29 @@
+.tab-list-item {
+    position: relative;
+    cursor: pointer;
+    display: block;
+    padding: 11px 5px;
+    white-space: nowrap;
+    color: #96a3a6;
+    font-weight: 700;
+
+    &:before {
+        content: '';
+        display: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 4px;
+        background-color: #78b532;
+    }
+
+    &:hover,
+    &.active {
+        &:before {
+            display: block;
+        }
+
+        color: #000;
+    }
+}

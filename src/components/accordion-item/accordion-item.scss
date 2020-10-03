@@ -1,0 +1,7 @@
+.accordion-item {
+    &.is-open {
+        .accordion-item-content {
+            display: block;
+        }
+    }
+}

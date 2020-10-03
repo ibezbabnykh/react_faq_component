@@ -1,0 +1,135 @@
+// This is base reset for global components.
+
+html, body {
+  margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #000;
+  background: #fff;
+  font: 14px/1.5 Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  min-width: 320px;
+
+  &.open-nav,
+  &.open-menu {
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
+  }
+}
+
+// adaptive images
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// google map fix
+.gm-style img {
+  max-width: none;
+}
+
+// hide tel links on desktop
+@media only screen and (min-width: 1025px) {
+  a[href^="tel"],
+  a[href^="skype"],
+  a[href^="sms"] {
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+// hidden element for accessibility
+.accessibility {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+a.skip-main {
+  &:focus,
+  &:active {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: auto;
+    height: auto;
+    z-index: 101;
+  }
+}
+
+// Typography
+//
+// Base font styles for headings and links.
+
+b,
+strong {
+  font-weight: 700;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6,
+.h {
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  line-height: 1.3;
+  font-weight: 700;
+  margin: 0 0 0.5em;
+}
+
+h1, .h1 {
+  font-size: 32px;
+}
+
+h2, .h2 {
+  font-size: 28px;
+}
+
+h3, .h3 {
+  font-size: 24px;
+}
+
+h4, .h4 {
+  font-size: 20px;
+}
+
+h5, .h5 {
+  font-size: 16px;
+}
+
+h6, .h6 {
+  font-size: 12px;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+a {
+  color: #31445d;
+  font-weight: bold;
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+}
