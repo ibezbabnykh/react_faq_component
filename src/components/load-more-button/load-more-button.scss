@@ -14,5 +14,10 @@
         i {
             margin-left: 10px;
         }
+
+        &:hover,
+        &:focus {
+            color: #6da52e;
+        }
     }
 }

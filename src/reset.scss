@@ -126,10 +126,17 @@ p {
 }
 
 a {
-  color: #31445d;
+  color: #78b532;
   font-weight: bold;
+  text-decoration: none;
+  outline: none;
+
   &:hover,
   &:focus {
-    text-decoration: none;
+    color: #6da52e;
   }
+}
+
+button {
+  outline: none;
 }
