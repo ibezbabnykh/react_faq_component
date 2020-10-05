@@ -41,9 +41,14 @@ export default class TabContentItem extends Component {
 
         return (
             <div className="tab-content-item">
-                <div className="accordion">
-                    { elements }
-                </div>
+                {elements.length < 0 &&
+                    <h5>No match for the search, please try another query.</h5>
+                }
+                {elements.length > 0 &&
+                    <div className="accordion">
+                        { elements }
+                    </div>
+                }
                 {(entries.length > this.postsPerPage) && isShowButton &&
                     <LoadMoreButton handleShowMoreItems={this.handleShowMoreItems}/>
                 }

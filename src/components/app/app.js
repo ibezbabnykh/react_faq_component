@@ -8,38 +8,21 @@ import TabContentItem from '../tab-content-item';
 import './app.scss';
 
 export default class App extends Component {
-    maxId = 100;
-
-    incomingData = require('../../data.json');
 
     state = {
-        questionData: this.getCommonData(this.incomingData)
+        questionData: require('../../data.json'),
+        filter: '',
+        count: 0
     }
 
-    getCommonData(arr) {
-        const newArray = arr.slice();
-        const newEntries = [];
-
-        newArray.forEach((item) => {
-            item.entries.forEach((item) => {
-                let newItem = {...item};
-                newItem.id += Math.floor(Math.random()*10000);
-                newEntries.push(newItem);
-            });
-        });
-
-        const newItem = {
-            "title": "Everything",
-            "priority": 900,
-            "id": this.maxId++,
-            "active": true,
-            "entries": newEntries
-        };
-
-        return [
-            newItem,
-            ...newArray
-        ];
+    createNewItem(title, priority, id, active, entries) {
+        return {
+            "title": title,
+            "priority": priority,
+            "id": id,
+            "active": active,
+            "entries": entries
+        }
     }
 
     findIndexEl(id) {
@@ -72,15 +55,44 @@ export default class App extends Component {
         });
     }
 
+    onSearchSubmit = (filter) => {
+        this.setState({ filter });
+    }
+
+    searchItems(items, term) {
+        if(term.length === 0) {
+            return items;
+        }
+
+        return items.filter((item) => {
+            return item.question
+                .toLowerCase()
+                .indexOf(term.toLowerCase()) > -1;
+        });
+    };
+
+    filterData = (items, filter) => {
+        let newArray = [];
+        items.forEach((item) => {
+            let filterEntries = this.searchItems(item.entries, filter);
+            let newItem = this.createNewItem(item.title, item.priority, item.id, item.active, filterEntries);
+
+            newArray.push(newItem);
+        });
+
+        return newArray;
+    }
+
     render() {
-        const { questionData } = this.state;
+        const { questionData, filter, count } = this.state;
+        const filteredData = this.filterData(questionData, filter);
 
         return (
             <div className="app">
                 <AppHeader />
-                <SearchPanel />
-                <TabList questionData={ questionData } onTabClick={this.onTabClick} />
-                <TabContentItem questionData={ questionData } />
+                <SearchPanel onSearchSubmit={this.onSearchSubmit}/>
+                <TabList questionData={filteredData} onTabClick={this.onTabClick} />
+                <TabContentItem questionData={filteredData} count={count} />
             </div>
         );
     }
