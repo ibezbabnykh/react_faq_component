@@ -12,7 +12,7 @@ export default class App extends Component {
     state = {
         questionData: require('../../data.json'),
         filter: '',
-        count: 0
+        currentActiveIndex: 0
     }
 
     createNewItem(title, priority, id, active, entries) {
@@ -25,33 +25,9 @@ export default class App extends Component {
         }
     }
 
-    findIndexEl(id) {
-        return this.state.questionData.findIndex((el) => el.id === id);
-    }
-
-    setActiveState = (arr, id, propName) => {
-        const newArray = arr.slice();
-        newArray.forEach((item) => {
-            if(item[propName]) {
-                item[propName] = false;
-            }
-        });
-        const idx = this.findIndexEl(id);
-        const oldItem = newArray[idx];
-        const newItem = { ...oldItem, [propName]: true };
-
-        return [
-            ...newArray.slice(0, idx),
-            newItem,
-            ...newArray.slice(idx + 1)
-        ];
-    };
-
     onTabClick = (id) => {
-        this.setState(({ questionData }) => {
-            return {
-                questionData: this.setActiveState(questionData, id, 'active')
-            }
+        this.setState( {
+            currentActiveIndex: id
         });
     }
 
@@ -74,8 +50,9 @@ export default class App extends Component {
     filterData = (items, filter) => {
         let newArray = [];
         items.forEach((item) => {
-            let filterEntries = this.searchItems(item.entries, filter);
-            let newItem = this.createNewItem(item.title, item.priority, item.id, item.active, filterEntries);
+            const {title, priority, id, active, entries} = item;
+            let filterEntries = this.searchItems(entries, filter);
+            let newItem = this.createNewItem(title, priority, id, active, filterEntries);
 
             newArray.push(newItem);
         });
@@ -84,15 +61,15 @@ export default class App extends Component {
     }
 
     render() {
-        const { questionData, filter, count } = this.state;
+        const { questionData, filter, currentActiveIndex } = this.state;
         const filteredData = this.filterData(questionData, filter);
 
         return (
             <div className="app">
                 <AppHeader />
                 <SearchPanel onSearchSubmit={this.onSearchSubmit}/>
-                <TabList questionData={filteredData} onTabClick={this.onTabClick} />
-                <TabContentItem questionData={filteredData} count={count} />
+                <TabList questionData={filteredData} onTabClick={this.onTabClick} activeTab={currentActiveIndex} />
+                <TabContentItem questionData={filteredData} activeTab={currentActiveIndex} />
             </div>
         );
     }
