@@ -6,7 +6,7 @@ const TabListItem = ({ title, entries, onTabClick, active }) => {
 
     let classNames = 'tab-list-item';
 
-    if(active) {
+    if (active) {
         classNames += ' active';
     }
 

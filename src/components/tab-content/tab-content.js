@@ -1,13 +1,12 @@
 import React from 'react';
 
-import './tab-content-item.scss';
+import './tab-content.scss';
 
 import AccordionList from '../accordion-list';
 
-const TabContentItem = ({questionData, activeTab}) => {
-
+const TabContent = ({ questionData, activeTab }) => {
     return (
-        <div className="tab-content-item">
+        <div className="tab-content">
             { questionData.map(({id, entries}) => (
                 <AccordionList key={id} elements={entries} isVisible={activeTab === id}/>
             )) }
@@ -15,4 +14,4 @@ const TabContentItem = ({questionData, activeTab}) => {
     );
 };
 
-export default TabContentItem;
+export default TabContent;

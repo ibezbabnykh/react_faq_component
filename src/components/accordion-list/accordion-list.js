@@ -22,8 +22,7 @@ export default class AccordionList extends Component {
     };
 
     render() {
-
-        const {elements: entries, isVisible} = this.props;
+        const { elements: entries, isVisible } = this.props;
 
         if (!isVisible) return null;
 
@@ -31,7 +30,7 @@ export default class AccordionList extends Component {
 
         const elements = entries.slice(0, (this.state.count + this.itemsPerPage)).map((item) => {
             return (
-                <div key={item.id} className="tab-group-item">
+                <div key={item.id} className="accordion-group-item">
                     <AccordionItem itemData={item} id={item.id}/>
                 </div>
             );
