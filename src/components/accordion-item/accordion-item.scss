@@ -3,5 +3,18 @@
         .accordion-item-content {
             display: block;
         }
+
+        .accordion-item-title {
+            i {
+                transform: rotate(180deg) translateY(-50%);
+                transform-origin: 50% 0;
+            }
+        }
+    }
+
+    border-top: 1px solid #e1e1e1;
+
+    &:first-child {
+        border-top: 0;
     }
 }

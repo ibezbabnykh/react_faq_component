@@ -28,12 +28,12 @@ export default class SearchPanel extends Component {
                     </div>
                     <form className="search-panel-form"
                         onSubmit={this.onSearchSubmit}>
-                        <h5>Do you need some support? <br/>Type your question (key words)</h5>
+                        <h5>Do you need some support? <br />Type your question (key words)</h5>
                         <div className="form-group">
-                            <input className="form-control" 
-                                type="text" 
+                            <input className="form-control"
+                                type="text"
                                 placeholder="Type your question (key words)"
-                                onChange={this.onSearchChange}/>
+                                onChange={this.onSearchChange} />
                             <button type="button" className="btn"><i className="fas fa-search"></i></button>
                         </div>
                     </form>

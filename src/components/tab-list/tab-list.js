@@ -6,12 +6,12 @@ import './tab-list.scss';
 const TabList = ({ questionData, onTabClick, activeTab }) => {
 
     const elements = questionData.map((item) => {
-        const { id,  ...itemProps } = item;
+        const { id, ...itemProps } = item;
 
         return (
             <li key={id} className="list-group-item">
                 <TabListItem
-                    { ...itemProps }
+                    {...itemProps}
                     active={activeTab === id}
                     onTabClick={() => onTabClick(id)}
                 />
@@ -21,7 +21,7 @@ const TabList = ({ questionData, onTabClick, activeTab }) => {
 
     return (
         <ul className="tab-list">
-            { elements }
+            {elements}
         </ul>
     );
 };

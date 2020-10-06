@@ -30,28 +30,28 @@ export default class AccordionList extends Component {
 
         const elements = entries.slice(0, (this.state.count + this.itemsPerPage)).map((item) => {
             return (
-                <div key={item.id} className="accordion-group-item">
-                    <AccordionItem itemData={item} id={item.id}/>
-                </div>
+                <AccordionItem key={item.id} itemData={item} id={item.id} />
             );
         });
 
         const isShowButton = elements.length < total;
 
         return (
-            <div className="accordion-list">
-                {elements.length === 0 &&
-                    <h5 className="no-results">No match results in this category, please try another query.</h5>
-                }
-                {elements.length > 0 &&
-                    <div className="accordion">
-                        { elements }
-                    </div>
-                }
+            <React.Fragment>
+                <div className="accordion-list">
+                    {elements.length === 0 &&
+                        <h5 className="no-results">No match results in this category, please try another query.</h5>
+                    }
+                    {elements.length > 0 &&
+                        <React.Fragment>
+                            {elements}
+                        </React.Fragment>
+                    }
+                </div>
                 {(total > this.itemsPerPage) && isShowButton &&
-                    <LoadMoreButton handleShowMoreItems={this.handleShowMoreItems}/>
+                    <LoadMoreButton handleShowMoreItems={this.handleShowMoreItems} />
                 }
-            </div>
+            </React.Fragment>
         );
-    }; 
+    };
 };

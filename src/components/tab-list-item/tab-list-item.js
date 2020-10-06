@@ -11,9 +11,9 @@ const TabListItem = ({ title, entries, onTabClick, active }) => {
     }
 
     return (
-        <span className={classNames} 
+        <span className={classNames}
             onClick={onTabClick}>
-                {title} ({entries.length})
+            {title} ({entries.length})
         </span>
     );
 };
