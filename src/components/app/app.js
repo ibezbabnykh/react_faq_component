@@ -22,9 +22,7 @@ export default class App extends Component {
         error: false
     }
 
-    constructor() {
-        super();
-
+    componentDidMount() {
         this.updateData();
     }
 

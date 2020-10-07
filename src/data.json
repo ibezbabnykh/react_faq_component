@@ -1449,7 +1449,7 @@
                "pluscard"
             ],
             "code":"C07",
-            "id":1099
+            "id":1010
          },
          {
             "question":"I didn't recieve my points",
@@ -1792,7 +1792,7 @@
                "support"
             ],
             "code":"M06",
-            "id":61
+            "id":6152
          },
          {
             "question":"I don't recieve the  ‘Only for you’ couponbook. What can I do?",
