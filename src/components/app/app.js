@@ -19,11 +19,18 @@ export default class App extends Component {
         filter: '',
         currentActiveIndex: 0,
         loading: true,
-        error: false
+        error: false,
+        hasError: false
     }
 
     componentDidMount() {
         this.updateData();
+    }
+
+    componentDidCatch() {
+        this.setState({
+            hasError: true
+        });
     }
 
     updateData() {
@@ -98,6 +105,10 @@ export default class App extends Component {
     }
 
     render() {
+        if (this.state.hasError) {
+            return <ErrorIndicator />
+        }
+        
         const { filteredData, currentActiveIndex, loading, error } = this.state;
 
         const hasData = !(loading || error);
