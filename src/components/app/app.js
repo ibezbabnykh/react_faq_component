@@ -12,11 +12,10 @@ import ErrorBoundary from '../error-boundary';
 
 export default class App extends Component {
 
-    ApiService = new ApiService();
+    apiService = new ApiService();
 
     state = {
         questionData: [],
-        filteredData: [],
         filter: '',
         currentActiveIndex: 0,
         loading: true,
@@ -27,9 +26,18 @@ export default class App extends Component {
         this.updateData();
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.filter !== prevState.filter) {
+            this.setState({
+                loading: true
+            });
+            this.updateData();
+        }
+    }
+
     updateData() {
-        this.ApiService
-            .getData('https://api.jsonbin.io/b/5f7c5fa1302a837e95758e63/')
+        this.apiService
+            .getData('5f7c5fa1302a837e95758e63/1', this.state.filter)
             .then(this.onDataLoad)
             .catch(this.onError);
     }
@@ -37,53 +45,16 @@ export default class App extends Component {
     onDataLoad = (data) => {
         this.setState({
             questionData: data,
-            filteredData: this.filterData(data, this.state.filter),
             loading: false
         });
     }
 
-    onError = (err) => {
-        console.log('err', err);
+    onError = () => {
         this.setState({
             error: true,
             loading: false
         });
     };
-
-    createNewItem(title, priority, id, entries) {
-        return {
-            "title": title,
-            "priority": priority,
-            "id": id,
-            "entries": entries
-        }
-    }
-
-    searchItems(items, term) {
-        if (term.length === 0) {
-            return items;
-        }
-
-        return items.filter((item) => {
-            return item.question
-                .toLowerCase()
-                .indexOf(term.toLowerCase()) > -1;
-        });
-    }
-
-    filterData = (items, filter) => {
-        let newArray = [];
-
-        items.forEach((item) => {
-            const { title, priority, id, entries } = item;
-            const filterEntries = this.searchItems(entries, filter);
-            const newItem = this.createNewItem(title, priority, id, filterEntries);
-
-            newArray.push(newItem);
-        });
-
-        return newArray;
-    }
 
     onTabClick = (id) => {
         this.setState({
@@ -93,19 +64,18 @@ export default class App extends Component {
 
     onSearchSubmit = (filter) => {
         this.setState({
-            filteredData: this.filterData(this.state.questionData, filter),
             filter
         });
     }
 
     render() {
-        const { filteredData, currentActiveIndex, loading, error } = this.state;
+        const { questionData, currentActiveIndex, loading, error } = this.state;
 
         const hasData = !(loading || error);
 
         const errorMessage = error ? <ErrorIndicator /> : null;
         const spinner = loading ? <Spinner /> : null;
-        const content = hasData ? <Tabs questionData={filteredData} onTabClick={this.onTabClick} activeTab={currentActiveIndex} /> : null;
+        const content = hasData ? <Tabs questionData={questionData} onTabClick={this.onTabClick} activeTab={currentActiveIndex} /> : null;
 
         return (
             <ErrorBoundary>
