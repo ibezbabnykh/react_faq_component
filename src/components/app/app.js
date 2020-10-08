@@ -8,6 +8,7 @@ import SearchPanel from '../search-panel';
 import Tabs from '../tabs';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
+import ErrorBoundary from '../error-boundary';
 
 export default class App extends Component {
 
@@ -19,18 +20,11 @@ export default class App extends Component {
         filter: '',
         currentActiveIndex: 0,
         loading: true,
-        error: false,
-        hasError: false
+        error: false
     }
 
     componentDidMount() {
         this.updateData();
-    }
-
-    componentDidCatch() {
-        this.setState({
-            hasError: true
-        });
     }
 
     updateData() {
@@ -105,26 +99,24 @@ export default class App extends Component {
     }
 
     render() {
-        if (this.state.hasError) {
-            return <ErrorIndicator />
-        }
-        
         const { filteredData, currentActiveIndex, loading, error } = this.state;
 
         const hasData = !(loading || error);
 
         const errorMessage = error ? <ErrorIndicator /> : null;
         const spinner = loading ? <Spinner /> : null;
-        const content = hasData ? <Tabs questionData={filteredData} onTabClick={this.onTabClick} activeTab={currentActiveIndex}/> : null;
+        const content = hasData ? <Tabs questionData={filteredData} onTabClick={this.onTabClick} activeTab={currentActiveIndex} /> : null;
 
         return (
-            <div className="app">
-                <AppHeader />
-                <SearchPanel onSearchSubmit={this.onSearchSubmit} />
-                {errorMessage}
-                {spinner}
-                {content}
-            </div>
+            <ErrorBoundary>
+                <div className="app">
+                    <AppHeader />
+                    <SearchPanel onSearchSubmit={this.onSearchSubmit} />
+                    {errorMessage}
+                    {spinner}
+                    {content}
+                </div>
+            </ErrorBoundary>
         );
     }
 };
