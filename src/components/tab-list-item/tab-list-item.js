@@ -2,7 +2,7 @@ import React from 'react';
 
 import './tab-list-item.scss';
 
-const TabListItem = ({ title, entries, onTabClick, active }) => {
+const TabListItem = ({ title, quantity, onTabClick, active }) => {
 
     let classNames = 'tab-list-item';
 
@@ -13,7 +13,7 @@ const TabListItem = ({ title, entries, onTabClick, active }) => {
     return (
         <span className={classNames}
             onClick={onTabClick}>
-            {title} ({entries.length})
+            {title} ({quantity})
         </span>
     );
 };
