@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import './tabs.scss';
 
-import ApiService from '../../services/api-service';
 import TabList from '../tab-list';
 import TabContent from '../tab-content';
 import ErrorBoundary from '../error-boundary';
@@ -10,8 +9,6 @@ import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 
 export default class Tabs extends Component {
-
-    apiService = new ApiService();
 
     state = {
         questionData: [],
@@ -34,8 +31,8 @@ export default class Tabs extends Component {
     }
 
     updateData() {
-        this.apiService
-            .getData('5f7c5fa1302a837e95758e63/1', this.props.term)
+        this.props
+            .getData(this.props.term)
             .then(this.onDataLoad)
             .catch(this.onError);
     }

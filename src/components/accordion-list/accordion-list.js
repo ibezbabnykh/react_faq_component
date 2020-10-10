@@ -7,28 +7,31 @@ import LoadMoreButton from '../load-more-button';
 
 export default class AccordionList extends Component {
 
+    static defaultProps = {
+        itemsPerPage: 10
+    };
+
     state = {
         count: 0
     }
 
-    itemsPerPage = 10;
-
     handleShowMoreItems = () => {
         this.setState((state) => {
             return {
-                count: (state.count + this.itemsPerPage)
+                count: (state.count + this.props.itemsPerPage)
             };
         });
     };
 
     render() {
-        const { elements: entries, isVisible } = this.props;
+        const { elements: entries, isVisible, itemsPerPage } = this.props;
+        const { count } = this.state;
 
         if (!isVisible) return null;
 
         const total = entries.length;
 
-        const elements = entries.slice(0, (this.state.count + this.itemsPerPage)).map((item) => {
+        const elements = entries.slice(0, (count + itemsPerPage)).map((item) => {
             return (
                 <AccordionItem key={item.id} itemData={item} id={item.id} />
             );
@@ -48,7 +51,7 @@ export default class AccordionList extends Component {
                         </React.Fragment>
                     }
                 </div>
-                {(total > this.itemsPerPage) && isShowButton &&
+                {(total > itemsPerPage) && isShowButton &&
                     <LoadMoreButton handleShowMoreItems={this.handleShowMoreItems} />
                 }
             </React.Fragment>

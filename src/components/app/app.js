@@ -6,11 +6,14 @@ import AppHeader from '../app-header';
 import SearchPanel from '../search-panel';
 import Tabs from '../tabs';
 import ErrorBoundary from '../error-boundary';
+import ApiService from '../../services/api-service';
+import { ApiServiceProvider } from '../api-service-context';
 
 export default class App extends Component {
 
     state = {
-        filter: ''
+        filter: '',
+        apiService: new ApiService()
     }
 
     onSearchSubmit = (filter) => {
@@ -22,11 +25,13 @@ export default class App extends Component {
     render() {
         return (
             <ErrorBoundary>
-                <div className="app">
-                    <AppHeader />
-                    <SearchPanel onSearchSubmit={this.onSearchSubmit} />
-                    <Tabs term={this.state.filter}/>
-                </div>
+                <ApiServiceProvider value={this.state.apiService}>
+                    <div className="app">
+                        <AppHeader />
+                        <SearchPanel onSearchSubmit={this.onSearchSubmit} />
+                        <Tabs term={this.state.filter} />
+                    </div>
+                </ApiServiceProvider>
             </ErrorBoundary>
         );
     }
