@@ -7,8 +7,9 @@ import TabContent from '../tab-content';
 import ErrorBoundary from '../error-boundary';
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
+import { withApiService } from '../hoc-helper';
 
-export default class Tabs extends Component {
+class Tabs extends Component {
 
     state = {
         questionData: [],
@@ -80,3 +81,10 @@ export default class Tabs extends Component {
     };
 };
 
+const mapMethodsToProps = (apiService) => {
+    return {
+        getData: apiService.getQuestionsData
+    }
+};
+
+export default withApiService(mapMethodsToProps)(Tabs);
