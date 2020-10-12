@@ -12,7 +12,7 @@ const DetailsSection = (props) => {
 
 const mapMethodsToProps = (apiService) => {
     return {
-        getData: apiService.getUser
+        getData: apiService.getUsersList
     }
 };
 

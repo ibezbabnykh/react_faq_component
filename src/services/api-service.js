@@ -24,8 +24,8 @@ export default class ApiService {
     };
 
     getUsersList = async () => {
-        const res = await this.getResource(this._apiBase, '5f818d27302a837e9577aea8');
-        return res.map(this._transformUser);
+        const res = await this.getResource(this._apiReqres, 'users/');
+        return res.data;
     }
 
     getUser = async (id) => {

@@ -5,52 +5,13 @@ import './tabs.scss';
 import TabList from '../tab-list';
 import TabContent from '../tab-content';
 import ErrorBoundary from '../error-boundary';
-import Spinner from '../spinner';
-import ErrorIndicator from '../error-indicator';
-import { withApiService } from '../hoc-helper';
+import { withApiService, withData } from '../hoc-helper';
 
 class Tabs extends Component {
 
     state = {
-        questionData: [],
-        currentActiveIndex: 0,
-        loading: true,
-        error: false
+        currentActiveIndex: 0
     }
-
-    componentDidMount() {
-        this.updateData();
-    }
-
-    componentDidUpdate(prevProps) {
-        if (this.props.term !== prevProps.term) {
-            this.setState({
-                loading: true
-            });
-            this.updateData();
-        }
-    }
-
-    updateData() {
-        this.props
-            .getData(this.props.term)
-            .then(this.onDataLoad)
-            .catch(this.onError);
-    }
-
-    onDataLoad = (data) => {
-        this.setState({
-            questionData: data,
-            loading: false
-        });
-    }
-
-    onError = () => {
-        this.setState({
-            error: true,
-            loading: false
-        });
-    };
 
     onTabClick = (id) => {
         this.setState({
@@ -59,32 +20,24 @@ class Tabs extends Component {
     }
 
     render() {
-        const { questionData, currentActiveIndex, loading, error } = this.state;
-
-        const hasData = !(loading || error);
-
-        const errorMessage = error ? <ErrorIndicator /> : null;
-        const spinner = loading ? <Spinner /> : null;
-        const content = hasData ?
-            <React.Fragment>
-                <TabList questionData={questionData} onTabClick={this.onTabClick} activeTab={currentActiveIndex} />
-                <TabContent questionData={questionData} activeTab={currentActiveIndex} />
-            </React.Fragment> : null;
+        const { currentActiveIndex } = this.state;
+        const { data } = this.props;
 
         return (
             <ErrorBoundary>
-                {errorMessage}
-                {spinner}
-                {content}
+                <React.Fragment>
+                    <TabList questionData={data} onTabClick={this.onTabClick} activeTab={currentActiveIndex} />
+                    <TabContent questionData={data} activeTab={currentActiveIndex} />
+                </React.Fragment>
             </ErrorBoundary>
         );
     };
 };
 
-const mapMethodsToProps = (apiService) => {
+const mapMethodsToProps = (apiService, attr) => {
     return {
-        getData: apiService.getQuestionsData
+        getData: apiService.getQuestionsData.bind(this, attr)
     }
 };
 
-export default withApiService(mapMethodsToProps)(Tabs);
+export default withApiService(mapMethodsToProps)(withData(Tabs));

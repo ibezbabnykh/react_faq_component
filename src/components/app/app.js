@@ -8,6 +8,7 @@ import Tabs from '../tabs';
 import ErrorBoundary from '../error-boundary';
 import ApiService from '../../services/api-service';
 import { ApiServiceProvider } from '../api-service-context';
+import DetailsSection from '../details-section';
 
 export default class App extends Component {
 
@@ -29,7 +30,7 @@ export default class App extends Component {
                     <div className="app">
                         <AppHeader />
                         <SearchPanel onSearchSubmit={this.onSearchSubmit} />
-                        <Tabs term={this.state.filter} />
+                        <Tabs fetchAttr={this.state.filter} />
                     </div>
                 </ApiServiceProvider>
             </ErrorBoundary>
