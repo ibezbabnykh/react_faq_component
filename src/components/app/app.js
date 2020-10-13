@@ -5,7 +5,7 @@ import './app.scss';
 import Header from '../header';
 import ErrorBoundary from '../error-boundary';
 import ApiService from '../../services/api-service';
-import { ApiServiceProvider } from '../api-service-context';
+import ApiServiceContext from '../api-service-context';
 import { FaqPage, UsersPage } from '../pages';
 
 export default class App extends Component {
@@ -17,13 +17,13 @@ export default class App extends Component {
     render() {
         return (
             <ErrorBoundary>
-                <ApiServiceProvider value={this.state.apiService}>
+                <ApiServiceContext.Provider value={this.state.apiService}>
                     <React.Fragment>
                         <Header />
                         <FaqPage />
                         <UsersPage />
                     </React.Fragment>
-                </ApiServiceProvider>
+                </ApiServiceContext.Provider>
             </ErrorBoundary>
         );
     }

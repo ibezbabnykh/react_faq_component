@@ -1,21 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-import { ApiServiceConsumer } from '../api-service-context';
+import ApiServiceContext from '../api-service-context';
 
 const withApiService = (mapMethodsToProps) => (Wrapped) => {
     return (props) => {
-        return (
-            <ApiServiceConsumer>
-                {
-                    (apiService) => {
-                        const serviceProps = (typeof props.fetchAttr === 'undefined' || props.fetchAttr === null) ? mapMethodsToProps(apiService) : mapMethodsToProps(apiService, props.fetchAttr);
+        const apiService = useContext(ApiServiceContext);
 
-                        return (
-                            <Wrapped {...props} {...serviceProps} />
-                        );
-                    }
-                }
-            </ApiServiceConsumer>
+        const serviceProps = (typeof props.fetchAttr === 'undefined' || props.fetchAttr === null) ? mapMethodsToProps(apiService) : mapMethodsToProps(apiService, props.fetchAttr);
+
+        return (
+            <Wrapped {...props} {...serviceProps} />
         );
     }
 }
