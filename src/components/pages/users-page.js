@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import ErrorBoundary from '../error-boundary';
 import PageTitle from '../page-title';
 import Row from '../row';
 import ItemList from '../item-list';
@@ -19,9 +20,11 @@ export default class UsersPage extends Component {
         return (
             <div className="pageBody center-holder">
                 <PageTitle title="Users" />
-                <Row 
-                    leftColumn={<ItemList onItemSelected={this.onItemSelected} activeUSer={selectedItem} />} 
-                    rightColumn={<ItemDetails fetchAttr={selectedItem} />}/>
+                <ErrorBoundary>
+                    <Row
+                        leftColumn={<ItemList onItemSelected={this.onItemSelected} activeUSer={selectedItem} />}
+                        rightColumn={<ItemDetails fetchAttr={selectedItem} />} />
+                </ErrorBoundary>
             </div>
         );
     }

@@ -75,21 +75,23 @@ export default class ApiService {
             avatar: user.avatar,
             email: user.email,
             firstName: user.first_name,
-            lastName: user.last_name,
-            fullName: `${user.first_name} + ${user.last_name}`
+            lastName: user.last_name
         }
     }
 
     _transformUser = (user) => {
+        const { id, avatar, email, first_name, last_name } = user.data;
+        const { company, text } = user.ad;
+
         return {
-            id: user.data.id,
-            avatar: user.data.avatar,
-            email: user.data.email,
-            firstName: user.data.first_name,
-            lastName: user.data.last_name,
-            fullName: `${user.data.first_name} ${user.data.last_name}`,
-            company: user.ad.company,
-            responsibility: user.ad.text
+            id,
+            avatar,
+            email,
+            firstName: first_name,
+            lastName: last_name,
+            fullName: `${first_name} ${last_name}`,
+            company,
+            responsibility: text
         }
     }
 }
