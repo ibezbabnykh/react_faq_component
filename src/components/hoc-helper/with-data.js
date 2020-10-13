@@ -1,63 +1,64 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
 import Spinner from '../spinner';
 import ErrorIndicator from '../error-indicator';
 
 const withData = (View) => {
-    return class extends Component {
-        state = {
-            data: null,
-            loading: true,
-            error: false
+    return (props) => {
+
+        const { getData, fetchAttr } = props;
+
+        const useRequestInfo = () => {
+            const request = useCallback(() => getData(), [getData]);
+
+            return useRequest(request);
         }
 
-        componentDidMount() {
-            this.update();
+        const useRequest = (request) => {
+            const initialState = useMemo(() => ({
+                data: null,
+                loading: true,
+                error: null
+            }), []);
+
+            const [dataState, setDataState] = useState(initialState);
+
+            useEffect(() => {
+                setDataState(initialState);
+
+                let cancelled = false;
+
+                request()
+                    .then(data => !cancelled && setDataState({
+                        data,
+                        loading: false,
+                        error: null
+                    }))
+                    .catch(
+                        error => !cancelled && setDataState({
+                            data: null,
+                            loading: false,
+                            error
+                        }));
+
+                return () => cancelled = true;
+            }, [request, initialState]);
+
+            return dataState;
         }
 
-        componentDidUpdate(prevProps) {
-            if (this.props.getData !== prevProps.getData) {
-                this.setState({
-                    loading: true
-                });
-                this.update();
-            }
+        const { data, loading, error } = useRequestInfo();
+
+        if (loading) {
+            return <Spinner />
         }
 
-        update() {
-            this.props.getData()
-                .then(this.onLoad)
-                .catch(this.onError);
+        if (error) {
+            return <ErrorIndicator />
         }
 
-        onLoad = (data) => {
-            this.setState({
-                data,
-                loading: false
-            });
-        }
-    
-        onError = () => {
-            this.setState({
-                error: true,
-                loading: false
-            });
-        };
-
-        render() {
-            const { data, loading, error } = this.state;
-
-            if (loading) {
-                return <Spinner />
-            }
-
-            if (error) {
-                return <ErrorIndicator />
-            }
-
-            return <View {...this.props} data={data} />
-        }
-    };
+        return <View {...props} data={data} />
+    }
 }
 
 export default withData;
