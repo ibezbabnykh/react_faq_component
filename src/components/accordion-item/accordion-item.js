@@ -1,39 +1,31 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
 import './accordion-item.scss';
 import AccordionItemTitle from '../accordion-item-title';
 import AccordionItemContent from '../accordion-item-content';
 
-export default class AccordionItem extends Component {
-    state = {
-        isOpen: false
+const AccordionItem = (props) => {
+
+    const [isOpen, setOpenState] = useState(false);
+
+    const onAccordionClick = () => {
+        setOpenState(!isOpen);
     }
 
-    onToggleProperty() {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
+    const { question, answer } = props.itemData;
+
+    let classNames = 'accordion-item';
+
+    if (isOpen) {
+        classNames += ' is-open';
     }
 
-    onAccordionClick() {
-        this.onToggleProperty();
-    }
-
-    render() {
-        const { question, answer } = this.props.itemData;
-        const { isOpen } = this.state;
-
-        let classNames = 'accordion-item';
-
-        if (isOpen) {
-            classNames += ' is-open';
-        }
-
-        return (
-            <div className={classNames}>
-                <AccordionItemTitle text={question} onAccordionClick={() => this.onAccordionClick()}/>
-                <AccordionItemContent text={answer} />
-            </div>
-        );
-    }
+    return (
+        <div className={classNames}>
+            <AccordionItemTitle text={question} onAccordionClick={() => onAccordionClick()} />
+            <AccordionItemContent text={answer} />
+        </div>
+    );
 };
+
+export default AccordionItem;

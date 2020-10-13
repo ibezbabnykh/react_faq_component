@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
 import './tabs.scss';
 
@@ -7,31 +7,21 @@ import TabContent from '../tab-content';
 import ErrorBoundary from '../error-boundary';
 import { withApiService, withData } from '../hoc-helper';
 
-class Tabs extends Component {
+const Tabs = ({ data }) => {
+    const [currentActiveIndex, setCurrentActiveIndex] = useState(0);
 
-    state = {
-        currentActiveIndex: 0
+    const onTabClick = (id) => {
+        setCurrentActiveIndex(id);
     }
 
-    onTabClick = (id) => {
-        this.setState({
-            currentActiveIndex: id
-        });
-    }
-
-    render() {
-        const { currentActiveIndex } = this.state;
-        const { data } = this.props;
-
-        return (
-            <ErrorBoundary>
-                <React.Fragment>
-                    <TabList questionData={data} onTabClick={this.onTabClick} activeTab={currentActiveIndex} />
-                    <TabContent questionData={data} activeTab={currentActiveIndex} />
-                </React.Fragment>
-            </ErrorBoundary>
-        );
-    };
+    return (
+        <ErrorBoundary>
+            <React.Fragment>
+                <TabList questionData={data} onTabClick={onTabClick} activeTab={currentActiveIndex} />
+                <TabContent questionData={data} activeTab={currentActiveIndex} />
+            </React.Fragment>
+        </ErrorBoundary>
+    );
 };
 
 const mapMethodsToProps = (apiService, attr) => {
