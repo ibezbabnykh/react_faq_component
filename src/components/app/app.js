@@ -2,36 +2,27 @@ import React, { Component } from 'react';
 
 import './app.scss';
 
-import AppHeader from '../app-header';
-import SearchPanel from '../search-panel';
-import Tabs from '../tabs';
+import Header from '../header';
 import ErrorBoundary from '../error-boundary';
 import ApiService from '../../services/api-service';
 import { ApiServiceProvider } from '../api-service-context';
-import DetailsSection from '../details-section';
+import { FaqPage, UsersPage } from '../pages';
 
 export default class App extends Component {
 
     state = {
-        filter: '',
         apiService: new ApiService()
-    }
-
-    onSearchSubmit = (filter) => {
-        this.setState({
-            filter
-        });
     }
 
     render() {
         return (
             <ErrorBoundary>
                 <ApiServiceProvider value={this.state.apiService}>
-                    <div className="app">
-                        <AppHeader />
-                        <SearchPanel onSearchSubmit={this.onSearchSubmit} />
-                        <Tabs fetchAttr={this.state.filter} />
-                    </div>
+                    <React.Fragment>
+                        <Header />
+                        <FaqPage />
+                        <UsersPage />
+                    </React.Fragment>
                 </ApiServiceProvider>
             </ErrorBoundary>
         );

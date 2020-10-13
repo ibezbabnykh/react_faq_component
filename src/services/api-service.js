@@ -25,7 +25,7 @@ export default class ApiService {
 
     getUsersList = async () => {
         const res = await this.getResource(this._apiReqres, 'users/');
-        return res.data;
+        return res.data.map(this._transformUserFromList);
     }
 
     getUser = async (id) => {
@@ -69,6 +69,17 @@ export default class ApiService {
         }
     };
 
+    _transformUserFromList = (user) => {
+        return {
+            id: user.id,
+            avatar: user.avatar,
+            email: user.email,
+            firstName: user.first_name,
+            lastName: user.last_name,
+            fullName: `${user.first_name} + ${user.last_name}`
+        }
+    }
+
     _transformUser = (user) => {
         return {
             id: user.data.id,
@@ -76,6 +87,7 @@ export default class ApiService {
             email: user.data.email,
             firstName: user.data.first_name,
             lastName: user.data.last_name,
+            fullName: `${user.data.first_name} ${user.data.last_name}`,
             company: user.ad.company,
             responsibility: user.ad.text
         }

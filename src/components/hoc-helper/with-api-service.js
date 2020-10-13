@@ -8,7 +8,7 @@ const withApiService = (mapMethodsToProps) => (Wrapped) => {
             <ApiServiceConsumer>
                 {
                     (apiService) => {
-                        const serviceProps = mapMethodsToProps(apiService, props.fetchAttr);
+                        const serviceProps = (typeof props.fetchAttr === 'undefined' || props.fetchAttr === null) ? mapMethodsToProps(apiService) : mapMethodsToProps(apiService, props.fetchAttr);
 
                         return (
                             <Wrapped {...props} {...serviceProps} />
