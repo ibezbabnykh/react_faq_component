@@ -1,18 +1,23 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './nav-list.scss';
 
 const NavList = () => {
     return (
         <ul className="nav-list">
-            <li><a href="">
-                <i className="fas fa-user"></i>
-                Users
-            </a></li>
-            <li><a href="">
-                <i className="fas fa-question"></i>
-                FAQ
-            </a></li>
+            <li>
+                <Link to="/users/">
+                    <i className="fas fa-user"></i>
+                    Users
+                </Link>
+            </li>
+            <li>
+                <Link to="/faq">
+                    <i className="fas fa-question"></i>
+                    FAQ
+                </Link>
+            </li>
         </ul>
     );
 }

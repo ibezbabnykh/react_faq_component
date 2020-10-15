@@ -9,8 +9,8 @@ const ItemList = (props) => {
 
     const items = data.map((item) => {
         const { id, firstName, lastName } = item;
-        
-        return <li key={id} className={id === activeUSer ? 'active' : ''}
+
+        return <li key={id} className={id === Number(activeUSer) ? 'active' : ''}
             onClick={() => onItemSelected(id)}>
                 {firstName} {lastName}
         </li>

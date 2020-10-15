@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import ErrorBoundary from '../error-boundary';
 import PageTitle from '../page-title';
@@ -6,23 +7,27 @@ import Row from '../row';
 import ItemList from '../item-list';
 import ItemDetails from '../item-details';
 
-const UsersPage = () => {
-    const [selectedItem, setSelectedItem] = useState(1);
+const UsersPage = ({ history, match }) => {
+    const { id } = match.params;
 
-    const onItemSelected = (selectedItem) => {
-        setSelectedItem(selectedItem);
+    let details;
+
+    if (typeof id === 'undefined') {
+        details = <span>Select a item from a list</span>;
+    } else {
+        details = <ItemDetails fetchAttr={id} />
     }
 
     return (
-        <div className="pageBody center-holder">
+        <React.Fragment>
             <PageTitle title="Users" />
             <ErrorBoundary>
                 <Row
-                    leftColumn={<ItemList onItemSelected={onItemSelected} activeUSer={selectedItem} />}
-                    rightColumn={<ItemDetails fetchAttr={selectedItem} />} />
+                    leftColumn={<ItemList onItemSelected={(id) => history.push(`${id}`)} activeUSer={id} />}
+                    rightColumn={details} />
             </ErrorBoundary>
-        </div>
+        </React.Fragment>
     );
 }
 
-export default UsersPage;
+export default withRouter(UsersPage);

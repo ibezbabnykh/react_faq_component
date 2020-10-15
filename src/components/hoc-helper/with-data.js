@@ -6,7 +6,7 @@ import ErrorIndicator from '../error-indicator';
 const withData = (View) => {
     return (props) => {
 
-        const { getData, fetchAttr } = props;
+        const { getData } = props;
 
         const useRequestInfo = () => {
             const request = useCallback(() => getData(), [getData]);
