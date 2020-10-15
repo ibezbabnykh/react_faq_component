@@ -1,0 +1,30 @@
+.form-details {
+    width: 100%;
+    padding-top: 20px;
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    label {
+        display: block;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .row {
+        display: flex;
+        margin: 0 -15px;
+    }
+
+    .col-50 {
+        width: 50%;
+        padding: 0 15px;
+    }
+
+    .btn-holder {
+        padding-top: 20px;
+        display: flex;
+        justify-content: flex-end;
+    }
+}

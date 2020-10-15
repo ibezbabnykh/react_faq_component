@@ -18,6 +18,22 @@ export default class ApiService {
         return await res.json();
     };
 
+    postResource = async (base, url, data) => {
+        const res = await fetch(`${base}${url}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${url}, received ${res.status}`);
+        }
+
+        return await res.json();
+    };
+
     getQuestionsData = async (term) => {
         const res = await this.getResource(this._apiBase, '5f7c5fa1302a837e95758e63/1');
         return this.filterData(res, term);
@@ -31,6 +47,12 @@ export default class ApiService {
     getUser = async (id) => {
         const user = await this.getResource(this._apiReqres, `users/${id}`);
         return this._transformUser(user);
+    }
+
+    createUser = async (data) => {
+        const res = await this.postResource(this._apiReqres, 'users/', data);
+        console.log('res user', res);
+        return res;
     }
 
     filterData = (arr, term) => {
@@ -70,12 +92,14 @@ export default class ApiService {
     };
 
     _transformUserFromList = (user) => {
+        const { id, avatar, email, first_name, last_name } = user;
+
         return {
-            id: user.id,
-            avatar: user.avatar,
-            email: user.email,
-            firstName: user.first_name,
-            lastName: user.last_name
+            id,
+            avatar,
+            email,
+            firstName: first_name,
+            lastName: last_name
         }
     }
 

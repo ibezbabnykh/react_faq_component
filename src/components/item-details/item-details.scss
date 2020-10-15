@@ -6,7 +6,8 @@
     padding: 20px 32px 24px;
     border-radius: 4px;
 
-    .edit-btn {
+    .btn-edit,
+    .btn-close {
         cursor: pointer;
         z-index: 5;
         position: absolute;
@@ -19,6 +20,7 @@
         height: 30px;
         color: #78b532;
         transition: color 0.3s ease-in-out;
+        font-size: 16px;
 
         &:hover {
             color: #6da52e;
