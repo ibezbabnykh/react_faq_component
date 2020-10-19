@@ -1,10 +1,10 @@
 import React from 'react';
 
-import './tab-list-item.scss';
+import './tab-nav-item.scss';
 
-const TabListItem = ({ title, quantity, onTabClick, active }) => {
+const TabNavItem = ({ title, quantity, onTabClick, active }) => {
 
-    let classNames = 'tab-list-item';
+    let classNames = 'tab-nav-item';
 
     if (active) {
         classNames += ' active';
@@ -18,4 +18,4 @@ const TabListItem = ({ title, quantity, onTabClick, active }) => {
     );
 };
 
-export default TabListItem;
+export default TabNavItem;

@@ -1,16 +1,16 @@
 import React from 'react';
 
-import TabListItem from '../tab-list-item';
-import './tab-list.scss';
+import TabNavItem from '../tab-nav-item';
+import './tab-nav.scss';
 
-const TabList = ({ questionData, onTabClick, activeTab }) => {
+const TabNav = ({ questionData, onTabClick, activeTab }) => {
 
     const elements = questionData.map((item) => {
         const { id, title, entries } = item;
 
         return (
             <li key={id} className="list-group-item">
-                <TabListItem
+                <TabNavItem
                     title={title}
                     quantity={entries.length}
                     active={activeTab === id}
@@ -21,10 +21,10 @@ const TabList = ({ questionData, onTabClick, activeTab }) => {
     });
 
     return (
-        <ul className="tab-list">
+        <ul className="tab-nav">
             {elements}
         </ul>
     );
 };
 
-export default TabList;
+export default TabNav;

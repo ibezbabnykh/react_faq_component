@@ -2,7 +2,7 @@ import React from 'react';
 
 import './tab-content.scss';
 
-import AccordionList from '../accordion-list';
+import AccordionList from '../../accordion';
 
 const TabContent = ({ questionData, activeTab }) => {
     return (

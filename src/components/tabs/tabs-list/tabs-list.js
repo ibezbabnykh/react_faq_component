@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
-import './tabs.scss';
+import './tabs-list.scss';
 
-import TabList from '../tab-list';
+import TabNav from '../tab-nav';
 import TabContent from '../tab-content';
-import ErrorBoundary from '../error-boundary';
-import { withApiService, withData } from '../hoc-helper';
+import ErrorBoundary from '../../common/error-boundary';
+import { withApiService, withData } from '../../../hoc-helper';
 
-const Tabs = ({ data }) => {
+const TabsList = ({ data }) => {
     const [currentActiveIndex, setCurrentActiveIndex] = useState(0);
 
     const onTabClick = (id) => {
@@ -17,7 +17,7 @@ const Tabs = ({ data }) => {
     return (
         <ErrorBoundary>
             <React.Fragment>
-                <TabList questionData={data} onTabClick={onTabClick} activeTab={currentActiveIndex} />
+                <TabNav questionData={data} onTabClick={onTabClick} activeTab={currentActiveIndex} />
                 <TabContent questionData={data} activeTab={currentActiveIndex} />
             </React.Fragment>
         </ErrorBoundary>
@@ -30,4 +30,4 @@ const mapMethodsToProps = (apiService, attr) => {
     }
 };
 
-export default withApiService(mapMethodsToProps)(withData(Tabs));
+export default withApiService(mapMethodsToProps)(withData(TabsList));

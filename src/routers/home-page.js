@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import './app.scss';
+import ApiService from '../services/api-service';
+import ApiServiceContext from '../components/common/api-service-context';
+import ErrorBoundary from '../components/common/error-boundary';
+import Header from '../components/common/header';
+import PageTitle from '../components/common/page-title';
+import FaqPage from './faq-page';
+import UsersPage from './users-page';
 
-import ApiService from '../../services/api-service';
-import ApiServiceContext from '../api-service-context';
-import ErrorBoundary from '../error-boundary';
-import Header from '../header';
-import PageTitle from '../page-title';
-import { FaqPage, UsersPage } from '../pages';
-
-const App = () => {
+const HomePage = () => {
 
     const [apiService] = useState(new ApiService());
 
@@ -35,4 +34,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default HomePage;

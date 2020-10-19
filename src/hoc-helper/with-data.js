@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
-import Spinner from '../spinner';
-import ErrorIndicator from '../error-indicator';
+import Spinner from '../components/common/spinner';
+import ErrorIndicator from '../components/common/error-indicator';
 
 const withData = (View) => {
     return (props) => {

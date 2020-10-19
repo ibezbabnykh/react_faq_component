@@ -176,3 +176,22 @@ button {
     background-color: #6da52e;
   }
 }
+
+.main {
+  display: flex;
+  min-height: 100vh;
+}
+
+.pageBody {
+  width: 100%;
+  padding:  0 30px 40px;
+}
+
+.center-holder {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+#root {
+  width: 100%;
+}

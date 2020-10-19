@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './header.scss';
 import logo from './DLL-logo.svg';
 
-import Navlist from '../nav-list';
+import Navlist from '../../nav-list';
 
 const Header = () => {
     return (

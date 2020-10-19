@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import ApiServiceContext from '../api-service-context';
+import ApiServiceContext from '../components/common/api-service-context';
 
 const withApiService = (mapMethodsToProps) => (Wrapped) => {
     return (props) => {

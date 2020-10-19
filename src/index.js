@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './components/app';
+import HomePage from './routers/home-page';
 import './reset.scss';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<HomePage />, document.getElementById('root'));

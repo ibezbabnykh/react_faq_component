@@ -2,7 +2,7 @@ import React from 'react';
 
 import './item-list.scss';
 
-import { withApiService, withData } from '../hoc-helper';
+import { withApiService, withData } from '../../../hoc-helper';
 
 const ItemList = (props) => {
     const { data, onItemSelected, activeUSer } = props;

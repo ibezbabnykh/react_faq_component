@@ -2,17 +2,16 @@ import React from 'react';
 
 import './form-details.scss';
 
-import { withApiService } from '../hoc-helper';
+import { withApiService } from '../../../hoc-helper';
 
-const Record = ({ item, label, field, onHandleChange }) => {
+const Record = ({ item, label, field }) => {
     return <div className="form-group">
         <label htmlFor={`${label} ${item.id}`}>{label}</label>
         <input id={`${label} ${item.id}`}
             type="text" defaultValue={item[field]}
             placeholder={label}
-            className="form-control" 
-            name={label} 
-            onChange={onHandleChange} />
+            className="form-control"
+            name={field} />
     </div>
 }
 
@@ -21,15 +20,21 @@ export {
 }
 
 const FormDetails = (props) => {
-
-    const { userInfo, onFormClose } = props;
+    const { userInfo, onFormClose, getData } = props;
 
     const onSubmit = (e) => {
         e.preventDefault();
+
+        const data = formData(new FormData(e.target));
+        getData(data);
     }
 
-    const onHandleChange = (e) => {
-        
+    const formData = (fd) => {
+        const data = {};
+        for (let key of fd.keys()) {
+            data[key] = fd.get(key);
+        }
+        return data;
     }
 
     return (
@@ -40,19 +45,19 @@ const FormDetails = (props) => {
             <form className="form-details" onSubmit={onSubmit}>
                 <div className="row">
                     <div className="col-50">
-                        <Record label="First Name" field="firstName" item={userInfo} onHandleChange={onHandleChange}/>
+                        <Record label="First Name" field="first_name" item={userInfo} />
                     </div>
 
                     <div className="col-50">
-                        <Record label="Last Name" field="lastName" item={userInfo} onHandleChange={onHandleChange}/>
+                        <Record label="Last Name" field="last_name" item={userInfo} />
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-50">
-                        <Record label="Email" field="email" item={userInfo} onHandleChange={onHandleChange}/>
+                        <Record label="Email" field="email" item={userInfo} />
                     </div>
                     <div className="col-50">
-                        <Record label="Company" field="company" item={userInfo} onHandleChange={onHandleChange}/>
+                        <Record label="Company" field="company" item={userInfo} />
                     </div>
                 </div>
                 <div className="btn-holder">
@@ -65,7 +70,7 @@ const FormDetails = (props) => {
 
 const mapMethodsToProps = (apiService) => {
     return {
-        getData: apiService.createUser
+        getData: apiService.updateUser
     }
 };
 

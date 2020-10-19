@@ -18,9 +18,9 @@ export default class ApiService {
         return await res.json();
     };
 
-    postResource = async (base, url, data) => {
+    putResource = async (base, url, data) => {
         const res = await fetch(`${base}${url}`, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
@@ -49,9 +49,8 @@ export default class ApiService {
         return this._transformUser(user);
     }
 
-    createUser = async (data) => {
-        const res = await this.postResource(this._apiReqres, 'users/', data);
-        console.log('res user', res);
+    updateUser = async (data) => {
+        const res = await this.putResource(this._apiReqres, 'users/', data);
         return res;
     }
 
@@ -111,8 +110,8 @@ export default class ApiService {
             id,
             avatar,
             email,
-            firstName: first_name,
-            lastName: last_name,
+            first_name,
+            last_name,
             fullName: `${first_name} ${last_name}`,
             company,
             responsibility: text
