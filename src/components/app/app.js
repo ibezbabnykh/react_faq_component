@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './app.scss';
@@ -10,31 +10,29 @@ import Header from '../header';
 import PageTitle from '../page-title';
 import { FaqPage, UsersPage } from '../pages';
 
-export default class App extends Component {
+const App = () => {
 
-    state = {
-        apiService: new ApiService()
-    }
+    const [apiService] = useState(new ApiService());
 
-    render() {
-        return (
-            <ErrorBoundary>
-                <ApiServiceContext.Provider value={this.state.apiService}>
-                    <Router>
-                        <Header />
-                        <div className="pageBody center-holder">
-                            <Route path="/" 
-                                render={(props) => (
-                                    <PageTitle {...props} title="Welcome to the app, please use the navigation."/>
-                                )}
-                                exact
-                            />
-                            <Route path="/faq" component={FaqPage} />
-                            <Route path="/users/:id?" component={UsersPage} />
-                        </div>
-                    </Router>
-                </ApiServiceContext.Provider>
-            </ErrorBoundary>
-        );
-    }
+    return (
+        <ErrorBoundary>
+            <ApiServiceContext.Provider value={apiService}>
+                <Router>
+                    <Header />
+                    <div className="pageBody center-holder">
+                        <Route path="/"
+                            render={(props) => (
+                                <PageTitle {...props} title="Welcome to the app, please use the navigation." />
+                            )}
+                            exact
+                        />
+                        <Route path="/faq" component={FaqPage} />
+                        <Route path="/users/:id?" component={UsersPage} />
+                    </div>
+                </Router>
+            </ApiServiceContext.Provider>
+        </ErrorBoundary>
+    );
 };
+
+export default App;
