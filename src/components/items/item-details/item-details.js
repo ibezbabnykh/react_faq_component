@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import './item-details.scss';
 
-import { withApiService, withData } from '../../../hoc-helper';
+import { withApiService, withData } from '../../../hoc';
 import ItemDetailsList, { Record } from '../item-details-list';
 import FormDetails from '../form-details';
 

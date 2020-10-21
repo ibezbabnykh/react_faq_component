@@ -5,7 +5,7 @@ import './tabs-list.scss';
 import TabNav from '../tab-nav';
 import TabContent from '../tab-content';
 import ErrorBoundary from '../../common/error-boundary';
-import { withApiService, withData } from '../../../hoc-helper';
+import { withApiService, withData } from '../../../hoc';
 
 const TabsList = ({ data }) => {
     const [currentActiveIndex, setCurrentActiveIndex] = useState(0);

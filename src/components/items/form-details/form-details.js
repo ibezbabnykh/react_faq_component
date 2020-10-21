@@ -2,7 +2,7 @@ import React from 'react';
 
 import './form-details.scss';
 
-import { withApiService } from '../../../hoc-helper';
+import { withApiService } from '../../../hoc';
 
 const Record = ({ item, label, field }) => {
     return <div className="form-group">
