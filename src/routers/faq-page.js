@@ -12,11 +12,11 @@ const FaqPage = () => {
     }
 
     return (
-        <React.Fragment>
+        <>
             <PageTitle title="FAQ" />
             <SearchPanel onSearchSubmit={onSearchSubmit} />
             <Tabs fetchAttr={filter} />
-        </React.Fragment>
+        </>
     );
 }
 

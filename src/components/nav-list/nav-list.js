@@ -18,6 +18,12 @@ const NavList = () => {
                     FAQ
                 </Link>
             </li>
+            <li>
+                <Link to="/products">
+                    <i className="fas fa-shopping-basket"></i>
+                    Products
+                </Link>
+            </li>
         </ul>
     );
 }

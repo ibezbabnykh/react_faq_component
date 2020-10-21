@@ -1,3 +1,1 @@
-import LoadMoreButton from './load-more-button';
-
-export default LoadMoreButton;
+export { default } from './load-more-button';

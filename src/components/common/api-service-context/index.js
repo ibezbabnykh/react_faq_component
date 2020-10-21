@@ -1,3 +1,1 @@
-import ApiServiceContext from './api-service-context';
-
-export default ApiServiceContext;
+export { default } from './api-service-context';

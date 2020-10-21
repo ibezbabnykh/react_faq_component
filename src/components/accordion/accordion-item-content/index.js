@@ -1,3 +1,1 @@
-import AccordionItemContent from './accordion-item-content';
-
-export default AccordionItemContent;
+export { default } from './accordion-item-content';

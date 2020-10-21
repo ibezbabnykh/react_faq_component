@@ -1,3 +1,1 @@
-import TabNavItem from './tab-nav-item';
-
-export default TabNavItem;
+export { default } from './tab-nav-item';

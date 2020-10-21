@@ -1,3 +1,1 @@
-import AccordionItemTitle from './accordion-item-title';
-
-export default AccordionItemTitle;
+export { default } from './accordion-item-title';

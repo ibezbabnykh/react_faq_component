@@ -30,21 +30,21 @@ const AccordionList = (props) => {
     const isShowButton = elements.length < total;
 
     return (
-        <React.Fragment>
+        <>
             <div className="accordion-list">
                 {elements.length === 0 &&
                     <h5 className="no-results">No match results in this category, please try another query.</h5>
                 }
                 {elements.length > 0 &&
-                    <React.Fragment>
+                    <>
                         {elements}
-                    </React.Fragment>
+                    </>
                 }
             </div>
             {(total > itemsPerPage) && isShowButton &&
                 <LoadMoreButton handleShowMoreItems={handleShowMoreItems} />
             }
-        </React.Fragment>
+        </>
     );
 };
 

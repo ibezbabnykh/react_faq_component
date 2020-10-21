@@ -1,3 +1,1 @@
-import FormDetails from './form-details';
-
-export default FormDetails;
+export { default } from './form-details';

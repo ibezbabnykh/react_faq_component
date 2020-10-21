@@ -16,10 +16,10 @@ const TabsList = ({ data }) => {
 
     return (
         <ErrorBoundary>
-            <React.Fragment>
+            <>
                 <TabNav questionData={data} onTabClick={onTabClick} activeTab={currentActiveIndex} />
                 <TabContent questionData={data} activeTab={currentActiveIndex} />
-            </React.Fragment>
+            </>
         </ErrorBoundary>
     );
 };

@@ -19,14 +19,14 @@ const UsersPage = ({ history, match }) => {
     }
 
     return (
-        <React.Fragment>
+        <>
             <PageTitle title="Users" />
             <ErrorBoundary>
                 <Row
                     leftColumn={<ItemList onItemSelected={(id) => history.push(`${id}`)} activeUSer={id} />}
                     rightColumn={details} />
             </ErrorBoundary>
-        </React.Fragment>
+        </>
     );
 }
 
