@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import './product-list.scss';
 
+import { withApiService, withData } from '../../hoc';
+import { compose } from '../../utils';
+import { productsLoaded } from '../../actions';
 import ProductListItem from '../product-list-item';
 
-const ProductList = ({ products }) => {
+const ProductList = (props) => {
+    const { products, productsLoaded, data } = props;
+
+    useEffect(() => {
+        productsLoaded(data);
+    }, [productsLoaded, data]);
+
     return (
-        <ul>
+        <ul className="product-list">
             {
                 products.map((product) => {
                     return <li key={product.id}>
@@ -23,4 +32,17 @@ const mapStateToProps = ({ products }) => {
     return { products };
 }
 
-export default connect(mapStateToProps)(ProductList);
+const mapDispatchToProps = {
+    productsLoaded
+}
+
+const mapMethodsToProps = (apiService) => {
+    return {
+        getData: apiService.getBooks
+    }
+}
+
+export default compose(
+    withApiService(mapMethodsToProps),
+    connect(mapStateToProps, mapDispatchToProps)
+)(withData(ProductList));

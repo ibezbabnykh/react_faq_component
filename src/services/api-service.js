@@ -39,6 +39,11 @@ export default class ApiService {
         return this.filterData(res, term);
     };
 
+    getBooks = async () => {
+        const res = await this.getResource(this._apiBase, '5f913710058d9a7b94decb99');
+        return res.map(this._transformProductFromList);
+    }
+
     getUsersList = async () => {
         const res = await this.getResource(this._apiReqres, 'users/');
         return res.data.map(this._transformUserFromList);
@@ -115,6 +120,30 @@ export default class ApiService {
             fullName: `${first_name} ${last_name}`,
             company,
             responsibility: text
+        }
+    }
+
+    _transformProductFromList = (product) => {
+        const { Name, Price, Brand, Season, Size, Color, Description, Category, Occassion } = product;
+
+        return {
+            id: product['Product ID'],
+            name: Name,
+            category: Category,
+            price: Price,
+            retailPrice: product['Retail Price'],
+            brand: Brand,
+            img: product['Thumbnail URL'],
+            raitingAvg: product['Rating Avg'],
+            raitngCount: product['Rating Count'],
+            season: Season,
+            size: Size,
+            color: Color,
+            description: Description,
+            shoeSize: product['Shoe Size'],
+            date: product['Date Created'],
+            occassion: Occassion,
+            inventoryCount: product['Inventory Count']
         }
     }
 }
