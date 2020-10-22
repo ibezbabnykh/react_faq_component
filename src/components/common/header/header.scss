@@ -1,5 +1,5 @@
 .header {
-    padding-top: 7px;
+    padding-top: 48px;
 
     .center-holder {
         padding: 0 30px;
@@ -7,6 +7,21 @@
 
     .logo {
         margin-right: 15px;
+        margin-top: 6px;
+    }
+
+    .top-space-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: #fff;
+
+        .center-holder {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
     }
 }
 

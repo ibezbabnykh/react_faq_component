@@ -1,0 +1,22 @@
+.header-minibasket {
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 12px;
+    cursor: pointer;
+    background-color: #7ab33c;
+    border-radius: 32px;
+    color: #fff;
+
+    i {
+        margin-right: 2px;
+    }
+    
+    span {
+        font-weight: 700;
+    }
+
+    .total-price {
+        margin-left: 10px;
+    }
+}

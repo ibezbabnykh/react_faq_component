@@ -1,0 +1,20 @@
+.minibasket-empty-overlay {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    text-align: center;
+
+    h4 {
+        margin: 0;
+    }
+
+    .empty-basket-content {
+        width: 100%;
+    }
+    
+    .person-avatar {
+        width: 72px;
+        margin: 0 auto 15px;
+    }
+}

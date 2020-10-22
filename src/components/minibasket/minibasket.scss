@@ -1,0 +1,43 @@
+.minibasket {
+    position: fixed;
+    top: 48px;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+    width: 0;
+    transition: width 0s;
+
+    &.is-open {
+        width: 100%;
+
+        .minibasket-container {
+            right: 0;
+        }
+
+        .minibasket-overlay {
+            opacity: 1;
+        }
+    }
+
+    &-overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background-color: rgba(0,0,0,.32);
+        opacity: 0;
+        transition: opacity .7s;
+    }
+
+    &-container {
+        position: absolute;
+        top: 0;
+        right: -330px;
+        bottom: 0;
+        width: 320px;
+        background-color: #fff;
+        transition: right .4s;
+        box-shadow: -4px 3px 4px rgba(0,0,0,.32);
+    }
+}

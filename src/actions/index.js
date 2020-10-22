@@ -5,6 +5,14 @@ const productsLoaded = (newProducts) => {
     }
 }
 
+const minibasketLoaded = (isOpen) => {
+    return {
+        type: 'MINIBASKET_OPEN',
+        payload: isOpen
+    }
+}
+
 export {
-    productsLoaded
+    productsLoaded,
+    minibasketLoaded
 }

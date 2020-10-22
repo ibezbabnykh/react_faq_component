@@ -5,15 +5,17 @@ import './header.scss';
 import logo from './DLL-logo.svg';
 
 import Navlist from '../../nav-list';
+import HeaderMiniBasket from '../header-minibasket';
 
 const Header = () => {
     return (
         <div className="header">
-            <div className="top-spac-wrapper">
+            <div className="top-space-wrapper">
                 <div className="center-holder">
                     <Link to="/">
                         <img src={logo} alt="logo" className="logo" />
                     </Link>
+                    <HeaderMiniBasket totalItems={5} totalPrice={200}/>
                 </div>
             </div>
             <div className="sub-nav-container">
