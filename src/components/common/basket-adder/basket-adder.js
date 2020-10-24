@@ -15,7 +15,6 @@ const BasketAdder = ({ count, itemId, onIncrease, onDecrease, onInputChange }) =
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('valueQty', valueQty);
         onInputChange(itemId, Number(valueQty));
     }
 
@@ -24,32 +23,33 @@ const BasketAdder = ({ count, itemId, onIncrease, onDecrease, onInputChange }) =
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div className="basket-adder">
-                {count >= 1 &&
-                    <div className="basket-adder-field" key={valueQty}>
-                        <button type="button" className="btn btn-default btn-decrease" onClick={() => onDecrease(itemId)}>
-                            <i className="fas fa-minus"></i>
-                        </button>
-                        <input type="text"
-                            className="input-qty form-control"
-                            min="0"
-                            max="100"
-                            defaultValue={valueQty}
-                            maxLength="4"
-                            onChange={handleChange} />
-                        <button type="button" className="btn btn-primary btn-increase" onClick={() => onIncrease(itemId)}>
-                            <i className="fas fa-plus"></i>
-                        </button>
-                    </div>
-                }
-                {count === 0 &&
-                    <div className="basket-adder-btns">
-                        <button type="button" className="btn btn-primary w-full" onClick={() => onIncrease(itemId)}>Add</button>
-                    </div>
-                }
-            </div>
-        </form>
+        <div className="basket-adder">
+            {count >= 1 &&
+            <>
+                <form className="basket-adder-field" key={valueQty} onSubmit={handleSubmit}>
+                    <button type="button" className="btn btn-default btn-decrease" onClick={() => onDecrease(itemId)}>
+                        <i className="fas fa-minus"></i>
+                    </button>
+                    <input type="number"
+                        className="input-qty form-control"
+                        min="0"
+                        max="100"
+                        defaultValue={valueQty}
+                        maxLength="4"
+                        inputMode="numeric"
+                        onChange={handleChange} />
+                    <button type="button" className="btn btn-primary btn-increase" onClick={() => onIncrease(itemId)}>
+                        <i className="fas fa-plus"></i>
+                    </button>
+                </form>
+                </>
+            }
+            {count === 0 &&
+                <div className="basket-adder-btns">
+                    <button type="button" className="btn btn-primary w-full" onClick={() => onIncrease(itemId)}>Add</button>
+                </div>
+            }
+        </div>
     );
 }
 

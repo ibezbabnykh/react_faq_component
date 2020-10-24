@@ -9,7 +9,7 @@ const MinibasketItems = ({ products, onDelete }) => {
         <ul className="minibasket-items">
             {
                 products.map((item) => {
-                    const { id, img, name, brand, count, total } = item;
+                    const { id, img, name, brand, count, price, total } = item;
                     return <li key={id} className="minibasket-item">
                         <div className="minibasket-item-img">
                             <img src={img} alt={name} />
@@ -17,7 +17,11 @@ const MinibasketItems = ({ products, onDelete }) => {
                         <div className="minibasket-item-description">
                             <div>{brand}</div>
                             <div><b>{name}</b></div>
-                            <strong className="price">${total}</strong>
+                            <div className="price">
+                                <span>{price} $/pc</span>
+                                <strong>${total}</strong>
+                            </div>
+                            
                             <BasketAdder count={count} itemId={id}/>
                         </div>
                         <button type="button" className="btn-delete" onClick={() => onDelete(id)}>

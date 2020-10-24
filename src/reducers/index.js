@@ -50,7 +50,7 @@ const updateCartItem = (item, itemOld = {}, quantity) => {
         price,
         size,
         count: count + quantity,
-        total: total + quantity * price
+        total: total + Math.round(quantity*price*100)/100
     }
 }
 
@@ -66,11 +66,13 @@ const updatedOrder = (state, itemId, quantity) => {
         ...state,
         cartItems: updateCartItems(cartItems, newItem, itemIndex),
         orderTotalCount: orderTotalCount + quantity,
-        orderTotalPrice: orderTotalPrice + quantity*newItem.price
+        orderTotalPrice: orderTotalPrice + Math.round(quantity*newItem.price*100)/100
     }
 }
 
 const reducer = (state = initialState, action) => {
+
+    let item;
 
     switch (action.type) {
         case 'FETCH_PRODUCTS_SUCCESS':
@@ -89,14 +91,15 @@ const reducer = (state = initialState, action) => {
             return updatedOrder(state, action.payload, 1)
 
         case 'FEW_ITEMS_ADDED_TO_CART':
-            console.log('qty', action.qty);
-            return updatedOrder(state, action.payload, action.qty)
+            item = state.cartItems.find((item) => item.id === action.payload);
+            
+            return updatedOrder(state, action.payload, action.qty - item.count)
 
         case 'ITEM_REMOVED_FROM_CART':
             return updatedOrder(state, action.payload, -1)
 
         case 'ALL_ITEMS_REMOVED_FROM_CART':
-            const item = state.cartItems.find((item) => item.id === action.payload);
+            item = state.cartItems.find((item) => item.id === action.payload);
             
             return updatedOrder(state, action.payload, -item.count)
 
