@@ -143,7 +143,8 @@ export default class ApiService {
             shoeSize: product['Shoe Size'],
             date: product['Date Created'],
             occassion: Occassion,
-            inventoryCount: product['Inventory Count']
+            inventoryCount: product['Inventory Count'],
+            count: 0
         }
     }
 }

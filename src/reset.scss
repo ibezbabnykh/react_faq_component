@@ -159,21 +159,59 @@ button {
   }
 }
 
-.btn-primary {
+.btn {
   cursor: pointer;
+
+  &.w-full {
+    width: 100%;
+  }
+}
+
+.btn-primary,
+.btn-default {
   border: none;
-  padding: 10px 16px;
-  text-align: center;
-  background-color: #78b532;
-  color: #fff;
-  transition: background-color 0.3s ease-in-out;
+  border-radius: 4px;
   font-size: 14px;
   line-height: 20px;
-  border-radius: 4px;
+  transition: background-color 0.3s ease-in-out;
+  text-align: center;
+  padding: 10px 16px;
+}
+
+.btn-primary {
+  background-color: #78b532;
+  color: #fff;
 
   &:focus,
   &:hover {
     background-color: #6da52e;
+    color: #fff;
+  }
+}
+
+.btn-default {
+  background-color: #e9eff0;
+  color: #292e31;
+
+  &:focus,
+  &:hover {
+    background-color: #dde6e8;
+    color: #292e31;
+  }
+}
+
+.btn-delete {
+  cursor: pointer;
+  padding: 0;
+  background: none;
+  border: none;
+  color: #78b532;
+  transition: color 0.3s ease-in-out;
+  width: 20px;
+  height: 20px;
+
+  &:hover {
+      color: #6da52e;
   }
 }
 

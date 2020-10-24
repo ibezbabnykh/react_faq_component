@@ -15,7 +15,7 @@ const Header = () => {
                     <Link to="/">
                         <img src={logo} alt="logo" className="logo" />
                     </Link>
-                    <HeaderMiniBasket totalItems={5} totalPrice={200}/>
+                    <HeaderMiniBasket />
                 </div>
             </div>
             <div className="sub-nav-container">

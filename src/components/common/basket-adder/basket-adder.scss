@@ -1,0 +1,16 @@
+.basket-adder {
+    .input-qty {
+        padding: 0 8px;
+        text-align: center;
+        margin: 0 5px;
+        flex-grow: 1;
+    }
+
+    .basket-adder-field {
+        display: flex;
+    }
+
+    .btn {
+        flex-shrink: 0;
+    }
+}

@@ -20,7 +20,7 @@ const ProductList = (props) => {
             {
                 products.map((product) => {
                     return <li key={product.id}>
-                        <ProductListItem product={product}/>
+                        <ProductListItem product={product} />
                     </li>
                 })
             }

@@ -8,7 +8,7 @@ import { minibasketLoaded } from '../../../actions';
 
 const HeaderMiniBasket = (props) => {
 
-    const { totalItems, totalPrice, isMiniBasketOpen, minibasketLoaded } = props;
+    const { isMiniBasketOpen, minibasketLoaded, orderTotalPrice, orderTotalCount } = props;
 
     const onBasketOpen = () => {
         minibasketLoaded(!isMiniBasketOpen);
@@ -17,14 +17,14 @@ const HeaderMiniBasket = (props) => {
     return (
         <div className="header-minibasket" onClick={onBasketOpen}>
             <i className="fas fa-shopping-cart"></i>
-            <span className="total-items">{totalItems}</span>
-            <span className="total-price">${totalPrice}</span>
+            <span className="total-items">{orderTotalCount}</span>
+            <span className="total-price">${orderTotalPrice}</span>
         </div>
     );
 }
 
-const mapStateToProps = ({ isMiniBasketOpen }) => {
-    return { isMiniBasketOpen }
+const mapStateToProps = ({ isMiniBasketOpen, orderTotalPrice, orderTotalCount }) => {
+    return { isMiniBasketOpen, orderTotalPrice, orderTotalCount }
 };
 
 const mapDispatchToProps = {

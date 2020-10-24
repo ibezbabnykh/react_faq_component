@@ -2,8 +2,10 @@ import React from 'react';
 
 import './product-list-item.scss';
 
+import BasketAdder from '../common/basket-adder';
+
 const ProductListItem = ({ product }) => {
-    const { img, name, brand, price, raitingAvg } = product;
+    const { id, img, name, brand, price, raitingAvg, count } = product;
     
     return (
         <div className="product">
@@ -26,7 +28,7 @@ const ProductListItem = ({ product }) => {
                         <strong className="price">{price}$</strong>
                     </div>
                     <div className="layout-footer">
-                        <button type="button" className="btn btn-primary">Add</button>
+                        <BasketAdder count={count} itemId={id}/>
                     </div>
                 </div>
             </div>
