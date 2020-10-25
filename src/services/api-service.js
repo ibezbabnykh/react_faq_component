@@ -39,7 +39,7 @@ export default class ApiService {
         return this.filterData(res, term);
     };
 
-    getBooks = async () => {
+    getProducts = async () => {
         const res = await this.getResource(this._apiBase, '5f913710058d9a7b94decb99');
         return res.map(this._transformProductFromList);
     }

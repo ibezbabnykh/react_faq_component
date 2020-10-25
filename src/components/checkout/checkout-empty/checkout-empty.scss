@@ -1,0 +1,26 @@
+.checkout-empty {
+    padding: 56px 0 30px;
+
+    .checkout-overlay-content {
+        max-width: 256px;
+        margin: 0 auto;
+    }
+
+    .empty-basket-content {
+        text-align: center;
+    }
+
+    .chatbot-person-avatar {
+        width: 72px;
+        height: 72px;
+        margin: 0 auto 10px;
+    }
+
+    h3 {
+        margin: 0 0 15px;
+    }
+
+    .btn {
+        display: block;
+    }
+}

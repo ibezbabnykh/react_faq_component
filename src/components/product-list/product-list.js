@@ -38,7 +38,7 @@ const mapDispatchToProps = {
 
 const mapMethodsToProps = (apiService) => {
     return {
-        getData: apiService.getBooks
+        getData: apiService.getProducts
     }
 }
 

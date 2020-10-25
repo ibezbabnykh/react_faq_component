@@ -1,24 +1,34 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import './checkout.scss';
 
 import CheckoutHeader from './checkout-header';
 import CheckoutProductList from './checkout-product-list';
+import CheckoutEmpty from './checkout-empty';
+import CheckoutReceiptArea from './checkout-receipt-area';
 
-const Checkout = () => {
+const Checkout = ({ orderTotalCount, orderTotalPrice }) => {
     return (
         <>
-            <CheckoutHeader total="4"/>
+            <CheckoutHeader total={orderTotalCount} />
             <div className="checkout-container">
                 <div className="checkout-product-list-container">
-                    <CheckoutProductList />
+                    {orderTotalCount === 0 &&
+                        <CheckoutEmpty />
+                    }
+                    {orderTotalCount > 0 &&
+                        <CheckoutProductList />
+                    }
                 </div>
-                <div className="checkout-receipt-area-container">
-
-                </div>
+                <CheckoutReceiptArea totalPrice={orderTotalPrice} />
             </div>
         </>
     );
 }
 
-export default Checkout;
+const mapStateToProps = ({ shoppingCart: { orderTotalCount, orderTotalPrice } }) => {
+    return { orderTotalCount, orderTotalPrice }
+}
+
+export default connect(mapStateToProps)(Checkout);

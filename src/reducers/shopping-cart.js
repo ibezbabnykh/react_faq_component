@@ -42,7 +42,7 @@ const updateCartItem = (item, itemOld = {}, quantity) => {
         price,
         size,
         count: count + quantity,
-        total: total + Math.round(quantity * price * 100) / 100
+        total: Math.round((total + quantity * price) * 100) / 100
     }
 }
 
@@ -58,7 +58,7 @@ const updatedOrder = (state, itemId, quantity) => {
         ...state,
         cartItems: updateCartItems(cartItems, newItem, itemIndex),
         orderTotalCount: orderTotalCount + quantity,
-        orderTotalPrice: orderTotalPrice + Math.round(quantity * newItem.price * 100) / 100
+        orderTotalPrice: Math.round((orderTotalPrice + quantity * newItem.price) * 100) / 100
     }
 }
 

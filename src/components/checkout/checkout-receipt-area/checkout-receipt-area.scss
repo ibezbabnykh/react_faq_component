@@ -1,0 +1,45 @@
+.checkout-receipt-area-container {
+    
+}
+
+.checkout-area-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 28px;
+    line-height: 1.14;
+    font-weight: 700;
+}
+
+.checkout-area-item-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.checkout-area-item {
+    border-top: 1px solid #f7f8f8;
+    margin-bottom: 15px;
+    padding-top: 15px;
+
+    strong {
+        display: block;
+        margin-bottom: 5px;
+    }
+}
+
+.checkout-area-item-select-options {
+    display: flex;
+    margin: 0 -10px;
+}
+
+.checkout-area-item-column {
+    width: 50%;
+    padding: 0 10px;
+    text-align: center;
+
+    .icon-holder {
+        margin-bottom: 10px;
+        font-size: 24px;
+    }
+}
