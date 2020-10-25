@@ -28,7 +28,7 @@ const ProductList = (props) => {
     );
 }
 
-const mapStateToProps = ({ products }) => {
+const mapStateToProps = ({ productList: { products }}) => {
     return { products };
 }
 

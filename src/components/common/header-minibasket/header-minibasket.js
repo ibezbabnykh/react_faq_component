@@ -23,7 +23,7 @@ const HeaderMiniBasket = (props) => {
     );
 }
 
-const mapStateToProps = ({ isMiniBasketOpen, orderTotalPrice, orderTotalCount }) => {
+const mapStateToProps = ({ minibasket: { isMiniBasketOpen }, shoppingCart: { orderTotalPrice, orderTotalCount }}) => {
     return { isMiniBasketOpen, orderTotalPrice, orderTotalCount }
 };
 

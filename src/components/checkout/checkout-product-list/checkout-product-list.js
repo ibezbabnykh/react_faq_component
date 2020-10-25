@@ -44,7 +44,7 @@ const CheckoutProductList = ({ products, onDelete }) => {
     );
 }
 
-const mapStateToProps = ({ cartItems }) => {
+const mapStateToProps = ({ shoppingCart : { cartItems }}) => {
     return {
         products: cartItems
     };

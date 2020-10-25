@@ -43,7 +43,7 @@ const MiniBasket = (props) => {
     );
 }
 
-const mapStateToProps = ({ isMiniBasketOpen, cartItems, orderTotalCount }) => {
+const mapStateToProps = ({ minibasket: { isMiniBasketOpen }, shoppingCart: { cartItems, orderTotalCount }}) => {
     return {
         isMiniBasketOpen,
         total: orderTotalCount,
