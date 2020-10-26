@@ -15,7 +15,7 @@ const BasketAdder = ({ count, itemId, onIncrease, onDecrease, onInputChange }) =
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onInputChange(itemId, Number(valueQty));
+        onInputChange(itemId, valueQty);
     }
 
     const handleChange = (e) => {
@@ -26,7 +26,7 @@ const BasketAdder = ({ count, itemId, onIncrease, onDecrease, onInputChange }) =
         <div className="basket-adder">
             {count >= 1 &&
             <>
-                <form className="basket-adder-field" key={valueQty} onSubmit={handleSubmit}>
+                <form className="basket-adder-field" onSubmit={handleSubmit}>
                     <button type="button" className="btn btn-default btn-decrease" onClick={() => onDecrease(itemId)}>
                         <i className="fas fa-minus"></i>
                     </button>
@@ -34,7 +34,7 @@ const BasketAdder = ({ count, itemId, onIncrease, onDecrease, onInputChange }) =
                         className="input-qty form-control"
                         min="0"
                         max="100"
-                        defaultValue={valueQty}
+                        value={valueQty}
                         maxLength="4"
                         inputMode="numeric"
                         onChange={handleChange} />

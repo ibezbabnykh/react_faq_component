@@ -6,6 +6,11 @@ const updateMinibasket = (state, action) => {
     }
 
     switch (action.type) {
+        case 'MINIBASKET_LOADED':
+            return {
+                isMiniBasketOpen: false
+            }
+
         case 'MINIBASKET_OPEN':
             return {
                 isMiniBasketOpen: action.payload

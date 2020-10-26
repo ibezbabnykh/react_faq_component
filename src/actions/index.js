@@ -5,10 +5,22 @@ const productsLoaded = (newProducts) => {
     }
 }
 
-const minibasketLoaded = (isOpen) => {
+const minibasketLoaded = () => {
+    return {
+        type: 'MINIBASKET_LOADED'
+    }
+}
+
+const minibasketOpened = (isOpen) => {
     return {
         type: 'MINIBASKET_OPEN',
         payload: isOpen
+    }
+}
+
+const cartLoaded = () => {
+    return {
+        type: 'FETCH_CART_SUCCESS'
     }
 }
 
@@ -42,11 +54,20 @@ const allItemsRemovedFromCart = (id) => {
     }
 }
 
+const clearCart = () => {
+    return {
+        type: 'CLEAR_CART'
+    }
+}
+
 export {
     productsLoaded,
     minibasketLoaded,
+    minibasketOpened,
+    cartLoaded,
     itemAddedToCart,
     fewItemsAddedToCart,
     itemRemovedFromCart,
-    allItemsRemovedFromCart
+    allItemsRemovedFromCart,
+    clearCart
 }

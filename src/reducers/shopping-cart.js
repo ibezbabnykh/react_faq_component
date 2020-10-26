@@ -47,7 +47,7 @@ const updateCartItem = (item, itemOld = {}, quantity) => {
 }
 
 const updatedOrder = (state, itemId, quantity) => {
-    const { productList: { products }, shoppingCart: {cartItems, orderTotalCount, orderTotalPrice }} = state;
+    const { productList: { products }, shoppingCart: { cartItems, orderTotalCount, orderTotalPrice } } = state;
     const item = products.find((item) => item.id === itemId);
     const itemIndex = cartItems.findIndex(({ id }) => id === itemId);
     const itemOld = cartItems[itemIndex];
@@ -74,11 +74,19 @@ const updateShoppingCart = (state, action) => {
     let item;
 
     switch (action.type) {
+        case 'FETCH_CART_SUCCESS':
+            return {
+                ...state,
+                cartItems: JSON.parse(localStorage.getItem('cartItems')) || [],
+                orderTotalCount: Number(localStorage.getItem('orderTotalCount')) || 0,
+                orderTotalPrice: Number(localStorage.getItem('orderTotalPrice')) || 0
+            }
+
         case 'ITEM_ADDED_TO_CART':
             return updatedOrder(state, action.payload, 1)
 
         case 'FEW_ITEMS_ADDED_TO_CART':
-            item = state.shoppingCart.scartItems.find((item) => item.id === action.payload);
+            item = state.shoppingCart.cartItems.find((item) => item.id === action.payload);
 
             return updatedOrder(state, action.payload, action.qty - item.count)
 
@@ -89,6 +97,14 @@ const updateShoppingCart = (state, action) => {
             item = state.shoppingCart.cartItems.find((item) => item.id === action.payload);
 
             return updatedOrder(state, action.payload, -item.count)
+
+        case 'CLEAR_CART':
+            return {
+                ...state,
+                orderTotalPrice: 0,
+                orderTotalCount: 0,
+                cartItems: []
+            }
 
         default:
             return state.shoppingCart

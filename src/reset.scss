@@ -139,6 +139,7 @@ a {
 }
 
 button {
+  cursor: pointer;
   outline: none;
 }
 
@@ -169,8 +170,21 @@ input[type=number] {
   }
 }
 
+button.link {
+  padding: 0;
+  border: none;
+  background: none;
+  color: #78b532;
+  transition: color 0.3s ease-in-out;
+  font-weight: 700;
+
+  &:focus,
+  &:hover {
+    color: #6da52e;
+  }
+}
+
 .btn {
-  cursor: pointer;
   font-weight: 700;
 
   &.w-full {

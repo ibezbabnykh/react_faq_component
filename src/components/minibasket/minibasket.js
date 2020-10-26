@@ -1,23 +1,25 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import './minibasket.scss';
 
 import EmptyOverlay from './empty-overlay';
 import MinibasketItems from './minibasket-items';
-import { minibasketLoaded, allItemsRemovedFromCart } from '../../actions';
+import { minibasketOpened, minibasketLoaded, allItemsRemovedFromCart } from '../../actions';
 
 const MiniBasket = (props) => {
 
-    const { isMiniBasketOpen, minibasketLoaded, onDelete, total, products } = props;
+    const { isMiniBasketOpen, minibasketOpened, minibasketLoaded, onDelete, total, products, history } = props;
+    
+    const location = history.location.pathname;
 
     useEffect(() => {
-        minibasketLoaded(isMiniBasketOpen);
-    }, [minibasketLoaded, isMiniBasketOpen]);
+        minibasketLoaded();
+    }, [minibasketLoaded, location]);
 
     const onOverlayClick = () => {
-        minibasketLoaded(!isMiniBasketOpen);
+        minibasketOpened(!isMiniBasketOpen);
     }
 
     let content;
@@ -53,7 +55,8 @@ const mapStateToProps = ({ minibasket: { isMiniBasketOpen }, shoppingCart: { car
 
 const mapDispatchToProps = {
     minibasketLoaded,
+    minibasketOpened,
     onDelete: (id) => allItemsRemovedFromCart(id)
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MiniBasket);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MiniBasket));
