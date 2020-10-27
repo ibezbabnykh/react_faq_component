@@ -60,6 +60,13 @@ const clearCart = () => {
     }
 }
 
+const sortCart = (value) => {
+    return {
+        type: 'SORT_CART',
+        payload: value
+    }
+}
+
 export {
     productsLoaded,
     minibasketLoaded,
@@ -69,5 +76,6 @@ export {
     fewItemsAddedToCart,
     itemRemovedFromCart,
     allItemsRemovedFromCart,
-    clearCart
+    clearCart,
+    sortCart
 }

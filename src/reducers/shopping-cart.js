@@ -20,15 +20,17 @@ const updateCartItems = (cartItems, item, idx) => {
     ]
 }
 
-const updateCartItem = (item, itemOld = {}, quantity) => {
+const updateCartItem = (item, itemOld = {}, quantity, arrLength) => {
     const {
         id = item.id,
         brand = item.brand,
         name = item.name,
+        category = item.category,
         description = item.description,
         img = item.img,
         price = item.price,
         size = item.size,
+        sortIdx = arrLength,
         count = 0,
         total = 0
     } = itemOld;
@@ -37,10 +39,12 @@ const updateCartItem = (item, itemOld = {}, quantity) => {
         id,
         brand,
         name,
+        category,
         description,
         img,
         price,
         size,
+        sortIdx: sortIdx + 1,
         count: count + quantity,
         total: Math.round((total + quantity * price) * 100) / 100
     }
@@ -52,13 +56,56 @@ const updatedOrder = (state, itemId, quantity) => {
     const itemIndex = cartItems.findIndex(({ id }) => id === itemId);
     const itemOld = cartItems[itemIndex];
 
-    const newItem = updateCartItem(item, itemOld, quantity);
+    const newItem = updateCartItem(item, itemOld, quantity, cartItems.length);
 
     return {
         ...state,
         cartItems: updateCartItems(cartItems, newItem, itemIndex),
         orderTotalCount: orderTotalCount + quantity,
         orderTotalPrice: Math.round((orderTotalPrice + quantity * newItem.price) * 100) / 100
+    }
+}
+
+const sortcartItems = (cartItems) => {
+    return [
+        ...cartItems
+    ]
+}
+
+const compareValues = (key, order = 'asc') => {
+    return function innerSort(a, b) {
+        if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+            return 0;
+        }
+
+        const varA = (typeof a[key] === 'string')
+            ? a[key].toUpperCase() : a[key];
+        const varB = (typeof b[key] === 'string')
+            ? b[key].toUpperCase() : b[key];
+
+        let comparison = 0;
+
+        if (varA > varB) {
+            comparison = 1;
+        } else if (varA < varB) {
+            comparison = -1;
+        }
+
+        return (
+            (order === 'desc') ? (comparison * -1) : comparison
+        );
+    }
+}
+
+const sortedCartItems = (state, value) => {
+    const { shoppingCart: { cartItems, orderTotalCount, orderTotalPrice } } = state;
+    const sortArray = cartItems.sort(compareValues(value));
+
+    return {
+        ...state,
+        cartItems: sortcartItems(sortArray),
+        orderTotalCount: orderTotalCount,
+        orderTotalPrice: orderTotalPrice
     }
 }
 
@@ -105,6 +152,9 @@ const updateShoppingCart = (state, action) => {
                 orderTotalCount: 0,
                 cartItems: []
             }
+
+        case 'SORT_CART':
+            return sortedCartItems(state, action.payload)
 
         default:
             return state.shoppingCart

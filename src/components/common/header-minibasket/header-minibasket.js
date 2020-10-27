@@ -12,7 +12,7 @@ const HeaderMiniBasket = (props) => {
 
     useEffect(() => {
         cartLoaded();
-    }, []);
+    }, [cartLoaded]);
 
     useEffect(() => {
         localStorage.setItem('cartItems', JSON.stringify(cartItems));

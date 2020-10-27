@@ -8,6 +8,7 @@ import BasketAdder from '../../common/basket-adder';
 
 const renderRow = (item, onDelete) => {
     const { id, brand, name, description, price, img, count, total } = item;
+
     return (
         <li key={id}>
             <div className="checkout-product-tile">
@@ -33,6 +34,7 @@ const renderRow = (item, onDelete) => {
 }
 
 const CheckoutProductList = ({ products, onDelete }) => {
+
     return (
         <>
             <ul className="checkout-product-list">
@@ -44,7 +46,7 @@ const CheckoutProductList = ({ products, onDelete }) => {
     );
 }
 
-const mapStateToProps = ({ shoppingCart : { cartItems }}) => {
+const mapStateToProps = ({ shoppingCart: { cartItems } }) => {
     return {
         products: cartItems
     };

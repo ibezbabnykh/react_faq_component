@@ -70,15 +70,24 @@ const updatedProductItem = (item, itemOld = {}, quantity) => {
 
 const updatedProduct = (state, itemId, quantity) => {
     const { productList: { products } } = state;
-    const item = products.find((item) => item.id === itemId);
-    const itemIndex = products.findIndex(({ id }) => id === itemId);
-    const itemOld = products[itemIndex];
+    const storageProducts = JSON.parse(localStorage.getItem('productList')) || []
+    
+    let arr;
+    if (products.length === 0) {
+        arr = storageProducts;
+    } else {
+        arr = products;
+    }
+
+    const item = arr.find((item) => item.id === itemId);
+    const itemIndex = arr.findIndex(({ id }) => id === itemId);
+    const itemOld = arr[itemIndex];
 
     const newItem = updatedProductItem(item, itemOld, quantity);
 
     return {
         ...state,
-        products: createProductList(products, newItem, itemIndex)
+        products: createProductList(arr, newItem, itemIndex)
     }
 }
 
