@@ -28,7 +28,7 @@ const HeaderMiniBasket = (props) => {
         <div className="header-minibasket" onClick={onBasketOpen}>
             <i className="fas fa-shopping-cart"></i>
             <span className="total-items">{orderTotalCount}</span>
-            <span className="total-price">${orderTotalPrice}</span>
+            <span className="total-price">${orderTotalPrice.toFixed(2)}</span>
         </div>
     );
 }
