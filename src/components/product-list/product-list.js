@@ -13,7 +13,6 @@ const ProductList = (props) => {
 
     useEffect(() => {
         productsLoaded(data);
-        localStorage.setItem('productList', JSON.stringify(data))
     }, [productsLoaded, data]);
 
     return (

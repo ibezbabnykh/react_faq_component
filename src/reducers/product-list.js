@@ -70,39 +70,48 @@ const updatedProductItem = (item, itemOld = {}, quantity) => {
 
 const updatedProduct = (state, itemId, quantity) => {
     const { productList: { products } } = state;
-    const storageProducts = JSON.parse(localStorage.getItem('productList')) || []
-    
-    let arr;
-    if (products.length === 0) {
-        arr = storageProducts;
-    } else {
-        arr = products;
-    }
-
-    const item = arr.find((item) => item.id === itemId);
-    const itemIndex = arr.findIndex(({ id }) => id === itemId);
-    const itemOld = arr[itemIndex];
+    const item = products.find((item) => item.id === itemId);
+    const itemIndex = products.findIndex(({ id }) => id === itemId);
+    const itemOld = products[itemIndex];
 
     const newItem = updatedProductItem(item, itemOld, quantity);
 
     return {
         ...state,
-        products: createProductList(arr, newItem, itemIndex)
+        loading: true,
+        error: null,
+        products: createProductList(products, newItem, itemIndex)
     }
 }
 
 const updateProductList = (state, action) => {
     if (state === undefined) {
         return {
-            products: []
+            products: [],
+            loading: true,
+            error: null
         }
     }
 
     let item;
 
     switch (action.type) {
+        case 'FETCH_PRODUCTS_REQUEST':
+            return {
+                books: [],
+                loading: true,
+                error: null
+            }
+
         case 'FETCH_PRODUCTS_SUCCESS':
             return updatedProductList(state, action.payload)
+
+        case 'FETCH_PRODUCTS_FAILURE':
+            return {
+                products: [],
+                loading: false,
+                error: action.payload
+            }
 
         case 'ITEM_ADDED_TO_CART':
             return updatedProduct(state, action.payload, 1)

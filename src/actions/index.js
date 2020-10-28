@@ -1,9 +1,29 @@
+const productsRequested = () => {
+    return {
+        type: 'FETCH_PRODUCTS_REQUEST'
+    };
+};
+
 const productsLoaded = (newProducts) => {
     return {
         type: 'FETCH_PRODUCTS_SUCCESS',
         payload: newProducts
     }
 }
+
+const productsError = (error) => {
+    return {
+        type: 'FETCH_PRODUCTS_FAILURE',
+        payload: error
+    };
+};
+
+const fetchProducts = (getData) => () => (dispatch) => {
+    dispatch(productsRequested());
+    getData()
+        .then((data) => dispatch(productsLoaded(data)))
+        .catch((err) => dispatch(productsError(err)));
+};
 
 const minibasketLoaded = () => {
     return {
@@ -69,6 +89,7 @@ const sortCart = (value) => {
 
 export {
     productsLoaded,
+    fetchProducts,
     minibasketLoaded,
     minibasketOpened,
     cartLoaded,
