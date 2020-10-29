@@ -18,9 +18,20 @@ const updateCartItems = (cartItems, item, idx) => {
         item,
         ...cartItems.slice(idx + 1)
     ]
-}
+};
+
+const updateSortCartItems = (cartItems) => {
+    return [
+        ...cartItems
+    ]
+};
+
+const getItemIndex = (arr, itemIdx) => {
+    return arr.findIndex(({ id }) => id === itemIdx);
+};
 
 const updateCartItem = (item, itemOld = {}, quantity, arrLength) => {
+    
     const {
         id = item.id,
         brand = item.brand,
@@ -48,29 +59,7 @@ const updateCartItem = (item, itemOld = {}, quantity, arrLength) => {
         count: count + quantity,
         total: Math.round((total + quantity * price) * 100) / 100
     }
-}
-
-const updatedOrder = (state, itemId, quantity) => {
-    const { productList: { products }, shoppingCart: { cartItems, orderTotalCount, orderTotalPrice } } = state;
-    const item = products.find((item) => item.id === itemId);
-    const itemIndex = cartItems.findIndex(({ id }) => id === itemId);
-    const itemOld = cartItems[itemIndex];
-
-    const newItem = updateCartItem(item, itemOld, quantity, cartItems.length);
-
-    return {
-        ...state,
-        cartItems: updateCartItems(cartItems, newItem, itemIndex),
-        orderTotalCount: orderTotalCount + quantity,
-        orderTotalPrice: Math.round((orderTotalPrice + quantity * newItem.price) * 100) / 100
-    }
-}
-
-const sortcartItems = (cartItems) => {
-    return [
-        ...cartItems
-    ]
-}
+};
 
 const compareValues = (key, order = 'asc') => {
     return function innerSort(a, b) {
@@ -95,7 +84,7 @@ const compareValues = (key, order = 'asc') => {
             (order === 'desc') ? (comparison * -1) : comparison
         );
     }
-}
+};
 
 const sortedCartItems = (state, value) => {
     const { shoppingCart: { cartItems, orderTotalCount, orderTotalPrice } } = state;
@@ -103,11 +92,36 @@ const sortedCartItems = (state, value) => {
 
     return {
         ...state,
-        cartItems: sortcartItems(sortArray),
+        cartItems: updateSortCartItems(sortArray),
         orderTotalCount: orderTotalCount,
         orderTotalPrice: orderTotalPrice
     }
-}
+};
+
+const updatedOrder = (state, itemId, quantity) => {
+    const { productList: { products }, shoppingCart: { cartItems, orderTotalCount, orderTotalPrice } } = state;
+    const item = products.find((item) => item.id === itemId);
+    const itemIndex = getItemIndex(cartItems, itemId);
+    const itemOld = cartItems[itemIndex];
+
+    const newItem = updateCartItem(item, itemOld, quantity, cartItems.length);
+
+    return {
+        ...state,
+        cartItems: updateCartItems(cartItems, newItem, itemIndex),
+        orderTotalCount: orderTotalCount + quantity,
+        orderTotalPrice: Math.round((orderTotalPrice + quantity * newItem.price) * 100) / 100
+    }
+};
+
+const updatedCartItems = (state) => {
+    return {
+        ...state,
+        cartItems: JSON.parse(localStorage.getItem('cartItems')) || [],
+        orderTotalCount: JSON.parse(localStorage.getItem('orderTotalCount')) || 0,
+        orderTotalPrice: JSON.parse(localStorage.getItem('orderTotalPrice')) || 0
+    }
+};
 
 const updateShoppingCart = (state, action) => {
     if (state === undefined) {
@@ -122,12 +136,7 @@ const updateShoppingCart = (state, action) => {
 
     switch (action.type) {
         case 'FETCH_CART_SUCCESS':
-            return {
-                ...state,
-                cartItems: JSON.parse(localStorage.getItem('cartItems')) || [],
-                orderTotalCount: Number(localStorage.getItem('orderTotalCount')) || 0,
-                orderTotalPrice: Number(localStorage.getItem('orderTotalPrice')) || 0
-            }
+            return updatedCartItems(state)
 
         case 'ITEM_ADDED_TO_CART':
             return updatedOrder(state, action.payload, 1)
@@ -159,6 +168,6 @@ const updateShoppingCart = (state, action) => {
         default:
             return state.shoppingCart
     }
-}
+};
 
 export default updateShoppingCart;

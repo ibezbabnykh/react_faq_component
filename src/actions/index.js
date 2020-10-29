@@ -27,7 +27,7 @@ const fetchProducts = (getData) => () => (dispatch) => {
 
 const minibasketLoaded = () => {
     return {
-        type: 'MINIBASKET_LOADED'
+        type: 'FETCH_MINIBASKET_SUCCESS'
     }
 }
 
@@ -41,6 +41,19 @@ const minibasketOpened = (isOpen) => {
 const cartLoaded = () => {
     return {
         type: 'FETCH_CART_SUCCESS'
+    }
+}
+
+const clearCart = () => {
+    return {
+        type: 'CLEAR_CART'
+    }
+}
+
+const sortCart = (value) => {
+    return {
+        type: 'SORT_CART',
+        payload: value
     }
 }
 
@@ -74,29 +87,16 @@ const allItemsRemovedFromCart = (id) => {
     }
 }
 
-const clearCart = () => {
-    return {
-        type: 'CLEAR_CART'
-    }
-}
-
-const sortCart = (value) => {
-    return {
-        type: 'SORT_CART',
-        payload: value
-    }
-}
-
 export {
     productsLoaded,
     fetchProducts,
     minibasketLoaded,
     minibasketOpened,
     cartLoaded,
+    clearCart,
+    sortCart,
     itemAddedToCart,
     fewItemsAddedToCart,
     itemRemovedFromCart,
-    allItemsRemovedFromCart,
-    clearCart,
-    sortCart
+    allItemsRemovedFromCart
 }

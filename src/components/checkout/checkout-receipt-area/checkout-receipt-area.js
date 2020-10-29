@@ -28,7 +28,7 @@ const CheckoutReceiptArea = ({ totalPrice }) => {
                     </div>
                 </li>
                 <li className="checkout-area-item">
-                    <button type="button" className="btn btn-primary w-full">Go to payment</button>
+                    <button type="button" className="btn btn-primary w-full" disabled={totalPrice === 0 ? 'disabled' : ''}>Go to payment</button>
                 </li>
             </ul>
         </div>

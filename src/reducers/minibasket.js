@@ -6,7 +6,7 @@ const updateMinibasket = (state, action) => {
     }
 
     switch (action.type) {
-        case 'MINIBASKET_LOADED':
+        case 'FETCH_MINIBASKET_SUCCESS':
             return {
                 isMiniBasketOpen: false
             }

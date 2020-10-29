@@ -40,7 +40,7 @@ export default class ApiService {
     };
 
     getProducts = async () => {
-        const res = await this.getResource(this._apiBase, '5f913710058d9a7b94decb99');
+        const res = await this.getResource(this._apiBase, '5f913710058d9a7b94decb99/1');
         return res.map(this._transformProductFromList);
     }
 

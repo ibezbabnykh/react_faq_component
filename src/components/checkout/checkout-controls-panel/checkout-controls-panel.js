@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { clearCart, sortCart } from '../../../actions';
 
@@ -8,10 +8,12 @@ const CheckoutControlsPanel = ({ clearCart, sortCart }) => {
 
     const [optionsState, setOptionsState] = useState('sortIdx');
 
-    const handleChange = (e) => {
-        const value = e.target.value;
-        setOptionsState(value)
+    useEffect(() => {
         sortCart(optionsState);
+    }, [sortCart, optionsState]);
+
+    const handleChange = (e) => {
+        setOptionsState(e.target.value);
     }
 
     return (
@@ -19,7 +21,7 @@ const CheckoutControlsPanel = ({ clearCart, sortCart }) => {
             <button type="button" className="link" onClick={() => clearCart()}>Remove all</button>
             <div className="sort-by-options">
                 <strong>Sort by:</strong>
-                <select name="sort" value={optionsState} onChange={handleChange}>
+                <select className="sort-select" name="sort" value={optionsState} onChange={handleChange}>
                     <option value="sortIdx">Added to basket</option>
                     <option value="category">Category</option>
                     <option value="brand">Brand</option>

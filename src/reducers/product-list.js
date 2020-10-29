@@ -1,28 +1,10 @@
-const createProductList = (products, item, idx) => {
+const createItemList = (items, item, idx) => {
     return [
-        ...products.slice(0, idx),
+        ...items.slice(0, idx),
         item,
-        ...products.slice(idx + 1)
+        ...items.slice(idx + 1)
     ]
-}
-
-const updatedProductList = (state, products) => {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems'));
-    let newProductList = products;
-
-    if (cartItems) {
-        cartItems.forEach((product) => {
-            const itemIndex = products.findIndex(({ id }) => id === product.id);
-
-            newProductList = createProductList(newProductList, product, itemIndex);
-        });
-    }
-
-    return {
-        ...state,
-        products: newProductList
-    }
-}
+};
 
 const updatedProductItem = (item, itemOld = {}, quantity) => {
     const {
@@ -66,23 +48,130 @@ const updatedProductItem = (item, itemOld = {}, quantity) => {
         shoeSize,
         count: count + quantity
     }
-}
+};
+
+const updateProductPrice = (item, itemOld = {}, Idx) => {
+
+    const {
+        id = item.id,
+        brand = item.brand,
+        name = item.name,
+        category = item.category,
+        description = item.description,
+        img = item.img,
+        size = item.size,
+        sortIdx = Idx,
+        count = item.count
+    } = itemOld;
+
+    return {
+        id,
+        brand,
+        name,
+        category,
+        description,
+        img,
+        price: item.price,
+        size,
+        sortIdx,
+        count,
+        total: Math.round((count * item.price) * 100) / 100
+    }
+};
+
+const getItemIndex = (arr, itemIdx) => {
+    return arr.findIndex(({ id }) => id === itemIdx);
+};
+
+const createNewItem = (newArr, itemId, oldArr, fn, ...Args) => {
+    const item = newArr.find(({ id }) => id === itemId);
+    const itemIndex = getItemIndex(oldArr, itemId);
+    const itemOld = oldArr[itemIndex];
+
+    return fn(item, itemOld, ...Args);
+};
+
+const updateItemsList = ({ wrapFn, arr, newArr, itemId, oldArr, fn, additionalArg }) => {
+    const itemIndex = getItemIndex(arr, itemId);
+    const newItem = createNewItem(newArr, itemId, oldArr, fn, ...additionalArg);
+
+    return wrapFn(arr, newItem, itemIndex);
+};
 
 const updatedProduct = (state, itemId, quantity) => {
     const { productList: { products } } = state;
-    const item = products.find((item) => item.id === itemId);
-    const itemIndex = products.findIndex(({ id }) => id === itemId);
-    const itemOld = products[itemIndex];
-
-    const newItem = updatedProductItem(item, itemOld, quantity);
 
     return {
         ...state,
-        loading: true,
-        error: null,
-        products: createProductList(products, newItem, itemIndex)
+        products: updateItemsList({
+            wrapFn: createItemList,
+            arr: products,
+            newArr: products,
+            itemId: itemId,
+            oldArr: products,
+            fn: updatedProductItem,
+            additionalArg: [
+                quantity
+            ]
+        })
     }
+};
+
+const updateTotalPrice = (arr) => {
+    let totalPrice = 0;
+    
+    arr.forEach((item) => {
+        const { count, price } = item;
+        totalPrice = Math.round((totalPrice + count * price) * 100) / 100;
+    });
+
+    return totalPrice;
 }
+
+const updatedProductList = (state, products) => {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems'));
+    let newProductList = products;
+    let newCartItems = cartItems;
+    let newTotalPrice = JSON.parse(localStorage.getItem('orderTotalPrice'));
+
+    if (cartItems) {
+        cartItems.forEach((product) => {
+            newProductList = updateItemsList({
+                wrapFn: createItemList,
+                arr: newProductList,
+                newArr: products,
+                itemId: product.id,
+                oldArr: products,
+                fn: updatedProductItem,
+                additionalArg: [
+                    product.count
+                ]
+            });
+
+            newCartItems = updateItemsList({
+                wrapFn: createItemList,
+                arr: newCartItems,
+                newArr: products,
+                itemId: product.id,
+                oldArr: newCartItems,
+                fn: updateProductPrice,
+                additionalArg: []
+            });
+        });
+
+        newTotalPrice = updateTotalPrice(newCartItems);
+
+        localStorage.setItem('cartItems', JSON.stringify(newCartItems));
+        localStorage.setItem('orderTotalPrice', newTotalPrice);
+    }
+
+    return {
+        ...state,
+        loading: false,
+        error: null,
+        products: newProductList
+    }
+};
 
 const updateProductList = (state, action) => {
     if (state === undefined) {
@@ -98,7 +187,7 @@ const updateProductList = (state, action) => {
     switch (action.type) {
         case 'FETCH_PRODUCTS_REQUEST':
             return {
-                books: [],
+                products: [],
                 loading: true,
                 error: null
             }
@@ -117,7 +206,7 @@ const updateProductList = (state, action) => {
             return updatedProduct(state, action.payload, 1)
 
         case 'FEW_ITEMS_ADDED_TO_CART':
-            item = state.productList.products.find((item) => item.id === action.payload);
+            item = state.productList.products.find(({ id }) => id === action.payload);
 
             return updatedProduct(state, action.payload, action.qty - item.count)
 
@@ -125,13 +214,13 @@ const updateProductList = (state, action) => {
             return updatedProduct(state, action.payload, -1)
 
         case 'ALL_ITEMS_REMOVED_FROM_CART':
-            item = state.productList.products.find((item) => item.id === action.payload);
+            item = state.productList.products.find(({ id }) => id === action.payload);
 
             return updatedProduct(state, action.payload, -item.count)
 
         default:
             return state.productList
     }
-}
+};
 
 export default updateProductList;
