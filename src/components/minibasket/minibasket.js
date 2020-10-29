@@ -21,20 +21,15 @@ const MiniBasket = (props) => {
     const onOverlayClick = () => {
         minibasketOpened(!isMiniBasketOpen);
     }
-
-    let content;
-
-    if (total === 0) {
-        content = <EmptyOverlay />
-    } else {
-        content = <MinibasketItems products={products} onDelete={onDelete} />;
-    }
     
     return (
         <div className={`minibasket ${isMiniBasketOpen ? 'is-open' : ''}`}>
             <div className="minibasket-overlay" onClick={onOverlayClick}></div>
             <div className="minibasket-container">
-                { content }
+                {!total
+                    ? <EmptyOverlay />
+                    : <MinibasketItems products={products} onDelete={onDelete} />
+                }
                 <div className="checkout-container">
                     <Link to="/checkout" className="btn btn-primary w-full">
                         Go to basket
@@ -56,7 +51,7 @@ const mapStateToProps = ({ minibasket: { isMiniBasketOpen }, shoppingCart: { car
 const mapDispatchToProps = {
     minibasketLoaded,
     minibasketOpened,
-    onDelete: (id) => allItemsRemovedFromCart(id)
+    onDelete: allItemsRemovedFromCart,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MiniBasket));

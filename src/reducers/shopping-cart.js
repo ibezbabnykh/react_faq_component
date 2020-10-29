@@ -93,8 +93,8 @@ const sortedCartItems = (state, value) => {
     return {
         ...state,
         cartItems: updateSortCartItems(sortArray),
-        orderTotalCount: orderTotalCount,
-        orderTotalPrice: orderTotalPrice
+        orderTotalCount,
+        orderTotalPrice,
     }
 };
 

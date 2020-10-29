@@ -42,7 +42,7 @@ const BasketAdder = ({ count, itemId, onIncrease, onDecrease, onInputChange }) =
                         <i className="fas fa-plus"></i>
                     </button>
                 </form>
-                </>
+            </>
             }
             {count === 0 &&
                 <div className="basket-adder-btns">
@@ -58,9 +58,9 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-    onIncrease: (id) => itemAddedToCart(id),
-    onDecrease: (id) => itemRemovedFromCart(id),
-    onInputChange: (id, qty) => fewItemsAddedToCart(id, qty)
+    onIncrease: itemAddedToCart,
+    onDecrease: itemRemovedFromCart,
+    onInputChange: fewItemsAddedToCart,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BasketAdder);

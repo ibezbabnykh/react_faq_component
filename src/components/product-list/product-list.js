@@ -19,9 +19,11 @@ const ProductList = (props) => {
         <ul className="product-list">
             {
                 products.map((product) => {
-                    return <li key={product.id}>
-                        <ProductListItem product={product} />
-                    </li>
+                    return (
+                        <li key={product.id}>
+                            <ProductListItem product={product} />
+                        </li>
+                    );
                 })
             }
         </ul>

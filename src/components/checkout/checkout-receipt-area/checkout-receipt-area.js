@@ -3,6 +3,20 @@ import React from 'react';
 import './checkout-receipt-area.scss';
 
 const CheckoutReceiptArea = ({ totalPrice }) => {
+/* 
+for exp: 
+const buttonProps = {
+    type: 'button',
+    className="btn btn-primary w-full"
+};
+
+if (!totalPrice) {
+    buttonProps = {
+        ...buttonProps,
+        disapled,
+    };
+}
+*/
     return (
         <div className="checkout-receipt-area-container">
             <div className="checkout-area-header">
