@@ -5,7 +5,6 @@ import AccordionItemTitle from '../accordion-item-title';
 import AccordionItemContent from '../accordion-item-content';
 
 const AccordionItem = (props) => {
-
     const [isOpen, setOpenState] = useState(false);
 
     const onAccordionClick = () => {
@@ -22,7 +21,10 @@ const AccordionItem = (props) => {
 
     return (
         <div className={classNames}>
-            <AccordionItemTitle text={question} onAccordionClick={() => onAccordionClick()} />
+            <AccordionItemTitle
+                text={question}
+                onAccordionClick={onAccordionClick}
+            />
             <AccordionItemContent text={answer} />
         </div>
     );

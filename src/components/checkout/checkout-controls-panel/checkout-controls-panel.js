@@ -18,7 +18,7 @@ const CheckoutControlsPanel = ({ clearCart, sortCart }) => {
 
     return (
         <div className="checkout-controls-panel">
-            <button type="button" className="link" onClick={() => clearCart()}>Remove all</button>
+            <button type="button" className="link" onClick={clearCart}>Remove all</button>
             <div className="sort-by-options">
                 <strong>Sort by:</strong>
                 <select className="sort-select" name="sort" value={optionsState} onChange={handleChange}>
@@ -43,3 +43,26 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutControlsPanel);
+
+// suggestion
+/*
+const options = [{
+        value: 'sortIdx'
+        label: 'Added to basket',
+    }, {
+        value: 'category'
+        label: 'Category',
+    }, {
+        value: 'brand'
+        label: 'Brand',
+    }, {
+        value: 'name'
+        label: 'Product',
+    }, {
+        value: 'price'
+        label: 'Prices',
+    },
+]
+
+const optionsElements = options.map(({ value, label }) => <option value={value}>{label}</option>);
+*/

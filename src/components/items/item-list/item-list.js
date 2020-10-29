@@ -9,12 +9,18 @@ const ItemList = (props) => {
 
     const items = data.map((item) => {
         const { id, firstName, lastName } = item;
-
-        return <li key={id} className={id === Number(activeUSer) ? 'active' : ''}
-            onClick={() => onItemSelected(id)}>
+// difficult to read
+        return (
+            <li
+                key={id}
+                className={id === Number(activeUSer) ? 'active' : ''}
+                onClick={() => onItemSelected(id)}
+            >
                 {firstName} {lastName}
-        </li>
+            </li>
+        );
     });
+
     return (
         <ul className="item-list list-group">
             {items}

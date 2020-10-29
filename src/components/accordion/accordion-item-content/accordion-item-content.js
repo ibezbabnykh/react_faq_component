@@ -3,7 +3,7 @@ import ReactHtmlParser from 'react-html-parser';
 
 import './accordion-item-content.scss';
 
-const AccordionItemContent = ({text}) => {
+const AccordionItemContent = ({ text }) => {
     return (
         <div className="accordion-item-content">
             { ReactHtmlParser(text) }

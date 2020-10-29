@@ -18,13 +18,18 @@ const productsError = (error) => {
     };
 };
 
-const fetchProducts = (getData) => () => (dispatch) => {
+//I think it could be write simpler
+// also better to move this function in utils, not in actions
+const fetchProducts = (getData) => (dispatch) => {
     dispatch(productsRequested());
     getData()
         .then((data) => dispatch(productsLoaded(data)))
         .catch((err) => dispatch(productsError(err)));
 };
 
+// better to call actions on the same manner as action type
+// exp: fetchMinibasketSuccess() -> FETCH_MINIBASKET_SUCCESS
+// and will be a plus if it called as a verb
 const minibasketLoaded = () => {
     return {
         type: 'FETCH_MINIBASKET_SUCCESS'
@@ -57,6 +62,7 @@ const sortCart = (value) => {
     }
 }
 
+// addItemToCart
 const itemAddedToCart = (id) => {
     return {
         type: 'ITEM_ADDED_TO_CART',
@@ -65,6 +71,7 @@ const itemAddedToCart = (id) => {
     }
 }
 
+// addItemsToCart
 const fewItemsAddedToCart = (id, qty) => {
     return {
         type: 'FEW_ITEMS_ADDED_TO_CART',
@@ -73,6 +80,7 @@ const fewItemsAddedToCart = (id, qty) => {
     }
 }
 
+// removeItemFromCart
 const itemRemovedFromCart = (id) => {
     return {
         type: 'ITEM_REMOVED_FROM_CART',
@@ -80,6 +88,7 @@ const itemRemovedFromCart = (id) => {
     }
 }
 
+// removeAllItemsFromCart
 const allItemsRemovedFromCart = (id) => {
     return {
         type: 'ALL_ITEMS_REMOVED_FROM_CART',
@@ -99,4 +108,14 @@ export {
     fewItemsAddedToCart,
     itemRemovedFromCart,
     allItemsRemovedFromCart
-}
+};
+
+// better to split each action in separate file and import them in index.js
+// and make constants with action type 
+// for exp: 
+// const FETCH_PRODUCTS_REQUEST = 'FETCH_PRODUCTS_REQUEST';
+// and then use them in actions
+// for exp: 
+// const productsRequested = () => ({
+//   type: FETCH_PRODUCTS_REQUEST,
+// });

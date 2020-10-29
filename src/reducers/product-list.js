@@ -6,77 +6,21 @@ const createItemList = (items, item, idx) => {
     ]
 };
 
-const updatedProductItem = (item, itemOld = {}, quantity) => {
-    const {
-        id = item.id,
-        brand = item.brand,
-        category = item.category,
-        color = item.color,
-        date = item.date,
-        inventoryCount = item.inventoryCount,
-        occassion = item.occassion,
-        name = item.name,
-        description = item.description,
-        img = item.img,
-        price = item.price,
-        size = item.size,
-        raitingAvg = item.raitingAvg,
-        raitngCount = item.raitngCount,
-        retailPrice = item.retailPrice,
-        season = item.season,
-        shoeSize = item.shoeSize,
-        count = 0
-    } = itemOld;
-
-    return {
-        id,
-        brand,
-        category,
-        color,
-        date,
-        inventoryCount,
-        occassion,
-        name,
-        description,
-        img,
-        price,
-        size,
-        raitingAvg,
-        raitngCount,
-        retailPrice,
-        season,
-        shoeSize,
-        count: count + quantity
-    }
-};
+const updatedProductItem = (item, itemOld = {}, quantity) => ({
+    ...item,
+    ...itemOld,
+    count: count + quantity,
+});
 
 const updateProductPrice = (item, itemOld = {}, Idx) => {
-
-    const {
-        id = item.id,
-        brand = item.brand,
-        name = item.name,
-        category = item.category,
-        description = item.description,
-        img = item.img,
-        size = item.size,
-        sortIdx = Idx,
-        count = item.count
-    } = itemOld;
+    const count = itemOld?.count || item.count;
 
     return {
-        id,
-        brand,
-        name,
-        category,
-        description,
-        img,
-        price: item.price,
-        size,
-        sortIdx,
-        count,
-        total: Math.round((count * item.price) * 100) / 100
-    }
+        ...item,
+        ...itemOld,
+        sortIdx: Idx,
+        total: Math.round((count * item.price) * 100) / 100,
+    };
 };
 
 const getItemIndex = (arr, itemIdx) => {
@@ -130,36 +74,42 @@ const updateTotalPrice = (arr) => {
 
 const updatedProductList = (state, products) => {
     const cartItems = JSON.parse(localStorage.getItem('cartItems'));
-    let newProductList = products;
-    let newCartItems = cartItems;
-    let newTotalPrice = JSON.parse(localStorage.getItem('orderTotalPrice'));
+    const newProductList = products;
+    const newCartItems = cartItems;
+    const newTotalPrice = JSON.parse(localStorage.getItem('orderTotalPrice'));
 
     if (cartItems) {
         cartItems.forEach((product) => {
-            newProductList = updateItemsList({
-                wrapFn: createItemList,
-                arr: newProductList,
-                newArr: products,
-                itemId: product.id,
-                oldArr: products,
-                fn: updatedProductItem,
-                additionalArg: [
-                    product.count
-                ]
-            });
+            newProductList = {
+                ...newProductList,
+                ...updateItemsList({
+                    wrapFn: createItemList,
+                    arr: newProductList,
+                    newArr: products,
+                    itemId: product.id,
+                    oldArr: products,
+                    fn: updatedProductItem,
+                    additionalArg: [
+                        product.count
+                    ],
+                }),
+            };
 
-            newCartItems = updateItemsList({
-                wrapFn: createItemList,
-                arr: newCartItems,
-                newArr: products,
-                itemId: product.id,
-                oldArr: newCartItems,
-                fn: updateProductPrice,
-                additionalArg: []
-            });
+            newCartItems = {
+                ...newCartItems,
+                ...updateItemsList({
+                    wrapFn: createItemList,
+                    arr: newCartItems,
+                    newArr: products,
+                    itemId: product.id,
+                    oldArr: newCartItems,
+                    fn: updateProductPrice,
+                    additionalArg: []
+                })
+            };
         });
 
-        newTotalPrice = updateTotalPrice(newCartItems);
+        newTotalPrice = { ...newtotalPrice, ...updateTotalPrice(newCartItems), };
 
         localStorage.setItem('cartItems', JSON.stringify(newCartItems));
         localStorage.setItem('orderTotalPrice', newTotalPrice);
