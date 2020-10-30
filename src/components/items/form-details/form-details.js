@@ -3,27 +3,7 @@ import React from 'react';
 import './form-details.scss';
 
 import { withApiService } from '../../../hoc';
-
-const Record = ({ item, label, field }) => {
-    return (
-        <div className="form-group">
-            <label htmlFor={`${label} ${item.id}`}>
-                {label}
-            </label>
-            <input
-                id={`${label} ${item.id}`}
-                type="text" defaultValue={item[field]}
-                placeholder={label}
-                className="form-control"
-                name={field}
-            />
-        </div>
-    );
-}
-
-export {
-    Record
-}
+import Record from './record';
 
 const FormDetails = (props) => {
     const { userInfo, onFormClose, getData } = props;
@@ -34,15 +14,10 @@ const FormDetails = (props) => {
         getData(data);
     }
 
-    const formData = (fd) => {
-        const data = {};
-
-        for (let key of fd.keys()) {
-            data[key] = fd.get(key);
-        }
-
-        return data;
-    }
+    const formData = fd => [...fd.keys()].reduce((acc, item) => {
+        acc[item] = fd.get(item);
+        return acc;
+    }, {});
 
     return (
         <div className="item-details">

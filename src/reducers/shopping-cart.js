@@ -153,9 +153,10 @@ const updateShoppingCart = (state, action) => {
             return updatedOrder(state, action.payload, 1)
 
         case ADD_ITEMS_TO_CART:
-            item = state.shoppingCart.cartItems.find(({ id }) => id === action.payload);
+            const { id, qty } = action.payload;
+            item = state.shoppingCart.cartItems.find((item) => item.id === id);
 
-            return updatedOrder(state, action.payload, action.qty - item.count)
+            return updatedOrder(state, id, qty - item.count)
 
         case REMOVE_ITEM_FROM_CART:
             return updatedOrder(state, action.payload, -1)

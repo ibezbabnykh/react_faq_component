@@ -166,9 +166,10 @@ const updateProductList = (state, action) => {
             return updatedProduct(state, action.payload, 1)
 
         case ADD_ITEMS_TO_CART:
-            item = state.productList.products.find(({ id }) => id === action.payload);
+            const { id, qty } = action.payload;
+            item = state.productList.products.find((item) => item.id === id);
 
-            return updatedProduct(state, action.payload, action.qty - item.count)
+            return updatedProduct(state, id, qty - item.count)
 
         case REMOVE_ITEM_FROM_CART:
             return updatedProduct(state, action.payload, -1)

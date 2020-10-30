@@ -6,7 +6,7 @@ import './accordion-item-content.scss';
 const AccordionItemContent = ({ text }) => {
     return (
         <div className="accordion-item-content">
-            { ReactHtmlParser(text)}
+            {ReactHtmlParser(text)}
         </div>
     );
 };
