@@ -1,3 +1,13 @@
+import {
+    FETCH_CART_SUCCESS,
+    ADD_ITEM_TO_CART,
+    ADD_ITEMS_TO_CART,
+    REMOVE_ITEM_FROM_CART,
+    REMOVE_ITEMS_FROM_CART,
+    CLEAR_CART,
+    SORT_CART
+} from '../actions';
+
 const updateCartItems = (cartItems, item, idx) => {
     if (item.count === 0) {
         return [
@@ -136,26 +146,26 @@ const updateShoppingCart = (state, action) => {
     let item;
 
     switch (action.type) {
-        case 'FETCH_CART_SUCCESS':
+        case FETCH_CART_SUCCESS:
             return updatedCartItems(state)
 
-        case 'ADD_ITEM_TO_CART':
+        case ADD_ITEM_TO_CART:
             return updatedOrder(state, action.payload, 1)
 
-        case 'ADD_ITEMS_TO_CART':
+        case ADD_ITEMS_TO_CART:
             item = state.shoppingCart.cartItems.find(({ id }) => id === action.payload);
 
             return updatedOrder(state, action.payload, action.qty - item.count)
 
-        case 'REMOVE_ITEM_FROM_CART':
+        case REMOVE_ITEM_FROM_CART:
             return updatedOrder(state, action.payload, -1)
 
-        case 'REMOVE_ITEMS_FROM_CART':
+        case REMOVE_ITEMS_FROM_CART:
             item = state.shoppingCart.cartItems.find(({ id }) => id === action.payload);
 
             return updatedOrder(state, action.payload, -item.count)
 
-        case 'CLEAR_CART':
+        case CLEAR_CART:
             return {
                 ...state,
                 orderTotalPrice: 0,
@@ -163,7 +173,7 @@ const updateShoppingCart = (state, action) => {
                 cartItems: []
             }
 
-        case 'SORT_CART':
+        case SORT_CART:
             return sortedCartItems(state, action.payload)
 
         default:

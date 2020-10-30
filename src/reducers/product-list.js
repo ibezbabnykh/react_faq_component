@@ -1,3 +1,13 @@
+import {
+    FETCH_PRODUCTS_REQUEST,
+    FETCH_PRODUCTS_SUCCESS,
+    FETCH_PRODUCTS_FAILURE,
+    ADD_ITEM_TO_CART,
+    ADD_ITEMS_TO_CART,
+    REMOVE_ITEM_FROM_CART,
+    REMOVE_ITEMS_FROM_CART
+} from '../actions';
+
 const createItemList = (items, item, idx) => {
     return [
         ...items.slice(0, idx),
@@ -135,35 +145,35 @@ const updateProductList = (state, action) => {
     let item;
 
     switch (action.type) {
-        case 'FETCH_PRODUCTS_REQUEST':
+        case FETCH_PRODUCTS_REQUEST:
             return {
                 products: [],
                 loading: true,
                 error: null
             }
 
-        case 'FETCH_PRODUCTS_SUCCESS':
+        case FETCH_PRODUCTS_SUCCESS:
             return updatedProductList(state, action.payload)
 
-        case 'FETCH_PRODUCTS_FAILURE':
+        case FETCH_PRODUCTS_FAILURE:
             return {
                 products: [],
                 loading: false,
                 error: action.payload
             }
 
-        case 'ADD_ITEM_TO_CART':
+        case ADD_ITEM_TO_CART:
             return updatedProduct(state, action.payload, 1)
 
-        case 'ADD_ITEMS_TO_CART':
+        case ADD_ITEMS_TO_CART:
             item = state.productList.products.find(({ id }) => id === action.payload);
 
             return updatedProduct(state, action.payload, action.qty - item.count)
 
-        case 'REMOVE_ITEM_FROM_CART':
+        case REMOVE_ITEM_FROM_CART:
             return updatedProduct(state, action.payload, -1)
 
-        case 'REMOVE_ITEMS_FROM_CART':
+        case REMOVE_ITEMS_FROM_CART:
             item = state.productList.products.find(({ id }) => id === action.payload);
 
             return updatedProduct(state, action.payload, -item.count)
