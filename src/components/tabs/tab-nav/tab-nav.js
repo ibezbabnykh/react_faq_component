@@ -4,8 +4,7 @@ import TabNavItem from '../tab-nav-item';
 import './tab-nav.scss';
 
 const TabNav = ({ questionData, onTabClick, activeTab }) => {
-
-    const elements = questionData.map((item) => {
+    const elements = questionData.map(item => {
         const { id, title, entries } = item;
 
         return (

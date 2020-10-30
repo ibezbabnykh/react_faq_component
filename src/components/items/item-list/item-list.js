@@ -7,14 +7,20 @@ import { withApiService, withData } from '../../../hoc';
 const ItemList = (props) => {
     const { data, onItemSelected, activeUSer } = props;
 
-    const items = data.map((item) => {
+    const items = data.map(item => {
         const { id, firstName, lastName } = item;
 
-        return <li key={id} className={id === Number(activeUSer) ? 'active' : ''}
-            onClick={() => onItemSelected(id)}>
+        return (
+            <li
+                key={id}
+                className={id === Number(activeUSer) ? 'active' : ''}
+                onClick={() => onItemSelected(id)}
+            >
                 {firstName} {lastName}
-        </li>
+            </li>
+        );
     });
+
     return (
         <ul className="item-list list-group">
             {items}

@@ -21,15 +21,24 @@ const SearchPanel = ({ onSearchSubmit }) => {
                 <div className="search-panel-logo">
                     <img src={avatar} alt="avatar" width="85" height="85" />
                 </div>
-                <form className="search-panel-form"
-                    onSubmit={handleSubmit}>
+                <form
+                    className="search-panel-form"
+                    onSubmit={handleSubmit}
+                >
                     <h5>Do you need some support? <br />Type your question (key words)</h5>
                     <div className="form-group">
-                        <input className="form-control"
+                        <input
+                            className="form-control"
                             type="text"
                             placeholder="Type your question (key words)"
-                            onChange={handleChange} />
-                        <button type="submit" className="btn"><i className="fas fa-search"></i></button>
+                            onChange={handleChange}
+                        />
+                        <button
+                            type="submit"
+                            className="btn"
+                        >
+                            <i className="fas fa-search"></i>
+                        </button>
                     </div>
                 </form>
             </div>

@@ -11,7 +11,7 @@ const updateMinibasket = (state, action) => {
                 isMiniBasketOpen: false
             }
 
-        case 'MINIBASKET_OPEN':
+        case 'OPEN_MINIBASKET':
             return {
                 isMiniBasketOpen: action.payload
             }

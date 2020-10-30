@@ -5,7 +5,6 @@ import ErrorIndicator from '../components/common/error-indicator';
 
 const withData = (View) => {
     return (props) => {
-
         const { getData } = props;
 
         const useRequestInfo = () => {

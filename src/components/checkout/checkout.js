@@ -4,9 +4,9 @@ import { bindActionCreators } from 'redux';
 
 import './checkout.scss';
 
-import { fetchProducts, cartLoaded } from '../../actions';
+import { fetchCartSuccess } from '../../actions';
 import { withApiService } from '../../hoc';
-import { compose } from '../../utils';
+import { compose, fetchProducts } from '../../utils';
 import Spinner from '../common/spinner';
 import ErrorIndicator from '../common/error-indicator';
 import CheckoutHeader from './checkout-header';
@@ -15,17 +15,16 @@ import CheckoutProductList from './checkout-product-list';
 import CheckoutEmpty from './checkout-empty';
 import CheckoutReceiptArea from './checkout-receipt-area';
 
-const Checkout = ({ orderTotalCount, orderTotalPrice, fetchProducts, cartLoaded, loading, error }) => {
-
+const Checkout = ({ orderTotalCount, orderTotalPrice, onProductsLoad, onCartLoad, loading, error }) => {
     useEffect(() => {
-        fetchProducts();
-    }, [fetchProducts]);
+        onProductsLoad();
+    }, [onProductsLoad]);
 
     useEffect(() => {
         if (!loading && loading != null) {
-            cartLoaded();
+            onCartLoad();
         }
-    }, [loading, cartLoaded]);
+    }, [loading, onCartLoad]);
 
     if (loading) {
         return <Spinner />
@@ -40,7 +39,7 @@ const Checkout = ({ orderTotalCount, orderTotalPrice, fetchProducts, cartLoaded,
             <CheckoutHeader total={orderTotalCount} />
             <div className="checkout-container">
                 <div className="checkout-product-list-container">
-                    {orderTotalCount === 0 &&
+                    {!orderTotalCount &&
                         <CheckoutEmpty />
                     }
                     {orderTotalCount > 0 &&
@@ -56,14 +55,23 @@ const Checkout = ({ orderTotalCount, orderTotalPrice, fetchProducts, cartLoaded,
     );
 }
 
-const mapStateToProps = ({ productList: { loading, error }, shoppingCart: { orderTotalCount, orderTotalPrice } }) => {
+const mapStateToProps = ({
+    productList: {
+        loading,
+        error
+    },
+    shoppingCart: {
+        orderTotalCount,
+        orderTotalPrice
+    }
+}) => {
     return { loading, error, orderTotalCount, orderTotalPrice }
 }
 
 const mapDispatchToProps = (dispatch, { getData }) => {
     return bindActionCreators({
-        fetchProducts: fetchProducts(getData),
-        cartLoaded
+        onProductsLoad: fetchProducts(getData),
+        onCartLoad: fetchCartSuccess
     }, dispatch);
 };
 

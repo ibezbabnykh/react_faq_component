@@ -17,8 +17,15 @@ const TabsList = ({ data }) => {
     return (
         <ErrorBoundary>
             <>
-                <TabNav questionData={data} onTabClick={onTabClick} activeTab={currentActiveIndex} />
-                <TabContent questionData={data} activeTab={currentActiveIndex} />
+                <TabNav
+                    questionData={data}
+                    onTabClick={onTabClick}
+                    activeTab={currentActiveIndex}
+                />
+                <TabContent
+                    questionData={data}
+                    activeTab={currentActiveIndex}
+                />
             </>
         </ErrorBoundary>
     );

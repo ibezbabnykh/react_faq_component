@@ -31,30 +31,16 @@ const getItemIndex = (arr, itemIdx) => {
 };
 
 const updateCartItem = (item, itemOld = {}, quantity, arrLength) => {
-    
     const {
-        id = item.id,
-        brand = item.brand,
-        name = item.name,
-        category = item.category,
-        description = item.description,
-        img = item.img,
         price = item.price,
-        size = item.size,
-        sortIdx = arrLength,
         count = 0,
-        total = 0
+        total = 0,
+        sortIdx = arrLength
     } = itemOld;
 
     return {
-        id,
-        brand,
-        name,
-        category,
-        description,
-        img,
-        price,
-        size,
+        ...item,
+        ...itemOld,
         sortIdx: sortIdx + 1,
         count: count + quantity,
         total: Math.round((total + quantity * price) * 100) / 100
@@ -87,20 +73,35 @@ const compareValues = (key, order = 'asc') => {
 };
 
 const sortedCartItems = (state, value) => {
-    const { shoppingCart: { cartItems, orderTotalCount, orderTotalPrice } } = state;
+    const {
+        shoppingCart: {
+            cartItems,
+            orderTotalCount,
+            orderTotalPrice
+        }
+    } = state;
     const sortArray = cartItems.sort(compareValues(value));
 
     return {
         ...state,
         cartItems: updateSortCartItems(sortArray),
-        orderTotalCount: orderTotalCount,
-        orderTotalPrice: orderTotalPrice
+        orderTotalCount,
+        orderTotalPrice
     }
 };
 
 const updatedOrder = (state, itemId, quantity) => {
-    const { productList: { products }, shoppingCart: { cartItems, orderTotalCount, orderTotalPrice } } = state;
-    const item = products.find((item) => item.id === itemId);
+    const {
+        productList: {
+            products
+        },
+        shoppingCart: {
+            cartItems,
+            orderTotalCount,
+            orderTotalPrice
+        }
+    } = state;
+    const item = products.find(({ id }) => id === itemId);
     const itemIndex = getItemIndex(cartItems, itemId);
     const itemOld = cartItems[itemIndex];
 
@@ -138,19 +139,19 @@ const updateShoppingCart = (state, action) => {
         case 'FETCH_CART_SUCCESS':
             return updatedCartItems(state)
 
-        case 'ITEM_ADDED_TO_CART':
+        case 'ADD_ITEM_TO_CART':
             return updatedOrder(state, action.payload, 1)
 
-        case 'FEW_ITEMS_ADDED_TO_CART':
-            item = state.shoppingCart.cartItems.find((item) => item.id === action.payload);
+        case 'ADD_ITEMS_TO_CART':
+            item = state.shoppingCart.cartItems.find(({ id }) => id === action.payload);
 
             return updatedOrder(state, action.payload, action.qty - item.count)
 
-        case 'ITEM_REMOVED_FROM_CART':
+        case 'REMOVE_ITEM_FROM_CART':
             return updatedOrder(state, action.payload, -1)
 
-        case 'ALL_ITEMS_REMOVED_FROM_CART':
-            item = state.shoppingCart.cartItems.find((item) => item.id === action.payload);
+        case 'REMOVE_ITEMS_FROM_CART':
+            item = state.shoppingCart.cartItems.find(({ id }) => id === action.payload);
 
             return updatedOrder(state, action.payload, -item.count)
 
