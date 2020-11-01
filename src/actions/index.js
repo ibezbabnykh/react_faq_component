@@ -10,3 +10,5 @@ export * from './add-item-to-cart';
 export * from './add-items-to-cart';
 export * from './remove-item-from-cart';
 export * from './remove-items-from-cart';
+export * from './fetch-wish-list';
+export * from './add-new-list-to-wish-list';

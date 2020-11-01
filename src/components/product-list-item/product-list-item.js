@@ -3,6 +3,7 @@ import React from 'react';
 import './product-list-item.scss';
 
 import BasketAdder from '../common/basket-adder';
+import AddToWishList from '../common/add-to-wish-list';
 
 const ProductListItem = ({ product }) => {
     const { id, img, name, brand, price, raitingAvg, count } = product;
@@ -10,6 +11,7 @@ const ProductListItem = ({ product }) => {
     return (
         <div className="product">
             <div className="product-layout">
+                <AddToWishList itemId={id} />
                 <div className="layout-shot">
                     <img src={img} alt={name} />
                 </div>
