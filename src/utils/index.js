@@ -1,5 +1,7 @@
 import compose from './compose';
+import fetchProducts from './fetchProducts';
 
 export {
-    compose
+    compose,
+    fetchProducts
 };

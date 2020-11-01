@@ -10,21 +10,22 @@ import ItemDetails from '../components/items/item-details';
 const UsersPage = ({ history, match }) => {
     const { id } = match.params;
 
-    let details;
-
-    if (typeof id === 'undefined') {
-        details = <span>Select a item from a list</span>;
-    } else {
-        details = <ItemDetails fetchAttr={id} />
-    }
-
     return (
         <>
             <PageTitle title="Users" />
             <ErrorBoundary>
                 <Row
-                    leftColumn={<ItemList onItemSelected={(id) => history.push(`${id}`)} activeUSer={id} />}
-                    rightColumn={details} />
+                    leftColumn={(
+                        <ItemList
+                            onItemSelected={(id) => history.push(`${id}`)}
+                            activeUSer={id}
+                        />
+                    )}
+                    rightColumn={
+                        typeof id === 'undefined'
+                            ? (<span>Select a item from a list</span>)
+                            : <ItemDetails fetchAttr={id} />
+                    } />
             </ErrorBoundary>
         </>
     );

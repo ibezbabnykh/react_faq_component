@@ -1,3 +1,8 @@
+import {
+    FETCH_MINIBASKET_SUCCESS,
+    OPEN_MINIBASKET
+} from '../actions';
+
 const updateMinibasket = (state, action) => {
     if (state === undefined) {
         return {
@@ -6,12 +11,12 @@ const updateMinibasket = (state, action) => {
     }
 
     switch (action.type) {
-        case 'FETCH_MINIBASKET_SUCCESS':
+        case FETCH_MINIBASKET_SUCCESS:
             return {
                 isMiniBasketOpen: false
             }
 
-        case 'MINIBASKET_OPEN':
+        case OPEN_MINIBASKET:
             return {
                 isMiniBasketOpen: action.payload
             }

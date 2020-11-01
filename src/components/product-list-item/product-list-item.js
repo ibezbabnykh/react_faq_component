@@ -6,12 +6,12 @@ import BasketAdder from '../common/basket-adder';
 
 const ProductListItem = ({ product }) => {
     const { id, img, name, brand, price, raitingAvg, count } = product;
-    
+
     return (
         <div className="product">
             <div className="product-layout">
                 <div className="layout-shot">
-                    <img src={img} alt={name}/>
+                    <img src={img} alt={name} />
                 </div>
                 <div className="layout-content">
                     <div className="layout-details">
@@ -28,7 +28,10 @@ const ProductListItem = ({ product }) => {
                         <strong className="price">{price}$</strong>
                     </div>
                     <div className="layout-footer">
-                        <BasketAdder count={count} itemId={id}/>
+                        <BasketAdder
+                            count={count}
+                            itemId={id}
+                        />
                     </div>
                 </div>
             </div>

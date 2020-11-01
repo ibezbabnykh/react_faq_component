@@ -66,7 +66,7 @@ export default class ApiService {
 
         let newArray = [];
 
-        arr.forEach((item) => {
+        arr.forEach(item => {
             const { title, priority, id, entries } = item;
 
             const filterEntries = this.searchItems(entries, term);

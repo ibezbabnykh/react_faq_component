@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react';
-
 import { connect } from 'react-redux';
 
 import './header-minibasket.scss';
 
-import { minibasketOpened, cartLoaded } from '../../../actions';
+import { openMinibasket, fetchCartSuccess } from '../../../actions';
 
 const HeaderMiniBasket = (props) => {
 
-    const { isMiniBasketOpen, minibasketOpened, cartItems, orderTotalPrice, orderTotalCount, cartLoaded } = props;
+    const { isMiniBasketOpen, openMinibasket, cartItems, orderTotalPrice, orderTotalCount, fetchCartSuccess } = props;
 
     useEffect(() => {
-        cartLoaded();
-    }, [cartLoaded]);
+        fetchCartSuccess();
+    }, [fetchCartSuccess]);
 
     useEffect(() => {
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
@@ -21,7 +20,7 @@ const HeaderMiniBasket = (props) => {
     }, [orderTotalPrice, orderTotalCount, cartItems]);
 
     const onBasketOpen = () => {
-        minibasketOpened(!isMiniBasketOpen);
+        openMinibasket(!isMiniBasketOpen);
     }
 
     return (
@@ -33,13 +32,21 @@ const HeaderMiniBasket = (props) => {
     );
 }
 
-const mapStateToProps = ({ minibasket: { isMiniBasketOpen }, shoppingCart: { cartItems, orderTotalPrice, orderTotalCount }}) => {
+const mapStateToProps = ({
+    minibasket: {
+        isMiniBasketOpen
+    },
+    shoppingCart: {
+        cartItems,
+        orderTotalPrice,
+        orderTotalCount
+    } }) => {
     return { isMiniBasketOpen, cartItems, orderTotalPrice, orderTotalCount }
 };
 
 const mapDispatchToProps = {
-    minibasketOpened,
-    cartLoaded
+    openMinibasket,
+    fetchCartSuccess
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderMiniBasket);

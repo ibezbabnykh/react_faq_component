@@ -6,6 +6,29 @@ import './checkout-controls-panel.scss';
 
 const CheckoutControlsPanel = ({ clearCart, sortCart }) => {
 
+    const options = [{
+        value: 'sortIdx',
+        label: 'Added to basket'
+    },
+    {
+        value: 'category',
+        label: 'Category'
+    },
+    {
+        value: 'brand',
+        label: 'Brand'
+    },
+    {
+        value: 'name',
+        label: 'Product'
+    },
+    {
+        value: 'price',
+        label: 'Prices'
+    }];
+
+    const optionsElements = options.map(({ value, label }) => <option key={value} value={value}>{label}</option>);
+
     const [optionsState, setOptionsState] = useState('sortIdx');
 
     useEffect(() => {
@@ -18,15 +41,22 @@ const CheckoutControlsPanel = ({ clearCart, sortCart }) => {
 
     return (
         <div className="checkout-controls-panel">
-            <button type="button" className="link" onClick={() => clearCart()}>Remove all</button>
+            <button
+                type="button"
+                className="link"
+                onClick={clearCart}
+            >
+                Remove all
+            </button>
             <div className="sort-by-options">
                 <strong>Sort by:</strong>
-                <select className="sort-select" name="sort" value={optionsState} onChange={handleChange}>
-                    <option value="sortIdx">Added to basket</option>
-                    <option value="category">Category</option>
-                    <option value="brand">Brand</option>
-                    <option value="name">Product</option>
-                    <option value="price">Prices</option>
+                <select
+                    className="sort-select"
+                    name="sort"
+                    value={optionsState}
+                    onChange={handleChange}
+                >
+                    {optionsElements}
                 </select>
             </div>
         </div>

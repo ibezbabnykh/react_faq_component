@@ -7,9 +7,15 @@ import Accordion from '../../accordion';
 const TabContent = ({ questionData, activeTab }) => {
     return (
         <div className="tab-content">
-            { questionData.map(({ id, entries }) => (
-                <Accordion key={id} elements={entries} isVisible={activeTab === id} />
-            ))}
+            {
+                questionData.map(({ id, entries }) => (
+                    <Accordion
+                        key={id}
+                        elements={entries}
+                        isVisible={activeTab === id}
+                    />
+                ))
+            }
         </div>
     );
 };

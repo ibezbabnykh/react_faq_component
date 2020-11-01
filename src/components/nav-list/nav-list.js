@@ -4,26 +4,34 @@ import { Link } from 'react-router-dom';
 import './nav-list.scss';
 
 const NavList = () => {
+    const navItems = [{
+        href: "/users/",
+        icon: "fa-user",
+        label: "Users"
+    },
+    {
+        href: "/faq",
+        icon: "fa-question",
+        label: "FAQ"
+    },
+    {
+        href: "/products",
+        icon: "fa-shopping-basket",
+        label: "Products"
+    }];
+
+    const navElements = navItems.map(({ href, icon, label }) => (
+        <li key={label}>
+            <Link to={href}>
+                <i className={`fas ${icon}`}></i>
+                {label}
+            </Link>
+        </li>
+    ));
+
     return (
         <ul className="nav-list">
-            <li>
-                <Link to="/users/">
-                    <i className="fas fa-user"></i>
-                    Users
-                </Link>
-            </li>
-            <li>
-                <Link to="/faq">
-                    <i className="fas fa-question"></i>
-                    FAQ
-                </Link>
-            </li>
-            <li>
-                <Link to="/products">
-                    <i className="fas fa-shopping-basket"></i>
-                    Products
-                </Link>
-            </li>
+            {navElements}
         </ul>
     );
 }

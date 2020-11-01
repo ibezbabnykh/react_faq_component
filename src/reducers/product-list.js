@@ -1,3 +1,13 @@
+import {
+    FETCH_PRODUCTS_REQUEST,
+    FETCH_PRODUCTS_SUCCESS,
+    FETCH_PRODUCTS_FAILURE,
+    ADD_ITEM_TO_CART,
+    ADD_ITEMS_TO_CART,
+    REMOVE_ITEM_FROM_CART,
+    REMOVE_ITEMS_FROM_CART
+} from '../actions';
+
 const createItemList = (items, item, idx) => {
     return [
         ...items.slice(0, idx),
@@ -7,74 +17,24 @@ const createItemList = (items, item, idx) => {
 };
 
 const updatedProductItem = (item, itemOld = {}, quantity) => {
-    const {
-        id = item.id,
-        brand = item.brand,
-        category = item.category,
-        color = item.color,
-        date = item.date,
-        inventoryCount = item.inventoryCount,
-        occassion = item.occassion,
-        name = item.name,
-        description = item.description,
-        img = item.img,
-        price = item.price,
-        size = item.size,
-        raitingAvg = item.raitingAvg,
-        raitngCount = item.raitngCount,
-        retailPrice = item.retailPrice,
-        season = item.season,
-        shoeSize = item.shoeSize,
-        count = 0
-    } = itemOld;
+    const { count = 0 } = itemOld;
 
     return {
-        id,
-        brand,
-        category,
-        color,
-        date,
-        inventoryCount,
-        occassion,
-        name,
-        description,
-        img,
-        price,
-        size,
-        raitingAvg,
-        raitngCount,
-        retailPrice,
-        season,
-        shoeSize,
+        ...item,
+        ...itemOld,
         count: count + quantity
     }
 };
 
-const updateProductPrice = (item, itemOld = {}, Idx) => {
-
+const updateProductPrice = (item, itemOld = {}) => {
     const {
-        id = item.id,
-        brand = item.brand,
-        name = item.name,
-        category = item.category,
-        description = item.description,
-        img = item.img,
-        size = item.size,
-        sortIdx = Idx,
         count = item.count
     } = itemOld;
 
     return {
-        id,
-        brand,
-        name,
-        category,
-        description,
-        img,
+        ...item,
+        ...itemOld,
         price: item.price,
-        size,
-        sortIdx,
-        count,
         total: Math.round((count * item.price) * 100) / 100
     }
 };
@@ -119,8 +79,8 @@ const updatedProduct = (state, itemId, quantity) => {
 
 const updateTotalPrice = (arr) => {
     let totalPrice = 0;
-    
-    arr.forEach((item) => {
+
+    arr.forEach(item => {
         const { count, price } = item;
         totalPrice = Math.round((totalPrice + count * price) * 100) / 100;
     });
@@ -135,7 +95,7 @@ const updatedProductList = (state, products) => {
     let newTotalPrice = JSON.parse(localStorage.getItem('orderTotalPrice'));
 
     if (cartItems) {
-        cartItems.forEach((product) => {
+        cartItems.forEach(product => {
             newProductList = updateItemsList({
                 wrapFn: createItemList,
                 arr: newProductList,
@@ -185,35 +145,36 @@ const updateProductList = (state, action) => {
     let item;
 
     switch (action.type) {
-        case 'FETCH_PRODUCTS_REQUEST':
+        case FETCH_PRODUCTS_REQUEST:
             return {
                 products: [],
                 loading: true,
                 error: null
             }
 
-        case 'FETCH_PRODUCTS_SUCCESS':
+        case FETCH_PRODUCTS_SUCCESS:
             return updatedProductList(state, action.payload)
 
-        case 'FETCH_PRODUCTS_FAILURE':
+        case FETCH_PRODUCTS_FAILURE:
             return {
                 products: [],
                 loading: false,
                 error: action.payload
             }
 
-        case 'ITEM_ADDED_TO_CART':
+        case ADD_ITEM_TO_CART:
             return updatedProduct(state, action.payload, 1)
 
-        case 'FEW_ITEMS_ADDED_TO_CART':
-            item = state.productList.products.find(({ id }) => id === action.payload);
+        case ADD_ITEMS_TO_CART:
+            const { id, qty } = action.payload;
+            item = state.productList.products.find((item) => item.id === id);
 
-            return updatedProduct(state, action.payload, action.qty - item.count)
+            return updatedProduct(state, id, qty - item.count)
 
-        case 'ITEM_REMOVED_FROM_CART':
+        case REMOVE_ITEM_FROM_CART:
             return updatedProduct(state, action.payload, -1)
 
-        case 'ALL_ITEMS_REMOVED_FROM_CART':
+        case REMOVE_ITEMS_FROM_CART:
             item = state.productList.products.find(({ id }) => id === action.payload);
 
             return updatedProduct(state, action.payload, -item.count)

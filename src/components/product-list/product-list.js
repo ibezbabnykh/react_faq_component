@@ -5,35 +5,37 @@ import './product-list.scss';
 
 import { withApiService, withData } from '../../hoc';
 import { compose } from '../../utils';
-import { productsLoaded } from '../../actions';
+import { fetchProductsSuccess } from '../../actions';
 import ProductListItem from '../product-list-item';
 
 const ProductList = (props) => {
-    const { products, productsLoaded, data } = props;
+    const { products, fetchProductsSuccess, data } = props;
 
     useEffect(() => {
-        productsLoaded(data);
-    }, [productsLoaded, data]);
+        fetchProductsSuccess(data);
+    }, [fetchProductsSuccess, data]);
 
     return (
         <ul className="product-list">
             {
-                products.map((product) => {
-                    return <li key={product.id}>
-                        <ProductListItem product={product} />
-                    </li>
+                products.map(product => {
+                    return (
+                        <li key={product.id}>
+                            <ProductListItem product={product} />
+                        </li>
+                    );
                 })
             }
         </ul>
     );
 }
 
-const mapStateToProps = ({ productList: { products }}) => {
+const mapStateToProps = ({ productList: { products } }) => {
     return { products };
 }
 
 const mapDispatchToProps = {
-    productsLoaded
+    fetchProductsSuccess
 }
 
 const mapMethodsToProps = (apiService) => {

@@ -6,37 +6,37 @@ import './minibasket.scss';
 
 import EmptyOverlay from './empty-overlay';
 import MinibasketItems from './minibasket-items';
-import { minibasketOpened, minibasketLoaded, allItemsRemovedFromCart } from '../../actions';
+import { openMinibasket, fetchMinibasketSuccess, removeItemsFromCart } from '../../actions';
 
 const MiniBasket = (props) => {
+    const { isMiniBasketOpen, openMinibasket, onMinibasketLoad, onDelete, total, products, history } = props;
 
-    const { isMiniBasketOpen, minibasketOpened, minibasketLoaded, onDelete, total, products, history } = props;
-    
     const location = history.location.pathname;
 
     useEffect(() => {
-        minibasketLoaded();
-    }, [minibasketLoaded, location]);
+        onMinibasketLoad();
+    }, [onMinibasketLoad, location]);
 
     const onOverlayClick = () => {
-        minibasketOpened(!isMiniBasketOpen);
+        openMinibasket(!isMiniBasketOpen);
     }
 
-    let content;
-
-    if (total === 0) {
-        content = <EmptyOverlay />
-    } else {
-        content = <MinibasketItems products={products} onDelete={onDelete} />;
-    }
-    
     return (
         <div className={`minibasket ${isMiniBasketOpen ? 'is-open' : ''}`}>
-            <div className="minibasket-overlay" onClick={onOverlayClick}></div>
+            <div
+                className="minibasket-overlay"
+                onClick={onOverlayClick}
+            ></div>
             <div className="minibasket-container">
-                { content }
+                {!total
+                    ? <EmptyOverlay />
+                    : <MinibasketItems products={products} onDelete={onDelete} />
+                }
                 <div className="checkout-container">
-                    <Link to="/checkout" className="btn btn-primary w-full">
+                    <Link
+                        to="/checkout"
+                        className="btn btn-primary w-full"
+                    >
                         Go to basket
                     </Link>
                 </div>
@@ -45,7 +45,15 @@ const MiniBasket = (props) => {
     );
 }
 
-const mapStateToProps = ({ minibasket: { isMiniBasketOpen }, shoppingCart: { cartItems, orderTotalCount }}) => {
+const mapStateToProps = ({
+    minibasket: {
+        isMiniBasketOpen
+    },
+    shoppingCart: {
+        cartItems,
+        orderTotalCount
+    }
+}) => {
     return {
         isMiniBasketOpen,
         total: orderTotalCount,
@@ -54,9 +62,9 @@ const mapStateToProps = ({ minibasket: { isMiniBasketOpen }, shoppingCart: { car
 };
 
 const mapDispatchToProps = {
-    minibasketLoaded,
-    minibasketOpened,
-    onDelete: (id) => allItemsRemovedFromCart(id)
+    onMinibasketLoad: fetchMinibasketSuccess,
+    openMinibasket,
+    onDelete: removeItemsFromCart
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MiniBasket));
