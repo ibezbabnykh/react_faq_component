@@ -28,6 +28,23 @@ export default class ApiService {
         return await res.json();
     };
 
+    postAuthenticate = async (url, data) => {
+        const res = await fetch(`${this._localBase}${url}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err);
+        }
+
+        return await res.json();
+    };
+
     getQuestionsData = async (term) => {
         const res = await this.getResource('questions');
         return this.filterData(res, term);
@@ -50,6 +67,18 @@ export default class ApiService {
 
     updateCustomer = async (id, data) => {
         await this.postResource('PUT', `customers/${id}`, data);
+    }
+
+    registerUser = async (data) => {
+        await this.postAuthenticate('users', data);
+    }
+
+    loginUser = async (data) => {
+        return await this.postAuthenticate('users/authenticate', data);
+    }
+
+    getUsers = async () => {
+        return await this.getResource('users');
     }
 
     getUserWishList = async () => {

@@ -78,14 +78,10 @@ const updatedProduct = (state, itemId, quantity) => {
 };
 
 const updateTotalPrice = (arr) => {
-    let totalPrice = 0;
-
-    arr.forEach(item => {
+    return arr.reduce((total, item) => {
         const { count, price } = item;
-        totalPrice = Math.round((totalPrice + count * price) * 100) / 100;
-    });
-
-    return totalPrice;
+        return Math.round((total + count * price) * 100) / 100;
+    }, [0])
 }
 
 const updatedProductList = (state, products) => {

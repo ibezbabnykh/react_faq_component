@@ -1,0 +1,17 @@
+@import '../../assets/variables.scss';
+
+.my-account-menu {
+    padding: 16px;
+    background-color: $gray-light;
+
+    @media (min-width: $screen-xs) {
+        width: 300px;
+        border-radius: 8px 0 8px 8px;
+    }
+
+    .block-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}

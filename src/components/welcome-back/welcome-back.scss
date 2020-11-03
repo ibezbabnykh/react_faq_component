@@ -1,0 +1,70 @@
+@import '../../assets/variables.scss';
+
+.welcome-back {
+    @media (min-width: $screen-xs) {
+        position: relative;
+    }
+
+    .my-account-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+
+        @media (min-width: $screen-xs) {
+            left: auto;
+        }
+    }
+}
+
+.my-account-button {
+    position: relative;
+    min-height: 32px;
+    padding: 6px 30px;
+    border: none;
+    font-weight: 700;
+    background-color: transparent;
+    border-radius: 3px;
+    transition: background-color 0.3s ease-in-out;
+
+    .fas {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        &.fa-user {
+            left: 8px;
+        }
+
+        &.fa-chevron-down {
+            right: 8px;
+        }
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        height: 8px;
+        background-color: $gray-light;
+        display: none;
+    }
+
+    &.active {
+        &:after {
+            display: block;
+    
+            @media (min-width: $screen-xs) {
+                display: none;    
+            }
+        }
+    }
+
+    &.active,
+    &:hover,
+    &:focus {
+        background-color: $gray-light;
+    }
+}
