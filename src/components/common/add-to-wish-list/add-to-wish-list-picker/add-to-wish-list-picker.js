@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import './add-to-wish-list-picker.scss';
 
-import { fetchWishList } from '../../../../actions';
+import {
+    fetchWishListsRequest,
+    fetchWishListsSuccess,
+    fetchWishListsFailure,
+    updateWishListsAfterRequest
+} from '../../../../actions';
+import { withApiService } from '../../../../hoc';
+import { fetchItems, compose } from '../../../../utils';
 import Modal from '../../modal';
 import { CreateWishListModal } from '../../../modals-content';
+import WishList from '../wish-list';
 
 const modalOptions = {
     size: "large",
@@ -13,59 +22,49 @@ const modalOptions = {
     hasCloseBtn: true
 }
 
-const AddToWishListPicker = ({ list, fetchWishList, itemId }) => {
+const AddToWishListPicker = ({ wishLists, itemId, onWishListsLoad, onPickerClosed }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [wishList, setWishList] = useState(list);
+    const [wishList, setWishList] = useState(wishLists);
 
     useEffect(() => {
-        fetchWishList();
-    }, [fetchWishList]);
+        // added a delay to emulate receiving data from a real server and show a spinner
+        setTimeout(() => {
+            onWishListsLoad();
+        }, 300);
+
+        return () => {
+            onPickerClosed();
+        };
+    }, [onWishListsLoad, onPickerClosed]);
 
     useEffect(() => {
-        localStorage.setItem('wishList', JSON.stringify(list));
-        setWishList(list);
-    }, [list]);
+        setWishList(wishLists);
+    }, [wishLists]);
 
     const toggleModalState = () => {
         setIsOpen(!isOpen);
     };
 
-    const addToList = (id) => {
-        // add product to wish list
+    const reloadWishList = () => {
+        setWishList({
+            ...wishLists,
+            list: [],
+            loading: true
+        });
     }
-
+    
     return (
         <div className="add-to-wish-list-picker">
             <div className="arrow"></div>
             <div className="content">
                 <div className="content-unavailable-product">
                     <strong className="title">Add to shopping list</strong>
-                    {!wishList.length &&
-
-                        <div className="no-lists">Looks like you don't have any shopping lists yet. Click the button below to create a new one.</div>
-                    }
-                    <div className="already-in-list">This product is already included within this list.</div>
-                    <div className="added-in-list">Product added to the list.</div>
-                    {wishList.length > 0 &&
-                        <ul className="list">
-                            {
-                                wishList.map(item => {
-                                    return (
-                                        <li key={item} onClick={() => addToList(itemId)}>
-                                            <span className="name">{item}</span>
-                                            <i className="fas fa-plus"></i>
-                                        </li>
-                                    )
-                                })
-                            }
-                        </ul>
-                    }
+                    <WishList data={wishList} itemId={itemId} />
                     <div className="action">
                         <button
                             className="btn btn-primary btn-create-list w-full"
                             onClick={toggleModalState}
                         >
-                            <i className="icon icon-add-to-list-16 m-t-3 m-r-1"></i>
                             Create new list
                         </button>
                         {isOpen &&
@@ -73,7 +72,10 @@ const AddToWishListPicker = ({ list, fetchWishList, itemId }) => {
                                 {...modalOptions}
                                 onClose={toggleModalState}
                             >
-                                <CreateWishListModal />
+                                <CreateWishListModal 
+                                    onModalClosed={onWishListsLoad} 
+                                    reloadWishList={reloadWishList}
+                                />
                             </Modal>
                         }
                     </div>
@@ -83,12 +85,24 @@ const AddToWishListPicker = ({ list, fetchWishList, itemId }) => {
     );
 }
 
-const mapStateToProps = ({ wishList: { list } }) => {
-    return { list }
+const mapStateToProps = ({ wishLists }) => {
+    return { wishLists }
+}
+
+const mapDispatchToProps = (dispatch, { getData }) => {
+    return bindActionCreators({
+        onWishListsLoad: fetchItems(getData, fetchWishListsRequest, fetchWishListsSuccess, fetchWishListsFailure),
+        onPickerClosed: updateWishListsAfterRequest
+    }, dispatch);
 };
 
-const mapDispatchToProps = {
-    fetchWishList
-};
+const mapMethodsToProps = (apiService) => {
+    return {
+        getData: apiService.getUserWishList
+    }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddToWishListPicker);
+export default compose(
+    withApiService(mapMethodsToProps),
+    connect(mapStateToProps, mapDispatchToProps)
+)(AddToWishListPicker);
