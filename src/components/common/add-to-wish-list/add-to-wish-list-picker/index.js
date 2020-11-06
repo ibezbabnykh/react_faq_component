@@ -1,0 +1,1 @@
+export { default } from './add-to-wish-list-picker';

@@ -1,0 +1,19 @@
+.add-to-wish-list-btn {
+    background: none;
+    padding: 0;
+    border: none;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e9eff0;
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04) inset;
+    border-radius: 3px;
+    transition: background-color 0.3s ease-in-out;
+
+    &:focus,
+    &:hover {
+        background-color: #dde6e8;
+    }
+}

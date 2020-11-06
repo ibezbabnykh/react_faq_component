@@ -9,16 +9,18 @@ const App = () => {
     return (
         <>
             <Header />
-            <div className="pageBody center-holder">
-                <MiniBasket />
-                <Switch>
-                    <Route path="/" component={HomePage} exact />
-                    <Route path="/faq" component={FaqPage} />
-                    <Route path="/users/:id?" component={UsersPage} />
-                    <Route path="/products" component={ProductsPage} />
-                    <Route path="/checkout" component={CheckoutPage} />
-                </Switch>
-            </div>
+            <main className="main">    
+                <div className="pageBody center-holder">
+                    <MiniBasket />
+                    <Switch>
+                        <Route path="/" component={HomePage} exact />
+                        <Route path="/faq" component={FaqPage} />
+                        <Route path="/users/:id?" component={UsersPage} />
+                        <Route path="/products" component={ProductsPage} />
+                        <Route path="/checkout" component={CheckoutPage} />
+                    </Switch>
+                </div>
+            </main>
         </>
     );
 }
