@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import { HomePage, FaqPage, UsersPage, ProductsPage, CheckoutPage } from '../../routers';
+import { HomePage, FaqPage, CustomersPage, ProductsPage, CheckoutPage } from '../../routers';
 import Header from '../common/header';
 import MiniBasket from '../minibasket';
 
@@ -15,7 +15,7 @@ const App = () => {
                     <Switch>
                         <Route path="/" component={HomePage} exact />
                         <Route path="/faq" component={FaqPage} />
-                        <Route path="/users/:id?" component={UsersPage} />
+                        <Route path="/customers/:id?" component={CustomersPage} />
                         <Route path="/products" component={ProductsPage} />
                         <Route path="/checkout" component={CheckoutPage} />
                     </Switch>

@@ -7,12 +7,12 @@ import Row from '../components/common/row';
 import ItemList from '../components/items/item-list';
 import ItemDetails from '../components/items/item-details';
 
-const UsersPage = ({ history, match }) => {
+const CustomersPage = ({ history, match }) => {
     const { id } = match.params;
 
     return (
         <>
-            <PageTitle title="Users" />
+            <PageTitle title="Customers" />
             <ErrorBoundary>
                 <Row
                     leftColumn={(
@@ -31,4 +31,4 @@ const UsersPage = ({ history, match }) => {
     );
 }
 
-export default withRouter(UsersPage);
+export default withRouter(CustomersPage);

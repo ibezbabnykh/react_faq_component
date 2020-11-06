@@ -58,7 +58,7 @@ const ItemDetails = (props) => {
 
 const mapMethodsToProps = (apiService, attr) => {
     return {
-        getData: apiService.getUser.bind(this, attr)
+        getData: apiService.getCustomer.bind(this, attr)
     }
 };
 

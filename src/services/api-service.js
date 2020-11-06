@@ -1,15 +1,9 @@
 export default class ApiService {
 
-    _apiBase = 'https://api.jsonbin.io/b/';
+    _localBase = 'http://localhost:9000/';
 
-    _apiReqres = 'https://reqres.in/api/';
-
-    getResource = async (base, url) => {
-        const res = await fetch(`${base}${url}`, {
-            headers: {
-                'secret-key': '$2b$10$P8lL8g.Ri/1qRA/qJEjuaO.B7wU50rWhpHsibzoSNhsH0S4dmqBvO'
-            }
-        });
+    getResource = async (url) => {
+        const res = await fetch(`${this._localBase}${url}`);
 
         if (!res.ok) {
             throw new Error(`Could not fetch ${url}, received ${res.status}`);
@@ -18,9 +12,9 @@ export default class ApiService {
         return await res.json();
     };
 
-    putResource = async (base, url, data) => {
-        const res = await fetch(`${base}${url}`, {
-            method: 'PUT',
+    postResource = async (type, url, data) => {
+        const res = await fetch(`${this._localBase}${url}`, {
+            method: type,
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
@@ -35,28 +29,36 @@ export default class ApiService {
     };
 
     getQuestionsData = async (term) => {
-        const res = await this.getResource(this._apiBase, '5f7c5fa1302a837e95758e63/1');
+        const res = await this.getResource('questions');
         return this.filterData(res, term);
     };
 
     getProducts = async () => {
-        const res = await this.getResource(this._apiBase, '5f913710058d9a7b94decb99/1');
+        const res = await this.getResource('products');
         return res.map(this._transformProductFromList);
     }
 
-    getUsersList = async () => {
-        const res = await this.getResource(this._apiReqres, 'users/');
-        return res.data.map(this._transformUserFromList);
+    getCustomersList = async () => {
+        const res = await this.getResource('customers');
+        return res.map(this._transformCustomerFromList);
     }
 
-    getUser = async (id) => {
-        const user = await this.getResource(this._apiReqres, `users/${id}`);
-        return this._transformUser(user);
+    getCustomer = async (id) => {
+        const customer = await this.getResource(`customers/${id}`);
+        return this._transformCustomer(customer);
     }
 
-    updateUser = async (data) => {
-        const res = await this.putResource(this._apiReqres, 'users/', data);
+    updateCustomer = async (id, data) => {
+        await this.postResource('PUT', `customers/${id}`, data);
+    }
+
+    getUserWishList = async () => {
+        const res = await this.getResource('userWishLists');
         return res;
+    }
+
+    createWishList = async (data) => {
+        await this.postResource('POST', 'userWishLists', data);
     }
 
     filterData = (arr, term) => {
@@ -95,8 +97,8 @@ export default class ApiService {
         }
     };
 
-    _transformUserFromList = (user) => {
-        const { id, avatar, email, first_name, last_name } = user;
+    _transformCustomerFromList = (customer) => {
+        const { id, avatar, email, first_name, last_name } = customer;
 
         return {
             id,
@@ -107,9 +109,8 @@ export default class ApiService {
         }
     }
 
-    _transformUser = (user) => {
-        const { id, avatar, email, first_name, last_name } = user.data;
-        const { company, text } = user.ad;
+    _transformCustomer = (customer) => {
+        const { id, avatar, email, first_name, last_name, company, responsibility } = customer;
 
         return {
             id,
@@ -119,7 +120,7 @@ export default class ApiService {
             last_name,
             fullName: `${first_name} ${last_name}`,
             company,
-            responsibility: text
+            responsibility
         }
     }
 

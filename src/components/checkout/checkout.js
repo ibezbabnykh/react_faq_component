@@ -4,9 +4,14 @@ import { bindActionCreators } from 'redux';
 
 import './checkout.scss';
 
-import { fetchCartSuccess } from '../../actions';
+import {
+    fetchCartSuccess,
+    fetchProductsRequest,
+    fetchProductsSuccess,
+    fetchProductsFailure
+} from '../../actions';
 import { withApiService } from '../../hoc';
-import { compose, fetchProducts } from '../../utils';
+import { compose, fetchItems } from '../../utils';
 import Spinner from '../common/spinner';
 import ErrorIndicator from '../common/error-indicator';
 import CheckoutHeader from './checkout-header';
@@ -70,7 +75,7 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = (dispatch, { getData }) => {
     return bindActionCreators({
-        onProductsLoad: fetchProducts(getData),
+        onProductsLoad: fetchItems(getData, fetchProductsRequest, fetchProductsSuccess, fetchProductsFailure),
         onCartLoad: fetchCartSuccess
     }, dispatch);
 };

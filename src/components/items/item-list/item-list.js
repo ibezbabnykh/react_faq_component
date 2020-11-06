@@ -30,7 +30,7 @@ const ItemList = (props) => {
 
 const mapMethodsToProps = (apiService) => {
     return {
-        getData: apiService.getUsersList
+        getData: apiService.getCustomersList
     }
 };
 
