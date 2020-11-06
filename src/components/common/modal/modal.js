@@ -4,7 +4,7 @@ import Portal from '../portal';
 import './modal.scss';
 
 const Remodal = (props) => {
-    const { children, size, title, hasCloseBtn = true, close, render } = props;
+    const { children, size, title, hasCloseBtn = true, onClose, render } = props;
 
     return (
         <Portal>
@@ -13,7 +13,7 @@ const Remodal = (props) => {
                     <button
                         type="button"
                         className="btn-close"
-                        onClick={close}
+                        onClick={onClose}
                     >
                         <i className="far fa-times-circle"></i>
                     </button>
@@ -23,7 +23,7 @@ const Remodal = (props) => {
                 {render
                     ? render(children)
                     : React.Children.map(children, (child) => {
-                        return React.cloneElement(child, { close });
+                        return React.cloneElement(child, { onClose });
                     })
                 }
             </div>

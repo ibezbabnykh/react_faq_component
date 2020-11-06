@@ -5,13 +5,13 @@ import './create-wish-list-modal.scss';
 
 import { addNewListToWishList } from '../../../actions';
 
-const CreateWishListModal = ({ close, addNewListToWishList }) => {
-    const [listName, setListName ] = useState();
+const CreateWishListModal = ({ onClose, addNewListToWishList }) => {
+    const [listName, setListName] = useState();
 
     const onHandleSubmit = (e) => {
         e.preventDefault();
         addNewListToWishList(listName);
-        close();
+        onClose();
     }
 
     const onHandleChange = (e) => {
@@ -22,10 +22,10 @@ const CreateWishListModal = ({ close, addNewListToWishList }) => {
         <form className="new-list-form" onSubmit={onHandleSubmit}>
             <div className="form-group">
                 <label htmlFor="list-name">List Name*</label>
-                <input 
-                    type="text" 
-                    id="list-name" 
-                    name="list-name" 
+                <input
+                    type="text"
+                    id="list-name"
+                    name="list-name"
                     placeholder="List Name"
                     className="form-control"
                     onChange={onHandleChange}
@@ -33,7 +33,7 @@ const CreateWishListModal = ({ close, addNewListToWishList }) => {
             </div>
             <div className="btn-holder">
                 <button type="button" className="btn btn-primary" onClick={onHandleSubmit}>Create List</button>
-                <button type="button" className="btn btn-default" onClick={close}>Cancel</button>
+                <button type="button" className="btn btn-default" onClick={onClose}>Cancel</button>
             </div>
         </form>
     );

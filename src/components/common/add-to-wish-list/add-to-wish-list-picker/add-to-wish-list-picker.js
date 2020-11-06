@@ -6,7 +6,6 @@ import './add-to-wish-list-picker.scss';
 import { fetchWishList } from '../../../../actions';
 import Modal from '../../modal';
 import { CreateWishListModal } from '../../../modals-content';
-import { useModal } from '../../../../hooks';
 
 const modalOptions = {
     size: "large",
@@ -15,7 +14,7 @@ const modalOptions = {
 }
 
 const AddToWishListPicker = ({ list, fetchWishList, itemId }) => {
-    const { open, openModal, closeModal } = useModal();
+    const [isOpen, setIsOpen] = useState(false);
     const [wishList, setWishList] = useState(list);
 
     useEffect(() => {
@@ -26,6 +25,10 @@ const AddToWishListPicker = ({ list, fetchWishList, itemId }) => {
         localStorage.setItem('wishList', JSON.stringify(list));
         setWishList(list);
     }, [list]);
+
+    const toggleModalState = () => {
+        setIsOpen(!isOpen);
+    };
 
     const addToList = (id) => {
         // add product to wish list
@@ -60,15 +63,15 @@ const AddToWishListPicker = ({ list, fetchWishList, itemId }) => {
                     <div className="action">
                         <button
                             className="btn btn-primary btn-create-list w-full"
-                            onClick={openModal}
+                            onClick={toggleModalState}
                         >
                             <i className="icon icon-add-to-list-16 m-t-3 m-r-1"></i>
                             Create new list
                         </button>
-                        {open &&
+                        {isOpen &&
                             <Modal
                                 {...modalOptions}
-                                close={closeModal}
+                                onClose={toggleModalState}
                             >
                                 <CreateWishListModal />
                             </Modal>
