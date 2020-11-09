@@ -1,40 +1,49 @@
 import {
-    FETCH_WISH_LIST,
-    ADD_NEW_LIST_TO_WISH_LIST
+    FETCH_WISH_LISTS_REQUEST,
+    FETCH_WISH_LISTS_SUCCESS,
+    FETCH_WISH_LISTS_FAILURE,
+    UPDATE_WISH_LISTS_AFTER_REQUEST
 } from '../actions';
-
-const updateList = (state, newItem) => {
-    const { wishList: { list } } = state;
-    console.log('first');
-
-    return {
-        ...state,
-        list: [
-            ...list,
-            newItem
-        ]
-    }
-};
 
 const updateWishList = (state, action) => {
     if (state === undefined) {
         return {
-            list: []
+            list: [],
+            loading: true,
+            error: null
         }
     }
 
     switch (action.type) {
-        case FETCH_WISH_LIST:
+        case FETCH_WISH_LISTS_REQUEST:
             return {
-                ...state,
-                list: JSON.parse(localStorage.getItem('wishList')) || []
+                list: [],
+                loading: true,
+                error: null
             }
 
-        case ADD_NEW_LIST_TO_WISH_LIST:
-            return updateList(state, action.payload)
+        case FETCH_WISH_LISTS_SUCCESS:
+            return {
+                list: action.payload,
+                loading: false,
+                error: null
+            };
+
+        case FETCH_WISH_LISTS_FAILURE:
+            return {
+                list: [],
+                loading: false,
+                error: action.payload
+            };
+
+        case UPDATE_WISH_LISTS_AFTER_REQUEST:
+            return {
+                ...state,
+                loading: true
+            };
 
         default:
-            return state.wishList
+            return state.wishLists
     }
 };
 

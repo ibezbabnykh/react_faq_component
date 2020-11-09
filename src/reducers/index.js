@@ -8,7 +8,7 @@ const reducer = (state, action) => {
         productList: updateProductList(state, action),
         shoppingCart: updateShoppingCart(state, action),
         minibasket: updateMinibasket(state, action),
-        wishList: updateWishList(state, action)
+        wishLists: updateWishList(state, action)
     }
 }
 

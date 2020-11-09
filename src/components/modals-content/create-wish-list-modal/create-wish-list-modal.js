@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 
 import './create-wish-list-modal.scss';
 
-import { addNewListToWishList } from '../../../actions';
+import { withApiService } from '../../../hoc';
 
-const CreateWishListModal = ({ onClose, addNewListToWishList }) => {
-    const [listName, setListName] = useState();
+const CreateWishListModal = ({ postData, onClose, onModalClosed, reloadWishList }) => {
+    const [listName, setListName] = useState(null);
 
     const onHandleSubmit = (e) => {
         e.preventDefault();
-        addNewListToWishList(listName);
+        postData({
+            entries: null,
+            name: listName
+        });
         onClose();
+        reloadWishList();
+        // added a delay to emulate receiving data from a real server and show a spinner
+        setTimeout(() => {
+            onModalClosed();
+        }, 300);
     }
 
     const onHandleChange = (e) => {
@@ -32,19 +39,28 @@ const CreateWishListModal = ({ onClose, addNewListToWishList }) => {
                 />
             </div>
             <div className="btn-holder">
-                <button type="button" className="btn btn-primary" onClick={onHandleSubmit}>Create List</button>
-                <button type="button" className="btn btn-default" onClick={onClose}>Cancel</button>
+                <button
+                    type="submit"
+                    className="btn btn-primary"
+                >
+                    Create List
+                </button>
+                <button
+                    type="button"
+                    className="btn btn-default"
+                    onClick={onClose}
+                >
+                    Cancel
+                </button>
             </div>
         </form>
     );
 }
 
-const mapStateToProps = (state) => {
-    return { state }
+const mapMethodsToProps = (apiService) => {
+    return {
+        postData: apiService.createWishList
+    }
 };
 
-const mapDispatchToProps = {
-    addNewListToWishList
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreateWishListModal);
+export default withApiService(mapMethodsToProps)(CreateWishListModal);

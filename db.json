@@ -5606,12 +5606,12 @@
   "userWishLists": [
     {
       "entries": null,
-      "name": "test",
+      "name": "Test",
       "id": 1
     },
     {
       "entries": null,
-      "name": "New",
+      "name": "List",
       "id": 2
     }
   ],

@@ -10,8 +10,12 @@ const FormDetails = (props) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        const data = formData(new FormData(e.target));
-        getData(data);
+        const data = {
+            ...userInfo,
+            ...formData(new FormData(e.target))
+        };
+        getData(userInfo.id, data);
+        onFormClose();
     }
 
     const formData = fd => [...fd.keys()].reduce((acc, item) => {

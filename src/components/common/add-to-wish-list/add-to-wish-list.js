@@ -6,13 +6,13 @@ import AddToWishListPicker from './add-to-wish-list-picker';
 const AddToWishList = ({ itemId }) => {
     const [isVisible, setIsVisible] = useState(false);
 
-    const openAddPicker = () => {
+    const toggleAddPicker = () => {
         setIsVisible(!isVisible);
     };
 
     return (
         <div className="add-to-wish-list">
-            <AddToWishListBtn onHandleClick={openAddPicker} />
+            <AddToWishListBtn onHandleClick={toggleAddPicker} />
             {isVisible &&
                 <AddToWishListPicker itemId={itemId} />
             }

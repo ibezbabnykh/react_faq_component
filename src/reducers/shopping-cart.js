@@ -168,10 +168,9 @@ const updateShoppingCart = (state, action) => {
 
         case CLEAR_CART:
             return {
-                ...state,
+                cartItems: [],
                 orderTotalPrice: 0,
-                orderTotalCount: 0,
-                cartItems: []
+                orderTotalCount: 0
             }
 
         case SORT_CART:
