@@ -7,28 +7,38 @@
     z-index: 5000;
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
     background-color: rgba(0, 0, 0, 0.25);
+}
 
-    .modal-content {
-        width: calc(100% - 16px);
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #fff;
-        border-radius: 3px;
-        padding: 16px;
-        box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1), 0 12px 24px 0 rgba(0, 0, 0, 0.1);
-        margin: 0 auto;
-        max-width: 400px;
+.modal-content {
+    width: calc(100% - 16px);
+    position: absolute;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 16px;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1), 0 12px 24px 0 rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    max-width: 400px;
 
-        &.large {
-            max-width: 592px;
-        }
+    &.large {
+        max-width: 592px;
+    }
 
-        &.p-t-l {
-            padding-top: 30px;
-        }
+    &.p-t-l {
+        padding-top: 30px;
     }
 
     .btn-close {

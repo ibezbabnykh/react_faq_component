@@ -8,17 +8,10 @@
         strong {
             margin-right: 10px;
         }
-    }
 
-    .sort-select {
-        cursor: pointer;
-        -webkit-appearance: none;
-        appearance: none;
-        background: #e9eff0 url('./chevron-down-16-black.svg') no-repeat right 12px center;
-        height: 40px;
-        border-radius: 4px;
-        outline: 0;
-        border: 0;
-        padding: 0 40px 0 16px;
+        .form-control {
+            width: auto;
+            background: #e9eff0 url('./chevron-down-16-black.svg') no-repeat right 12px center;
+        }
     }
 }

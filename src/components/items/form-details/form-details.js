@@ -3,6 +3,7 @@ import React from 'react';
 import './form-details.scss';
 
 import { withApiService } from '../../../hoc';
+import { formData } from '../../../helpers';
 import Record from './record';
 
 const FormDetails = (props) => {
@@ -17,11 +18,6 @@ const FormDetails = (props) => {
         getData(userInfo.id, data);
         onFormClose();
     }
-
-    const formData = fd => [...fd.keys()].reduce((acc, item) => {
-        acc[item] = fd.get(item);
-        return acc;
-    }, {});
 
     return (
         <div className="item-details">
@@ -81,7 +77,7 @@ const FormDetails = (props) => {
 
 const mapMethodsToProps = (apiService) => {
     return {
-        getData: apiService.updateUser
+        getData: apiService.updateCustomer
     }
 };
 

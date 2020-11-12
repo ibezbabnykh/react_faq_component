@@ -51,7 +51,7 @@ const CheckoutControlsPanel = ({ clearCart, sortCart }) => {
             <div className="sort-by-options">
                 <strong>Sort by:</strong>
                 <select
-                    className="sort-select"
+                    className="form-control"
                     name="sort"
                     value={optionsState}
                     onChange={handleChange}

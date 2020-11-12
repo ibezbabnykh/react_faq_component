@@ -6,7 +6,6 @@ import './header-minibasket.scss';
 import { openMinibasket, fetchCartSuccess } from '../../../actions';
 
 const HeaderMiniBasket = (props) => {
-
     const { isMiniBasketOpen, openMinibasket, cartItems, orderTotalPrice, orderTotalCount, fetchCartSuccess } = props;
 
     useEffect(() => {

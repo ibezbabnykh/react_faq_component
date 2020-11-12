@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 
-import './tabs-list.scss';
-
 import TabNav from '../tab-nav';
 import TabContent from '../tab-content';
 import ErrorBoundary from '../../common/error-boundary';

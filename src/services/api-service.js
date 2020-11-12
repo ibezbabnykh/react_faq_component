@@ -53,8 +53,7 @@ export default class ApiService {
     }
 
     getUserWishList = async () => {
-        const res = await this.getResource('userWishLists');
-        return res;
+        return await this.getResource('userWishLists');
     }
 
     createWishList = async (data) => {

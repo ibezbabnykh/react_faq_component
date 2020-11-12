@@ -7,7 +7,7 @@ const Remodal = (props) => {
     const { children, size, title, hasCloseBtn = true, onClose, render } = props;
 
     return (
-        <Portal>
+        <Portal onClose={onClose}>
             <div className={`modal-content ${size} ${hasCloseBtn ? 'p-t-l' : ''}`}>
                 {hasCloseBtn &&
                     <button

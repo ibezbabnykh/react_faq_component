@@ -4976,10 +4976,11 @@
     },
     {
       "id": 2,
+      "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg",
       "email": "janet.weaver@reqres.in",
       "first_name": "Janet",
       "last_name": "Weaver",
-      "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg",
+      "fullName": "Janet12 Weaver",
       "company": "StatusCode Weekly",
       "responsibility": "A weekly newsletter focusing on software development, infrastructure, the server, performance, and the stack end of things."
     },
@@ -5613,6 +5614,16 @@
       "entries": null,
       "name": "List",
       "id": 2
+    },
+    {
+      "entries": null,
+      "name": "New",
+      "id": 3
+    },
+    {
+      "entries": null,
+      "name": "test",
+      "id": 4
     }
   ],
   "users": [
@@ -5624,15 +5635,6 @@
       "email": "test@test.com",
       "password": "12345",
       "id": 1
-    },
-    {
-      "titleCode": "mr",
-      "customerType": "Individual",
-      "firstName": "Ihor",
-      "lastName": "Bezbabnykh",
-      "email": "test2@test.com",
-      "password": "112233",
-      "id": 2
     }
   ]
 }
