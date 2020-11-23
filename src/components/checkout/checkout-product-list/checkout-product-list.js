@@ -23,6 +23,7 @@ const CheckoutProductList = ({ products, onDelete }) => {
                         <div className="name"><b>{name}</b></div>
                         <div className="description">{description}</div>
                         <div className="price"><b>${price}</b></div>
+                        <div className="checkout-product-tile-total hidden-desktop">${total}</div>
                     </div>
                 </div>
                 <div className="checkout-product-tile-basket-total">
@@ -30,7 +31,7 @@ const CheckoutProductList = ({ products, onDelete }) => {
                         count={count}
                         itemId={id}
                     />
-                    <div className="checkout-product-tile-total">${total}</div>
+                    <div className="checkout-product-tile-total visible-desktop">${total}</div>
                 </div>
                 <button
                     type="button"

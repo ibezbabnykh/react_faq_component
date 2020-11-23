@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 
 import ErrorBoundary from '../components/common/error-boundary';
 import PageTitle from '../components/common/page-title';
-import Row from '../components/common/row';
+import ContentRow from '../components/common/content-row';
 import ItemList from '../components/items/item-list';
 import ItemDetails from '../components/items/item-details';
 
@@ -14,7 +14,7 @@ const CustomersPage = ({ history, match }) => {
         <>
             <PageTitle title="Customers" />
             <ErrorBoundary>
-                <Row
+                <ContentRow
                     leftColumn={(
                         <ItemList
                             onItemSelected={(id) => history.push(`${id}`)}

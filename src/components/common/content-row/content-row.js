@@ -1,13 +1,13 @@
 import React from 'react';
 
-import './row.scss';
+import './content-row.scss';
 
-const Row = ({ leftColumn, rightColumn }) => {
+const ContentRow = ({ leftColumn, rightColumn }) => {
     return (
         <div className="contentHolder">
-            <div className="LeftHandNav">
+            <aside className="LeftHandNav">
                 {leftColumn}
-            </div>
+            </aside>
             <div className="pageBody-content">
                 {rightColumn}
             </div>
@@ -15,4 +15,4 @@ const Row = ({ leftColumn, rightColumn }) => {
     );
 }
 
-export default Row;
+export default ContentRow;

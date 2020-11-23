@@ -1,3 +1,5 @@
+@import '../../../assets/variables.scss';
+
 .accordion-item {
     &.is-open {
         .accordion-item-content {
@@ -12,7 +14,7 @@
         }
     }
 
-    border-top: 1px solid #e1e1e1;
+    border-top: 1px solid $border-color;
 
     &:first-child {
         border-top: 0;

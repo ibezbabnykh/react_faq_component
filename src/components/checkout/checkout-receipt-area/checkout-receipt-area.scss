@@ -1,10 +1,30 @@
+@import '../../../assets/variables.scss';
+
 .checkout-area-header {
-    display: flex;
-    justify-content: space-between;
     margin-bottom: 10px;
-    font-size: 28px;
-    line-height: 1.14;
-    font-weight: 700;
+
+    &-details {
+        margin-bottom: 10px;
+
+        .btn-link {
+            i {
+                margin-right: 10px;
+            }
+        }
+    }
+
+    &-total {
+        display: flex;
+        justify-content: space-between;
+        font-size: 18px;
+        line-height: 1.14;
+        font-weight: 700;
+        margin-bottom: 10px;
+
+        @media (min-width: $screen-xs) {
+            font-size: $font-size-h2;
+        }
+    }
 }
 
 .checkout-area-item-list {
@@ -14,7 +34,7 @@
 }
 
 .checkout-area-item {
-    border-top: 1px solid #f7f8f8;
+    border-top: 1px solid $border-color;
     margin-bottom: 15px;
     padding-top: 15px;
 

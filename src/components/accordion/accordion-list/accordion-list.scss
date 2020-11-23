@@ -1,4 +1,6 @@
+@import '../../../assets/variables.scss';
+
 .accordion-list {
     margin-bottom: 15px;
-    border-bottom: 1px solid #e1e1e1;
+    border-bottom: 1px solid $border-color;
 }

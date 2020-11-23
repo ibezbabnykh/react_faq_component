@@ -1,10 +1,12 @@
+@import '../../../assets/variables.scss';
+
 .tab-nav-item {
     position: relative;
     cursor: pointer;
     display: block;
     padding: 11px 5px;
     white-space: nowrap;
-    color: #96a3a6;
+    color: $gray;
     font-weight: 700;
     transition: color 0.3s ease-in-out;
 
@@ -16,7 +18,7 @@
         right: 0;
         bottom: 0;
         height: 4px;
-        background-color: #78b532;
+        background-color: $link-color-hover;
         transition: opacity 0.3s ease-in-out;
     }
 
@@ -26,6 +28,6 @@
             opacity: 1;
         }
 
-        color: #000;
+        color: $base-text-color;
     }
 }

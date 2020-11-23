@@ -1,3 +1,5 @@
+@import '../../../assets/variables.scss';
+
 @keyframes ldio-9j8cqe46ee {
     0% {
         transform: rotate(0)
@@ -19,8 +21,8 @@
     top: 14px;
     left: 14px;
     border-radius: 50%;
-    border: 8px solid #000;
-    border-color: #78b532 transparent #78b532 transparent;
+    border: 8px solid $base-text-color;
+    border-color: $primary-color transparent $primary-color transparent;
     animation: ldio-9j8cqe46ee 1.6666666666666665s linear infinite;
 }
 
@@ -44,18 +46,18 @@
     height: 8px;
     top: -8px;
     left: 24px;
-    background: #78b532;
+    background: $primary-color;
     border-radius: 50%;
-    box-shadow: 0 64px 0 0 #78b532;
+    box-shadow: 0 64px 0 0 $primary-color;
 }
 
 .ldio-9j8cqe46ee>div:nth-child(2) div:after {
     left: -8px;
     top: 24px;
-    box-shadow: 64px 0 0 0 #78b532;
+    box-shadow: 64px 0 0 0 $primary-color;
 }
 
-.loadingio-spinner-dual-ring-geqmo2bihs4 {
+.loadingio-spinner-dual-ring {
     width: 50px;
     height: 50px;
     margin: 30px auto;
@@ -70,7 +72,6 @@
     transform: translateZ(0) scale(0.5);
     backface-visibility: hidden;
     transform-origin: 0 0;
-    /* see note above */
 }
 
 .ldio-9j8cqe46ee div {

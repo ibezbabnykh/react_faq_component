@@ -1,3 +1,5 @@
+@import '../../../../assets/variables.scss';
+
 .add-to-wish-list-picker {
     position: absolute;
     z-index: 100;
@@ -5,10 +7,22 @@
     left: 50%;
     transform: translateX(-50%);
 
+    &.is-aligned-right {
+        left: auto;
+        right: -15px;
+        transform: none;
+
+        .arrow {
+            left: auto;
+            right: 19px;
+            transform: none;
+        }
+    }
+
     .arrow {
         position: absolute;
         pointer-events: none;
-        color: #fff;
+        color: $color-white;
         top: 0;
         left: 50%;
         transform: translateX(-50%);
@@ -23,7 +37,7 @@
             position: absolute;
             width: 16px;
             height: 16px;
-            background: #fff;
+            background: $color-white;
             transform: rotate(45deg);
             top: 6px;
             left: 4px;
@@ -35,7 +49,7 @@
         position: relative;
         z-index: 100;
         margin-top: 10px;
-        background-color: #fff;
+        background-color: $color-white;
         width: 220px;
         border-radius: 3px;
         box-shadow: 0px -1px 5px 0px rgba(0, 0, 0, 0.1), 0px 1px 8px 0px rgba(0, 0, 0, 0.1);
@@ -52,7 +66,7 @@
     .added-in-list {
         font-size: 12px;
         padding: 0 16px 16px;
-        color: #96a3a6;
+        color: $gray;
         line-height: 16px;
     }
 
@@ -62,7 +76,7 @@
     }
 
     .action {
-        border-top: 1px solid #e9eff0;
+        border-top: 1px solid $border-color-dark;
         padding: 8px;
     }
 }

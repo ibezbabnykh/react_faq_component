@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import './reset.scss';
-
 import ApiService from './services/api-service';
 import ApiServiceContext from './components/common/api-service-context';
 import ErrorBoundary from './components/common/error-boundary';

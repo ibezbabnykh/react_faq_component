@@ -1,7 +1,10 @@
+
+@import '../../../assets/variables.scss';
+
 .page-title {
     text-align: center;
     padding: 15px 0;
-    border-bottom: 1px solid #e1e1e1;
+    border-bottom: 1px solid $border-color;
     margin-bottom: 20px;
 
     h1 {

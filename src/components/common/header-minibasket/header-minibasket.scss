@@ -1,13 +1,21 @@
+@import '../../../assets/variables.scss';
+
 .header-minibasket {
     display: inline-block;
     height: 32px;
     line-height: 32px;
     padding: 0 12px;
     cursor: pointer;
-    background-color: #7ab33c;
+    background-color: $btn-primary-bg;
     border-radius: 32px;
-    color: #fff;
+    color: $color-white;
     margin-left: 15px;
+    transition: background-color 0.3s ease-in-out;
+
+    &:hover,
+    &:focus {
+        background-color: $btn-primary-bg-hover;
+    }
 
     i {
         margin-right: 2px;

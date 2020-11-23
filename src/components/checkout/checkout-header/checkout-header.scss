@@ -1,12 +1,23 @@
+@import '../../../assets/variables.scss';
+
 .checkout-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #e1e1e1;
+    border-bottom: 1px solid $border-color;
     padding-bottom: 5px;
     margin-bottom: 15px;
 
     h3 {
         margin: 0;
+    }
+
+    a {
+        font-size: 12px;
+        flex-shrink: 0;
+
+        @media (min-width: $screen-xs) {
+            font-size: $base-font-size;
+        }
     }
 }

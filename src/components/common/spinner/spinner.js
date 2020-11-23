@@ -4,7 +4,7 @@ import './spinner.scss';
 
 const Spinner = () => {
     return (
-        <div className="loadingio-spinner-dual-ring-geqmo2bihs4">
+        <div className="loadingio-spinner-dual-ring">
             <div className="ldio-9j8cqe46ee">
                 <div></div>
                 <div>

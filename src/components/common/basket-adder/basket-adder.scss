@@ -4,6 +4,7 @@
         text-align: center;
         margin: 0 5px;
         flex-grow: 1;
+        max-width: 60px;
     }
 
     .basket-adder-field {
@@ -11,6 +12,6 @@
     }
 
     .btn {
-        flex-shrink: 0;
+        flex-grow: 1;
     }
 }

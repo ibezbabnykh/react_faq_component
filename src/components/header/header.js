@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import './header.scss';
 import logo from './DLL-logo.svg';
 
-import Navlist from '../../nav-list';
-import HeaderMiniBasket from '../header-minibasket';
+import Navlist from '../nav-list';
+import HeaderMiniBasket from '../common/header-minibasket';
 
 const Header = () => {
     return (

@@ -1,3 +1,5 @@
+@import '../../assets/variables.scss';
+@import '../../assets/helpers.scss';
 // This is base reset for global components.
 
 html,
@@ -20,9 +22,9 @@ html {
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #000;
-  background: #fff;
-  font: 14px/1.5 Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  color: $base-text-color;
+  background: $body-bg;
+  font: #{$base-font-size}/#{$base-line-height} $base-font-family;
   min-width: 320px;
 
   &.open-nav,
@@ -109,32 +111,32 @@ h6,
 
 h1,
 .h1 {
-  font-size: 32px;
+  font-size: $font-size-h1;
 }
 
 h2,
 .h2 {
-  font-size: 28px;
+  font-size: $font-size-h2;
 }
 
 h3,
 .h3 {
-  font-size: 24px;
+  font-size: $font-size-h3;
 }
 
 h4,
 .h4 {
-  font-size: 20px;
+  font-size: $font-size-h4;
 }
 
 h5,
 .h5 {
-  font-size: 16px;
+  font-size: $font-size-h5;
 }
 
 h6,
 .h6 {
-  font-size: 12px;
+  font-size: $font-size-h6;
 }
 
 p {
@@ -142,20 +144,22 @@ p {
 }
 
 a {
-  color: #78b532;
+  color: $link-color;
   font-weight: bold;
   text-decoration: none;
   outline: none;
 
   &:hover,
   &:focus {
-    color: #6da52e;
+    color: $link-color-hover;
   }
 }
 
 button {
   cursor: pointer;
   outline: none;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
 
   &[disabled] {
     pointer-events: none;
@@ -177,20 +181,20 @@ input[type=number] {
   height: 40px;
   width: 100%;
   border-radius: 4px;
-  border: 2px solid #e9eff0;
-  background-color: #fff;
+  border: 2px solid $input-border;
+  background-color: $input-bg;
   padding: 10px 15px;
-  font-size: 12px;
+  font-size: $input-font-size;
   line-height: 1.33;
   transition: border-color 0.3s ease-in-out;
 
   &.has-error {
-    border-color: #d9992a;
+    border-color: $input-error-border;
   }
 
   &:focus {
     outline: none;
-    border-color: #000;
+    border-color: $base-text-color;
   }
 }
 
@@ -207,13 +211,13 @@ button.link {
   padding: 0;
   border: none;
   background: none;
-  color: #78b532;
+  color: $link-color;
   transition: color 0.3s ease-in-out;
   font-weight: 700;
 
   &:focus,
   &:hover {
-    color: #6da52e;
+    color: $link-color-hover;
   }
 }
 
@@ -242,24 +246,23 @@ a.btn {
 }
 
 .btn-primary {
-  background-color: #78b532;
-  color: #fff;
+  background-color: $btn-primary-bg;
+  color: $btn-primary-color;
 
   &:focus,
   &:hover {
-    background-color: #6da52e;
-    color: #fff;
+    background-color: $btn-primary-bg-hover;
+    color: $btn-primary-color;
   }
 }
 
 .btn-default {
-  background-color: #e9eff0;
-  color: #292e31;
+  background-color: $btn-default-bg;
+  color: $btn-default-color;
 
   &:focus,
   &:hover {
-    background-color: #dde6e8;
-    color: #292e31;
+    background-color: $btn-default-bg-hover;
   }
 }
 
@@ -268,31 +271,55 @@ a.btn {
   padding: 0;
   background: none;
   border: none;
-  color: #78b532;
+  color: $link-color;
   transition: color 0.3s ease-in-out;
   width: 20px;
   height: 20px;
 
   &:hover {
+    color: $link-color-hover;
+  }
+}
+
+.btn-link {
+  cursor: pointer;
+  color: #78b532;
+  transition: color 0.3s ease-in-out;
+  font-weight: 700;
+
+  &:focus,
+  &:hover {
     color: #6da52e;
   }
 }
 
-.main {
-  display: flex;
-  min-height: 100vh;
-}
+.main {}
 
 .pageBody {
   width: 100%;
-  padding: 0 30px 40px;
+  padding-bottom: 20px;
+
+  @media (min-width: $screen-xs) {
+    padding-bottom: 40px;
+  }
 }
 
 .center-holder {
   max-width: 1440px;
   margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  @media (min-width: $screen-xs) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
 }
 
 #root {
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
 }

@@ -4972,54 +4972,60 @@
       "email": "george.bluth@reqres.in",
       "first_name": "George",
       "last_name": "Bluth",
-      "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/128.jpg"
+      "position": "Cashier",
+      "avatar": "https://image.tmdb.org/t/p/w235_and_h235_face/A1XBu3CffBpSK8HEIJM8q7Mn4lz.jpg",
+      "company": "StatusCode Weekly",
+      "responsibility": "They’re responsible for processing purchases and transactions, welcoming customers once they walk into the door, assisting with returns and exchanges, answering the phone, and promoting any add-ons — like rewards programs or other miscellaneous items — right before the customer checks out."
     },
     {
       "id": 2,
-      "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg",
       "email": "janet.weaver@reqres.in",
-      "first_name": "Janet",
+      "first_name": "Jane",
       "last_name": "Weaver",
-      "fullName": "Janet12 Weaver",
+      "position": "Inventory Control Specialist",
+      "avatar": "https://image.tmdb.org/t/p/w235_and_h235_face/1zA5GuTcciupj4PsNoV2YemB0Wm.jpg",
       "company": "StatusCode Weekly",
-      "responsibility": "A weekly newsletter focusing on software development, infrastructure, the server, performance, and the stack end of things."
+      "responsibility": "The responsibilities of this retail job include preventing loss, tracking and maintaining inventory, implementing procedures to control costs, controlling the ebb and flow of inventory, creating reports as it relates to defects, demand, and quantity, and ensuring received products are accurate and up to company standards."
     },
     {
       "id": 3,
-      "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/olegpogodaev/128.jpg",
       "email": "emma.wong@reqres.in",
       "first_name": "Emma",
       "last_name": "Wong",
-      "fullName": "Emma New Wong Test",
+      "position": "Sales Associate",
+      "avatar": "https://image.tmdb.org/t/p/w235_and_h235_face/3JTEc2tGUact9c0WktvpeJ9pajn.jpg",
       "company": "StatusCode",
-      "responsibility": "A weekly newsletter focusing on software development, infrastructure, the server, performance, and the stack end of things."
+      "responsibility": "A sales associate is also responsible for maintaining the store’s clean and organized appearance, restocking items, and checking out customers. Generally speaking, a sales associate is who can help to increase your sales."
     },
     {
       "id": 4,
       "email": "eve.holt@reqres.in",
       "first_name": "Eve",
       "last_name": "Holt",
-      "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/marcoramires/128.jpg",
+      "position": "Customer Service Representative",
+      "avatar": "https://image.tmdb.org/t/p/w235_and_h235_face/lh5zibQXYH1MNqkuX8TmxyNYHhK.jpg",
       "company": "StatusCode Weekly",
-      "responsibility": "A weekly newsletter focusing on software development, infrastructure, the server, performance, and the stack end of things."
+      "responsibility": "A CSR is responsible for answering all customer inquiries — whether it’s a concern, product question, or even a negative review."
     },
     {
       "id": 5,
       "email": "charles.morris@reqres.in",
       "first_name": "Charles",
       "last_name": "Morris",
-      "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/stephenmoon/128.jpg",
+      "position": "Store Manager",
+      "avatar": "https://image.tmdb.org/t/p/w235_and_h235_face/cAlwtnkOTtLAPjCQzMYbM6VA41p.jpg",
       "company": "StatusCode Weekly",
-      "responsibility": "A weekly newsletter focusing on software development, infrastructure, the server, performance, and the stack end of things."
+      "responsibility": "The store manager may also be in charge of budgeting, store requirements (such as safety and other operational needs), implementing company policies and procedures, providing customer assistance, and more"
     },
     {
       "id": 6,
       "email": "tracey.ramos@reqres.in",
       "first_name": "Tracey",
       "last_name": "Ramos",
-      "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/bigmancho/128.jpg",
+      "position": "Assistant Store Manager",
+      "avatar": "https://image.tmdb.org/t/p/w235_and_h235_face/agfMtjPhbaghOrEwOISOAnraV7I.jpg",
       "company": "StatusCode Weekly",
-      "responsibility": "A weekly newsletter focusing on software development, infrastructure, the server, performance, and the stack end of things."
+      "responsibility": "An assistant store manager, of course, has similar duties to the store manager, but when you add in this retail job to our organization chart, they generally provide support for day-to-day tasks along with taking over most of the employee-related responsibilities like management and scheduling."
     }
   ],
   "products": [

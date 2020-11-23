@@ -1,12 +1,13 @@
+@import '../../../assets/variables.scss';
+
 .load-more-button {
     text-align: center;
 
     .btn {
-        cursor: pointer;
         font-size: 14px;
         line-height: 1.42857143;
         font-weight: 700;
-        color: #78b532;
+        color: $link-color;
         padding: 0;
         border: none;
         background: none;
@@ -18,7 +19,7 @@
 
         &:hover,
         &:focus {
-            color: #6da52e;
+            color: $link-color-hover;
         }
     }
 }

@@ -1,0 +1,60 @@
+//== Colors
+
+$color-white: #fff;
+
+$body-bg: $color-white;
+
+$base-text-color: #292e31;
+
+$primary-color: #78b532;
+$primary-hover-color: #6da52e;
+
+$error-color: #d9992a;
+$success-color: #78b532;
+
+$link-color: $primary-color;
+$link-color-hover: $primary-hover-color;
+
+$btn-primary-color: #fff;
+$btn-primary-bg: $primary-color;
+$btn-primary-bg-hover: $primary-hover-color;
+
+$btn-default-color: $base-text-color;
+$btn-default-bg: #e9eff0;
+$btn-default-bg-hover: #dde6e8;
+
+$gray-light: #f3f3f3;
+$gray: #96a3a6;
+
+$border-color: #e1e1e1;
+$border-color-dark: #e9eff0;
+
+$nav-bg: #424242;
+
+//== Forms
+
+$input-border: #e9eff0;
+$input-error-border: $error-color;
+$input-bg: #fff;
+$input-font-size: 12px;
+$select-bg: #e9eff0;
+
+//== Typography
+
+$base-font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+$base-font-size: 14px;
+$base-line-height: 1.43;
+
+$font-size-h1: 32px;
+$font-size-h2: 28px;
+$font-size-h3: 24px;
+$font-size-h4: 20px;
+$font-size-h5: 16px;
+$font-size-h6: 12px;
+
+//== Media queries breakpoints
+
+$screen-xs: 600px;
+$screen-sm: 768px;
+$screen-md: 1024px;
+$screen-lg: 1200px;

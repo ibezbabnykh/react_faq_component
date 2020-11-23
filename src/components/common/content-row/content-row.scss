@@ -1,0 +1,20 @@
+@import '../../../assets/variables.scss';
+
+.contentHolder {
+    @media (min-width: $screen-xs) {
+        display: flex;
+    }
+}
+
+.LeftHandNav {
+    @media (min-width: $screen-xs) {
+        width: 33.33%;
+        margin-right: 30px;
+    }
+}
+
+.pageBody-content {
+    @media (min-width: $screen-xs) {
+        flex-grow: 1;
+    }
+}

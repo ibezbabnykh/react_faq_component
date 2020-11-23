@@ -1,0 +1,23 @@
+.hidden-xs {
+    @media (max-width: $screen-xs - 1) {
+        display: none !important;
+    }
+}
+
+.visible-xs {
+    @media (min-width: $screen-xs) {
+        display: none !important;
+    }
+}
+
+.hidden-desktop {
+    @media (min-width: $screen-md) {
+        display: none !important;
+    }
+}
+
+.visible-desktop {
+    @media (max-width: $screen-md - 1) {
+        display: none !important;
+    }
+}

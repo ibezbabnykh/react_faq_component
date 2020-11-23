@@ -1,8 +1,10 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import './app.scss';
+
 import { HomePage, FaqPage, CustomersPage, ProductsPage, CheckoutPage } from '../../routers';
-import Header from '../common/header';
+import Header from '../header';
 import MiniBasket from '../minibasket';
 
 const App = () => {
