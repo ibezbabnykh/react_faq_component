@@ -2,7 +2,7 @@ import HomePage from './home-page';
 import LoginPage from './login-page';
 import RegisterPage from './register-page';
 import FaqPage from './faq-page';
-import CustomersPage from './customers-page';
+import EmployeesPage from './employees-page';
 import ProductsPage from './products-page';
 import CheckoutPage from './checkout-page';
 
@@ -11,7 +11,7 @@ export {
     LoginPage,
     RegisterPage,
     FaqPage,
-    CustomersPage,
+    EmployeesPage,
     ProductsPage,
     CheckoutPage
 };

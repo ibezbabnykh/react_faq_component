@@ -1,7 +1,11 @@
 @import '../../assets/variables.scss';
 
 .header {
-    padding-top: 48px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
 
     .logo {
         margin-right: 15px;
@@ -51,12 +55,7 @@
     }
 
     .top-space-wrapper {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
         background-color: $color-white;
-        z-index: 50;
 
         .center-holder {
             display: flex;

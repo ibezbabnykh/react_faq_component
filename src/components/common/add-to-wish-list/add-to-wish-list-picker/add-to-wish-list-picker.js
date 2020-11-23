@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -25,6 +25,14 @@ const modalOptions = {
 const AddToWishListPicker = ({ wishLists, itemId, onWishListsLoad, onPickerClosed }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [wishList, setWishList] = useState(wishLists);
+    const [isNotFit, setIsNotFit] = useState(false);
+    const elRef = useRef();
+
+    useEffect(() => {
+        if (window.innerWidth < elRef.current.getBoundingClientRect().right) {
+            setIsNotFit(true);
+        }
+    }, []);
 
     useEffect(() => {
         // added a delay to emulate receiving data from a real server and show a spinner
@@ -35,7 +43,7 @@ const AddToWishListPicker = ({ wishLists, itemId, onWishListsLoad, onPickerClose
         return () => {
             onPickerClosed();
         };
-    }, [onWishListsLoad, onPickerClosed]);
+    }, []);
 
     useEffect(() => {
         setWishList(wishLists);
@@ -52,9 +60,9 @@ const AddToWishListPicker = ({ wishLists, itemId, onWishListsLoad, onPickerClose
             loading: true
         });
     }
-    
+
     return (
-        <div className="add-to-wish-list-picker">
+        <div className={`add-to-wish-list-picker ${isNotFit ? 'is-aligned-right' : ''}`} ref={elRef}>
             <div className="arrow"></div>
             <div className="content">
                 <div className="content-unavailable-product">

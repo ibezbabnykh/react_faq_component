@@ -1,10 +1,12 @@
 import React from 'react';
-import { useFormikContext, Field, ErrorMessage } from 'formik';
+import { connect, useFormikContext, Field, ErrorMessage } from 'formik';
+import { isRequiredField } from '../../../utils';
 
 import './form-group.scss';
 
-const FormGroup = ({ type, title, label, placeholder, options }) => {
-    const { errors, touched } = useFormikContext();
+const FormGroup = ({ formik, ...rest }) => {
+    const { type, title, label, placeholder, options } = rest;
+    const { errors, touched, validationSchema } = useFormikContext();
 
     return (
         <div className="form-group">
@@ -29,4 +31,4 @@ const FormGroup = ({ type, title, label, placeholder, options }) => {
     );
 }
 
-export default FormGroup;
+export default connect(FormGroup);

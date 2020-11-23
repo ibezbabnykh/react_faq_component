@@ -1,19 +1,17 @@
 import React from 'react';
 
-import './item-list.scss';
+import './employees-list.scss';
 
 import { withApiService, withData } from '../../../hoc';
 
-const ItemList = (props) => {
-    const { data, onItemSelected, activeUSer } = props;
-
+const EmployeesList = ({ data, onItemSelected, activeEmployee }) => {
     const items = data.map(item => {
         const { id, firstName, lastName } = item;
 
         return (
             <li
                 key={id}
-                className={id === Number(activeUSer) ? 'active' : ''}
+                className={id === Number(activeEmployee) ? 'active' : ''}
                 onClick={() => onItemSelected(id)}
             >
                 {firstName} {lastName}
@@ -22,7 +20,7 @@ const ItemList = (props) => {
     });
 
     return (
-        <ul className="item-list list-group">
+        <ul className="employees-list list-group">
             {items}
         </ul>
     );
@@ -30,8 +28,8 @@ const ItemList = (props) => {
 
 const mapMethodsToProps = (apiService) => {
     return {
-        getData: apiService.getCustomersList
+        getData: apiService.getEmployeesList
     }
 };
 
-export default withApiService(mapMethodsToProps)(withData(ItemList));
+export default withApiService(mapMethodsToProps)(withData(EmployeesList));

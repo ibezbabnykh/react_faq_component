@@ -9,7 +9,7 @@ import {
     LoginPage,
     RegisterPage,
     FaqPage,
-    CustomersPage,
+    EmployeesPage,
     ProductsPage,
     CheckoutPage
 } from '../../routers';
@@ -19,6 +19,8 @@ import { alertClear } from '../../actions';
 import Header from '../header';
 import MiniBasket from '../minibasket';
 import KeyMessaging from '../common/key-messaging';
+import Footer from '../footer';
+import BactToTopButton from '../common/back-to-top-button';
 
 const App = ({ alert, alertClear }) => {
     useEffect(() => {
@@ -41,12 +43,14 @@ const App = ({ alert, alertClear }) => {
                         <LoggedInRoute path="/login" component={LoginPage} />
                         <LoggedInRoute path="/register" component={RegisterPage} />
                         <Route path="/faq" component={FaqPage} />
-                        <PrivateRoute path="/customers/:id?" component={CustomersPage} />
+                        <PrivateRoute path="/employees/:id?" component={EmployeesPage} />
                         <Route path="/products" component={ProductsPage} />
                         <Route path="/checkout" component={CheckoutPage} />
                     </Switch>
                 </div>
             </main>
+            <Footer />
+            <BactToTopButton />
         </>
     );
 }

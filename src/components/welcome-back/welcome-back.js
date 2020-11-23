@@ -20,7 +20,7 @@ const WelcomeBack = ({ name, onLogout }) => {
                 onClick={toggleVisible}
             >
                 <i className="fas fa-user"></i>
-                My account
+                <span className="hidden-xs">My account</span>
                 <i className="fas fa-chevron-down"></i>
             </button>
             {isVisible &&

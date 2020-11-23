@@ -4,37 +4,48 @@
     &-container {
         @media (min-width: $screen-xs) {
             display: flex;
+            align-items: flex-start;
         }
     }
 
     &-product-list-container {
+        margin-bottom: 30px;
+
         @media (min-width: $screen-xs) {
-            width: calc(100% - 310px);
+            width: calc(100% - 280px);
             margin-right: 20px;
+        }
+
+        @media (min-width: $screen-md) {
+            width: calc(100% - 310px);
         }
     }
 
     &-receipt-area-container {
-        position: fixed;
+        position: sticky;
+        position: -webkit-sticky;
         height: 120px;
         overflow: hidden;
         bottom: 0;
-        left: 0;
-        right: 0;
+        left: -15px;
+        right: -15px;
         box-shadow: 0 -5px 5px rgba(0,0,0,.1), 0 -12px 24px 0 rgba(0,0,0,.1);
         padding: 10px 15px;
         background-color: $color-white;
         transition: height 0.3s ease-in-out;
         
         @media (min-width: $screen-xs) {
-            position: static;
             height: auto !important;
             bottom: auto;
-            top: 0;
+            top: 100px;
             border: 1px solid $border-color;
             border-radius: 4px;
-            width: 290px;
+            width: 260px;
             box-shadow: none;
+        }
+
+        @media (min-width: $screen-md) {
+            width: 290px;
         }
     }
 }

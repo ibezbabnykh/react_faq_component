@@ -1,4 +1,6 @@
-.item-list {
+@import '../../../assets/variables.scss';
+
+.employees-list {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -14,12 +16,12 @@
 
         &:hover,
         &.active {
-            background-color: #f3f4f4;
-            border-color: #e1e1e1;
+            background-color: $gray-light;
+            border-color: $border-color;
         }
 
         &.active {
-            border-left: 4px solid #78b532;
+            border-left: 4px solid $primary-color;
         }
     }
 }

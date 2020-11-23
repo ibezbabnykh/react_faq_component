@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './checkout-receipt-area.scss';
 
+import { PaymentButton } from '../checkout-button';
+
 const CheckoutReceiptArea = ({ totalPrice }) => {
+    const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+    
+    const toogleDetails = () => {
+        setIsDetailsOpen(!isDetailsOpen);
+    };
+
     return (
-        <div className="checkout-receipt-area-container">
+        <div className="checkout-receipt-area-container" style={isDetailsOpen ? { height: window.innerHeight - 88 } :  { height: 120 }}>
             <div className="checkout-area-header">
-                <span>Total</span>
-                <span>${totalPrice}</span>
+                <div className="checkout-area-header-details visible-xs">
+                    <span className="btn-link" onClick={toogleDetails}>
+                        <i className="fas fa-chevron-down"></i>
+                        Details
+                    </span>
+                </div>
+                <div className="checkout-area-header-total">
+                    <span>Total</span>
+                    <span>${totalPrice}</span>
+                </div>
+                <PaymentButton isDisabled={!totalPrice} />
             </div>
             <ul className="checkout-area-item-list">
                 <li className="checkout-area-item">
@@ -28,13 +45,7 @@ const CheckoutReceiptArea = ({ totalPrice }) => {
                     </div>
                 </li>
                 <li className="checkout-area-item">
-                    <button
-                        type="button"
-                        className="btn btn-primary w-full"
-                        disabled={!totalPrice ? 'disabled' : ''}
-                    >
-                        Go to payment
-                    </button>
+                    <PaymentButton isDisabled={!totalPrice} />
                 </li>
             </ul>
         </div>

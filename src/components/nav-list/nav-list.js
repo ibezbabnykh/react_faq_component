@@ -5,9 +5,9 @@ import './nav-list.scss';
 
 const NavList = () => {
     const navItems = [{
-        href: "/customers/",
+        href: "/employees/",
         icon: "fa-user",
-        label: "Customers"
+        label: "Employees"
     },
     {
         href: "/faq",

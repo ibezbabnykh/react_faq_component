@@ -55,18 +55,29 @@ export default class ApiService {
         return res.map(this._transformProductFromList);
     }
 
-    getCustomersList = async () => {
-        const res = await this.getResource('customers');
-        return res.map(this._transformCustomerFromList);
+    getEmployeesList = async () => {
+        const res = await this.getResource('employees');
+        return res.map(this._transformEmployeeFromList);
     }
 
-    getCustomer = async (id) => {
-        const customer = await this.getResource(`customers/${id}`);
-        return this._transformCustomer(customer);
+    getEmployee = async (id) => {
+        return await this.getResource(`employees/${id}`);
     }
 
-    updateCustomer = async (id, data) => {
-        await this.postResource('PUT', `customers/${id}`, data);
+    updateEmployee = async (id, data) => {
+        await this.postResource('PUT', `employees/${id}`, data);
+    }
+
+    registerUser = async (data) => {
+        await this.postAuthenticate('users', data);
+    }
+
+    loginUser = async (data) => {
+        return await this.postAuthenticate('users/authenticate', data);
+    }
+
+    getUsers = async () => {
+        return await this.getResource('users');
     }
 
     registerUser = async (data) => {
@@ -125,35 +136,38 @@ export default class ApiService {
         }
     };
 
-    _transformCustomerFromList = (customer) => {
-        const { id, avatar, email, first_name, last_name } = customer;
+    _transformEmployeeFromList = (employee) => {
+        const {
+            id,
+            avatar,
+            email,
+            first_name,
+            last_name,
+            position
+        } = employee;
 
         return {
             id,
             avatar,
             email,
             firstName: first_name,
-            lastName: last_name
-        }
-    }
-
-    _transformCustomer = (customer) => {
-        const { id, avatar, email, first_name, last_name, company, responsibility } = customer;
-
-        return {
-            id,
-            avatar,
-            email,
-            first_name,
-            last_name,
-            fullName: `${first_name} ${last_name}`,
-            company,
-            responsibility
+            lastName: last_name,
+            position
         }
     }
 
     _transformProductFromList = (product) => {
-        const { Name, Price, Brand, Season, Size, Color, Description, Category, Occassion } = product;
+        const {
+            Name,
+            Price,
+            Brand,
+            Season,
+            Size,
+            Color,
+            Description,
+            Category,
+            Occassion
+        } = product;
 
         return {
             id: product['Product ID'],

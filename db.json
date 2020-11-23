@@ -4966,7 +4966,7 @@
       ]
     }
   ],
-  "customers": [
+  "employees": [
     {
       "id": 1,
       "email": "george.bluth@reqres.in",
@@ -5625,11 +5625,6 @@
       "entries": null,
       "name": "New",
       "id": 3
-    },
-    {
-      "entries": null,
-      "name": "test",
-      "id": 4
     }
   ],
   "users": [
@@ -5641,6 +5636,15 @@
       "email": "test@test.com",
       "password": "12345",
       "id": 1
+    },
+    {
+      "titleCode": "mr",
+      "customerType": "Individual",
+      "firstName": "Ihor",
+      "lastName": "Bezbabnykh",
+      "email": "test2@test.com",
+      "password": "12345",
+      "id": 2
     }
   ]
 }
