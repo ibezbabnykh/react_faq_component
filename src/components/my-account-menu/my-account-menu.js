@@ -6,7 +6,7 @@ const MyAccountMenu = ({ name, onLogout }) => {
     return (
         <div className="my-account-menu">
             <div className="block-header">
-                <strong className="user-name">Welcome {name}</strong>
+                <h5 className="user-name">Welcome {name}</h5>
                 <span
                     className="btn-link"
                     onClick={onLogout}

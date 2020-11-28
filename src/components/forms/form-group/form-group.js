@@ -9,7 +9,7 @@ const FormGroup = ({ type, title, label, placeholder, options }) => {
     return (
         <div className="form-group">
             <label htmlFor={title}>{label} *</label>
-            {!(type === 'select')
+            {type !== 'select'
                 ? <Field
                     name={title}
                     type={type}

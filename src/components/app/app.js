@@ -25,7 +25,7 @@ const App = ({ alert, alertClear }) => {
         history.listen((location, action) => {
             alertClear();
         });
-    }, []);
+    }, [alertClear]);
 
     return (
         <>

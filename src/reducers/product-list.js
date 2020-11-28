@@ -81,7 +81,7 @@ const updateTotalPrice = (arr) => {
     return arr.reduce((total, item) => {
         const { count, price } = item;
         return Math.round((total + count * price) * 100) / 100;
-    }, [0])
+    }, 0);
 }
 
 const updatedProductList = (state, products) => {
