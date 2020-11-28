@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import './nav-list.scss';
 
@@ -22,10 +22,10 @@ const NavList = () => {
 
     const navElements = navItems.map(({ href, icon, label }) => (
         <li key={label}>
-            <Link to={href}>
+            <NavLink to={href} activeClassName="active">
                 <i className={`fas ${icon}`}></i>
                 {label}
-            </Link>
+            </NavLink>
         </li>
     ));
 

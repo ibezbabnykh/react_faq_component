@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
 
 import ApiService from './services/api-service';
 import ApiServiceContext from './components/common/api-service-context';
 import ErrorBoundary from './components/common/error-boundary';
+import { history } from './helpers';
 import App from './components/app';
 
 import store from './store';
@@ -16,7 +17,7 @@ ReactDOM.render(
     <Provider store={store}>
             <ErrorBoundary>
                 <ApiServiceContext.Provider value={apiService}>
-                    <Router>
+                    <Router history={history}>
                         <App />
                     </Router>
                 </ApiServiceContext.Provider>

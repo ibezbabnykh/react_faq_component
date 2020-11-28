@@ -1,0 +1,23 @@
+@import '../../../assets/variables.scss';
+
+.form-group {
+    margin-bottom: 15px;
+
+    label {
+        display: block;
+        font-weight: 700;
+        padding: 10px 0;
+        font-size: 12px;
+    }
+
+    .message-error {
+        color: $error-color;
+        font-size: 12px;
+        font-weight: 700;
+        margin-top: 5px;
+    }
+
+    select {
+        background: $select-bg url('./chevron-down-16-black.svg') no-repeat right 12px center;
+    }
+}

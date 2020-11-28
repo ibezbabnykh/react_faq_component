@@ -1,0 +1,32 @@
+@import '../../../assets/variables.scss';
+
+.key-messaging {
+    position: relative;
+    border-radius: 4px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+
+    &.error {
+        background-color: rgba(254, 244, 227, .9);
+
+        .content {
+            color: $error-color;
+        }
+    }
+
+    &.success {
+        background-color: rgba(237, 250, 222, 0.9);
+
+        .content {
+            color: $success-color;
+        }
+    }
+
+    .content {
+        padding: 8px;
+        max-width: 1440px;
+        text-align: center;
+        margin: auto;
+        font-size: 12px;
+    }
+}

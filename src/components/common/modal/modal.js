@@ -22,9 +22,7 @@ const Remodal = (props) => {
 
                 {render
                     ? render(children)
-                    : React.Children.map(children, (child) => {
-                        return React.cloneElement(child, { onClose });
-                    })
+                    : React.Children.map(children, (child) => React.cloneElement(child, { onClose }))
                 }
             </div>
         </Portal>

@@ -1,2 +1,2 @@
 export * from './fetch-minibasket-success';
-export * from './open-minibasket'; 
+export * from './open-minibasket';

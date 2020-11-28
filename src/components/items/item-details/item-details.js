@@ -7,7 +7,7 @@ import ItemDetailsList, { Record } from '../item-details-list';
 import FormDetails from '../form-details';
 
 const ItemDetails = (props) => {
-    const [editMode, setEditMode] = useState(false);
+    const [editMode, setEditMode] = useState(null);
 
     const { avatar, responsibility } = props.data;
 

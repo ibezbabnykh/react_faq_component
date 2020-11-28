@@ -5,4 +5,4 @@ const fetchItems = (getData, request, success, failure) => () => (dispatch) => {
         .catch((err) => dispatch(failure(err)));
 };
 
-export default fetchItems; 
+export default fetchItems;
